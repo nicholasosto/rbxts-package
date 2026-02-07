@@ -1,0 +1,45 @@
+{
+  "name": "game-test",
+  "tree": {
+    "$className": "DataModel",
+    "ServerScriptService": {
+      "$className": "ServerScriptService",
+      "TS": {
+        "$path": "out/server"
+      }
+    },
+    "StarterPlayer": {
+      "$className": "StarterPlayer",
+      "StarterPlayerScripts": {
+        "$className": "StarterPlayerScripts",
+        "TS": {
+          "$path": "out/client"
+        }
+      }
+    },
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+      "TS": {
+        "$path": "out/shared"
+      },
+      "rbxts_include": {
+        "$path": "include",
+        "node_modules": {
+          "$className": "Folder",
+          "@rbxts": {
+            "$path": "node_modules/@rbxts"
+          },
+          "@flamework": {
+            "$path": "node_modules/@flamework"
+          },
+          "@nicholasosto": {
+            "$className": "Folder",
+            "assets": {
+              "$path": "node_modules/@nicholasosto/assets/out"
+            }
+          }
+        }
+      }
+    }
+  }
+}

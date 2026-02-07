@@ -1,0 +1,30 @@
+{
+  "name": "@nicholasosto/assets",
+  "sourceType": "assets",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "rbxtsc",
+        "cwd": "packages/assets"
+      },
+      "cache": true,
+      "inputs": ["default"],
+      "outputs": ["{projectRoot}/out"]
+    },
+    "watch": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "rbxtsc -w",
+        "cwd": "packages/assets"
+      }
+    },
+    "clean": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "rm -rf out include",
+        "cwd": "packages/assets"
+      }
+    }
+  }
+}

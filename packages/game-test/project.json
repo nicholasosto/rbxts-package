@@ -1,0 +1,46 @@
+{
+  "name": "@nicholasosto/game-test",
+  "sourceType": "game-test",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["^build"],
+      "options": {
+        "command": "rbxtsc",
+        "cwd": "packages/game-test"
+      },
+      "cache": true,
+      "inputs": ["default"],
+      "outputs": ["{projectRoot}/out"]
+    },
+    "watch": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "rbxtsc -w",
+        "cwd": "packages/game-test"
+      }
+    },
+    "rojo-serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "rojo serve",
+        "cwd": "packages/game-test"
+      }
+    },
+    "rojo-build": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build"],
+      "options": {
+        "command": "rojo build default.project.json --output game-test.rbxl",
+        "cwd": "packages/game-test"
+      }
+    },
+    "clean": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "rm -rf out include",
+        "cwd": "packages/game-test"
+      }
+    }
+  }
+}

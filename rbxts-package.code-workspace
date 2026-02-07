@@ -1,8 +1,25 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
-	],
-	"settings": {}
+  "folders": [
+    {
+      "name": "root",
+      "path": ".",
+    },
+    {
+      "name": "assets",
+      "path": "packages/assets",
+    },
+    {
+      "name": "game-test",
+      "path": "packages/game-test",
+    },
+    {
+      "name": "node-tools",
+      "path": "packages/node-tools",
+    },
+  ],
+  "settings": {
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
 }

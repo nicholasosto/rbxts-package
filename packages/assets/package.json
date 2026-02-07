@@ -4,7 +4,7 @@
   "private": true,
   "description": "Shared game assets, constants, and utilities for roblox-ts projects",
   "main": "out/init.lua",
-  "types": "src/index.ts",
+  "types": "out/index.d.ts",
   "scripts": {
     "build": "rbxtsc",
     "watch": "rbxtsc -w",

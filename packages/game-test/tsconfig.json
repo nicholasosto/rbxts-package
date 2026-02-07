@@ -2,6 +2,7 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
+    "moduleDetection": "force",
     "jsx": "react",
     "jsxFactory": "React.createElement",
     "jsxFragmentFactory": "React.Fragment",
@@ -10,7 +11,7 @@
     "noLib": true,
     "strict": true,
     "target": "ESNext",
-    "typeRoots": ["node_modules/@rbxts", "node_modules/@flamework"],
+    "typeRoots": ["node_modules/@rbxts", "node_modules/@flamework", "node_modules/@nicholasosto"],
     "rootDir": "src",
     "outDir": "out",
     "declaration": false,
@@ -25,7 +26,7 @@
       }
     ],
     "paths": {
-      "@nicholasosto/assets": ["../assets/src"]
+      "@nicholasosto/assets": ["./node_modules/@nicholasosto/assets/out"]
     }
   },
   "include": ["src/**/*"]

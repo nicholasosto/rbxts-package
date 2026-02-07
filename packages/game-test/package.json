@@ -4,8 +4,8 @@
   "private": true,
   "description": "Roblox-ts game test place for validating packages",
   "scripts": {
-    "build": "rbxtsc",
-    "watch": "rbxtsc -w",
+    "build": "rbxtsc --type game",
+    "watch": "rbxtsc -w --type game",
     "rojo-serve": "rojo serve",
     "rojo-build": "rojo build default.project.json --output game-test.rbxl",
     "clean": "rm -rf out include"

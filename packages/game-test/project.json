@@ -6,7 +6,7 @@
       "executor": "nx:run-commands",
       "dependsOn": ["^build"],
       "options": {
-        "command": "rbxtsc",
+        "command": "rbxtsc --type game",
         "cwd": "packages/game-test"
       },
       "cache": true,
@@ -16,7 +16,7 @@
     "watch": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "rbxtsc -w",
+        "command": "rbxtsc -w --type game",
         "cwd": "packages/game-test"
       }
     },

@@ -15,6 +15,9 @@ import {
   StringUtils,
 } from '@nicholasosto/assets';
 
+// --- Networking (Flamework events/functions) ---
+export { GlobalEvents, GlobalFunctions } from './network';
+
 // --- Verify asset access patterns ---
 
 // Animation: get a specific melee animation ID

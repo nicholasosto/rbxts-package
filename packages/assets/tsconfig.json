@@ -12,6 +12,7 @@
     "strict": true,
     "target": "ESNext",
     "typeRoots": ["node_modules/@rbxts"],
+    "preserveSymlinks": true,
     "rootDir": "src",
     "outDir": "out",
     "declaration": true,

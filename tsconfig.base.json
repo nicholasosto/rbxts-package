@@ -16,5 +16,9 @@
       "@nicholasosto/node-tools": ["packages/node-tools/src/index.ts"]
     }
   },
-  "exclude": ["node_modules", "out", "dist", "include"]
+  "files": [],
+  "exclude": ["node_modules", "out", "dist", "include", "packages"],
+  "references": [
+    { "path": "packages/node-tools" }
+  ]
 }

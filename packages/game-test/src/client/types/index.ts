@@ -2,6 +2,12 @@
  * Client-specific type definitions for the Combat RPG.
  */
 
+// Import combat types from the shared package (used locally by PlayerUIState)
+import type { CombatState, AbilitySlot } from '@nicholasosto/combat-stats';
+
+// Re-export for consumers
+export type { CombatState, AbilitySlot };
+
 /** Possible player input actions */
 export enum InputAction {
   Attack = 'Attack',
@@ -14,24 +20,6 @@ export enum InputAction {
   Interact = 'Interact',
   ToggleInventory = 'ToggleInventory',
   ToggleMenu = 'ToggleMenu',
-}
-
-/** Client-side combat state tracking */
-export interface CombatState {
-  isAttacking: boolean;
-  isBlocking: boolean;
-  comboCount: number;
-  lastAttackTick: number;
-  cooldowns: Map<string, number>;
-}
-
-/** A single ability slot in the HUD */
-export interface AbilitySlot {
-  abilityId: string;
-  displayName: string;
-  iconImage: string;
-  cooldownRemaining: number;
-  isReady: boolean;
 }
 
 /** Props shared across HUD elements */

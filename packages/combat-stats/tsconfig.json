@@ -11,27 +11,17 @@
     "noLib": true,
     "strict": true,
     "target": "ESNext",
-    "typeRoots": ["node_modules/@rbxts", "node_modules/@flamework", "node_modules/@nicholasosto"],
+    "typeRoots": ["node_modules/@rbxts"],
     "preserveSymlinks": true,
     "rootDir": "src",
     "outDir": "out",
-    "declaration": false,
+    "declaration": true,
+    "declarationDir": "out",
     "sourceMap": false,
     "incremental": true,
     "tsBuildInfoFile": "out/tsconfig.tsbuildinfo",
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
-    "plugins": [
-      {
-        "transform": "rbxts-transformer-flamework"
-      }
-    ],
-    "paths": {
-      "@nicholasosto/assets": ["./node_modules/@nicholasosto/assets/out"],
-      "@nicholasosto/combat-stats": ["./node_modules/@nicholasosto/combat-stats/out"],
-      "@nicholasosto/name-generator": ["./node_modules/@nicholasosto/name-generator/out"],
-      "@nicholasosto/timer": ["./node_modules/@nicholasosto/timer/out"]
-    }
+    "skipLibCheck": true
   },
   "include": ["src/**/*"]
 }

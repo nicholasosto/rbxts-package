@@ -1,0 +1,30 @@
+{
+  "name": "@nicholasosto/combat-stats",
+  "sourceType": "combat-stats",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "rbxtsc",
+        "cwd": "packages/combat-stats"
+      },
+      "cache": true,
+      "inputs": ["default"],
+      "outputs": ["{projectRoot}/out"]
+    },
+    "watch": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "rbxtsc -w",
+        "cwd": "packages/combat-stats"
+      }
+    },
+    "clean": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "rm -rf out include",
+        "cwd": "packages/combat-stats"
+      }
+    }
+  }
+}

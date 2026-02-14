@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@nicholasosto/assets": "workspace:*",
+    "@nicholasosto/combat-stats": "workspace:*",
     "@nicholasosto/name-generator": "workspace:*",
     "@nicholasosto/timer": "workspace:*"
   },

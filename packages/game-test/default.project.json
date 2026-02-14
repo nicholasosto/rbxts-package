@@ -66,6 +66,9 @@
             "assets": {
               "$path": "node_modules/@nicholasosto/assets/out"
             },
+            "combat-stats": {
+              "$path": "node_modules/@nicholasosto/combat-stats/out"
+            },
             "name-generator": {
               "$path": "node_modules/@nicholasosto/name-generator/out"
             },

@@ -1,0 +1,25 @@
+{
+  "name": "@nicholasosto/timer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Full-featured Flamework-native timer system for Roblox-TS with display, effects, lifecycle hooks, and chainable API",
+  "main": "out/init.lua",
+  "types": "out/index.d.ts",
+  "scripts": {
+    "build": "rbxtsc",
+    "watch": "rbxtsc -w",
+    "clean": "rm -rf out include"
+  },
+  "dependencies": {
+    "@rbxts/signal": "^1.1.1"
+  },
+  "devDependencies": {
+    "@flamework/core": "^1.3.2",
+    "@rbxts/compiler-types": "3.0.0-types.0",
+    "@rbxts/services": "^1.6.0",
+    "@rbxts/types": "^1.0.879",
+    "rbxts-transformer-flamework": "^1.3.2",
+    "roblox-ts": "^3.0.0",
+    "typescript": "^5.5.3"
+  }
+}

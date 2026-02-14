@@ -68,6 +68,9 @@
             },
             "name-generator": {
               "$path": "node_modules/@nicholasosto/name-generator/out"
+            },
+            "timer": {
+              "$path": "node_modules/@nicholasosto/timer/out"
             }
           },
           "@rbxts-js": {

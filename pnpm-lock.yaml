@@ -53,6 +53,9 @@ importers:
       '@nicholasosto/name-generator':
         specifier: workspace:*
         version: link:../name-generator
+      '@nicholasosto/timer':
+        specifier: workspace:*
+        version: link:../timer
     devDependencies:
       '@flamework/components':
         specifier: ^1.3.2
@@ -117,6 +120,34 @@ importers:
       typescript:
         specifier: ^5.5.3
         version: 5.9.3
+
+  packages/timer:
+    dependencies:
+      '@rbxts/signal':
+        specifier: ^1.1.1
+        version: 1.1.1
+    devDependencies:
+      '@flamework/core':
+        specifier: ^1.3.2
+        version: 1.3.2
+      '@rbxts/compiler-types':
+        specifier: 3.0.0-types.0
+        version: 3.0.0-types.0
+      '@rbxts/services':
+        specifier: ^1.6.0
+        version: 1.6.0
+      '@rbxts/types':
+        specifier: ^1.0.879
+        version: 1.0.906
+      rbxts-transformer-flamework:
+        specifier: ^1.3.2
+        version: 1.3.2(typescript@5.5.3)
+      roblox-ts:
+        specifier: ^3.0.0
+        version: 3.0.0
+      typescript:
+        specifier: ^5.5.3
+        version: 5.5.3
 
 packages:
 

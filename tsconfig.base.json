@@ -18,7 +18,5 @@
   },
   "files": [],
   "exclude": ["node_modules", "out", "dist", "include", "packages"],
-  "references": [
-    { "path": "packages/node-tools" }
-  ]
+  "references": [{ "path": "packages/node-tools" }]
 }

@@ -1,0 +1,19 @@
+{
+  "name": "@nicholasosto/name-generator",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Random name generator for roblox-ts games with configurable first, last, and moniker pools",
+  "main": "out/init.lua",
+  "types": "out/index.d.ts",
+  "scripts": {
+    "build": "rbxtsc",
+    "watch": "rbxtsc -w",
+    "clean": "rm -rf out include"
+  },
+  "devDependencies": {
+    "@rbxts/compiler-types": "3.0.0-types.0",
+    "@rbxts/types": "^1.0.879",
+    "roblox-ts": "^3.0.0",
+    "typescript": "^5.5.3"
+  }
+}

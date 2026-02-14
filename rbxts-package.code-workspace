@@ -16,6 +16,10 @@
       "name": "node-tools",
       "path": "packages/node-tools",
     },
+    {
+      "name": "name-generator",
+      "path": "packages/name-generator",
+    },
   ],
   "settings": {
     "typescript.tsdk": "node_modules/typescript/lib",

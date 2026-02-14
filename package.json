@@ -12,6 +12,7 @@
     "build:assets": "nx build @nicholasosto/assets",
     "build:game-test": "nx build @nicholasosto/game-test",
     "build:node-tools": "nx build @nicholasosto/node-tools",
+    "build:name-generator": "nx build @nicholasosto/name-generator",
     "watch:game-test": "nx run @nicholasosto/game-test:watch",
     "serve:game-test": "nx run @nicholasosto/game-test:rojo-serve",
     "graph": "nx graph",

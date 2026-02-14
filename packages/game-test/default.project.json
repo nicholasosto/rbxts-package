@@ -27,16 +27,51 @@
         "node_modules": {
           "$className": "Folder",
           "@rbxts": {
-            "$path": "node_modules/@rbxts"
+            "$className": "Folder",
+            "react": {
+              "$path": "node_modules/@rbxts/react"
+            },
+            "react-roblox": {
+              "$path": "node_modules/@rbxts/react-roblox"
+            },
+            "services": {
+              "$path": "node_modules/@rbxts/services"
+            },
+            "t": {
+              "$className": "Folder",
+              "ts": { "$path": "node_modules/@rbxts/t/lib/ts.lua" },
+              "lib": { "$path": "node_modules/@rbxts/t/lib" }
+            },
+            "signal": {
+              "$path": "node_modules/@rbxts/signal"
+            },
+            "maid": {
+              "$path": "node_modules/@rbxts/maid"
+            }
           },
           "@flamework": {
-            "$path": "node_modules/@flamework"
+            "$className": "Folder",
+            "core": {
+              "$path": "node_modules/@flamework/core"
+            },
+            "components": {
+              "$path": "node_modules/@flamework/components"
+            },
+            "networking": {
+              "$path": "node_modules/@flamework/networking"
+            }
           },
           "@nicholasosto": {
             "$className": "Folder",
             "assets": {
               "$path": "node_modules/@nicholasosto/assets/out"
+            },
+            "name-generator": {
+              "$path": "node_modules/@nicholasosto/name-generator/out"
             }
+          },
+          "@rbxts-js": {
+            "$path": "../../node_modules/@rbxts-js"
           }
         }
       }

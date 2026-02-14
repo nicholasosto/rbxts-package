@@ -1,4 +1,5 @@
 import { Flamework } from '@flamework/core';
+import { Names } from '@nicholasosto/name-generator';
 
 /**
  * Client entry point — Flamework ignition.
@@ -7,3 +8,5 @@ import { Flamework } from '@flamework/core';
 Flamework.addPaths('out/client');
 Flamework.addPaths('out/shared');
 Flamework.ignite();
+
+print(`Generated name: ${Names.GenerateName({ type: 'FULL_MONIKER' })}`);

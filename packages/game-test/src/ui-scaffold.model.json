@@ -17,7 +17,12 @@
           "name": "HUD",
           "className": "CanvasGroup",
           "properties": {
-            "Size": {"UDim2": [[1, 0], [1, 0]]},
+            "Size": {
+              "UDim2": [
+                [1, 0],
+                [1, 0]
+              ]
+            },
             "BackgroundTransparency": 1
           }
         },
@@ -29,7 +34,12 @@
               "name": "Menu",
               "className": "Frame",
               "properties": {
-                "Size": {"UDim2": [[1, 0], [1, 0]]},
+                "Size": {
+                  "UDim2": [
+                    [1, 0],
+                    [1, 0]
+                  ]
+                },
                 "BackgroundTransparency": 1,
                 "Visible": false
               },
@@ -38,7 +48,12 @@
                   "name": "Content",
                   "className": "CanvasGroup",
                   "properties": {
-                    "Size": {"UDim2": [[1, 0], [1, 0]]},
+                    "Size": {
+                      "UDim2": [
+                        [1, 0],
+                        [1, 0]
+                      ]
+                    },
                     "BackgroundTransparency": 1
                   }
                 }
@@ -48,7 +63,12 @@
               "name": "Inventory",
               "className": "Frame",
               "properties": {
-                "Size": {"UDim2": [[1, 0], [1, 0]]},
+                "Size": {
+                  "UDim2": [
+                    [1, 0],
+                    [1, 0]
+                  ]
+                },
                 "BackgroundTransparency": 1,
                 "Visible": false
               },
@@ -57,7 +77,41 @@
                   "name": "Content",
                   "className": "CanvasGroup",
                   "properties": {
-                    "Size": {"UDim2": [[1, 0], [1, 0]]},
+                    "Size": {
+                      "UDim2": [
+                        [1, 0],
+                        [1, 0]
+                      ]
+                    },
+                    "BackgroundTransparency": 1
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Catalog",
+              "className": "Frame",
+              "properties": {
+                "Size": {
+                  "UDim2": [
+                    [1, 0],
+                    [1, 0]
+                  ]
+                },
+                "BackgroundTransparency": 1,
+                "Visible": false
+              },
+              "children": [
+                {
+                  "name": "Content",
+                  "className": "CanvasGroup",
+                  "properties": {
+                    "Size": {
+                      "UDim2": [
+                        [1, 0],
+                        [1, 0]
+                      ]
+                    },
                     "BackgroundTransparency": 1
                   }
                 }
@@ -83,7 +137,12 @@
           "name": "Content",
           "className": "CanvasGroup",
           "properties": {
-            "Size": {"UDim2": [[1, 0], [1, 0]]},
+            "Size": {
+              "UDim2": [
+                [1, 0],
+                [1, 0]
+              ]
+            },
             "BackgroundTransparency": 1
           }
         }
@@ -105,7 +164,12 @@
           "name": "Content",
           "className": "CanvasGroup",
           "properties": {
-            "Size": {"UDim2": [[1, 0], [1, 0]]},
+            "Size": {
+              "UDim2": [
+                [1, 0],
+                [1, 0]
+              ]
+            },
             "BackgroundTransparency": 1
           }
         }
@@ -127,7 +191,12 @@
           "name": "Content",
           "className": "CanvasGroup",
           "properties": {
-            "Size": {"UDim2": [[1, 0], [1, 0]]},
+            "Size": {
+              "UDim2": [
+                [1, 0],
+                [1, 0]
+              ]
+            },
             "BackgroundTransparency": 1
           }
         }

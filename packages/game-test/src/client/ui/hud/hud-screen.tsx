@@ -2,6 +2,7 @@ import React from '@rbxts/react';
 import { useSelector } from '@rbxts/react-reflex';
 import { ResourceBar, ResourceBarStyle } from '@nicholasosto/rpg-ui-bars';
 import { selectHealth, selectMana } from '../../store';
+import { useRootProducer } from '../hooks';
 import { AbilityBar } from './ability-bar';
 
 /**
@@ -14,6 +15,7 @@ import { AbilityBar } from './ability-bar';
 export function HudScreen(): React.Element {
   const health = useSelector(selectHealth);
   const mana = useSelector(selectMana);
+  const { toggleCatalog } = useRootProducer();
 
   return (
     <React.Fragment>
@@ -48,6 +50,24 @@ export function HudScreen(): React.Element {
 
       {/* Ability bar — bottom center */}
       <AbilityBar abilities={[]} />
+
+      {/* Catalog toggle — bottom right */}
+      <textbutton
+        key="CatalogBtn"
+        AnchorPoint={new Vector2(1, 1)}
+        Position={new UDim2(1, -16, 1, -16)}
+        Size={new UDim2(0, 44, 0, 44)}
+        BackgroundColor3={Color3.fromRGB(60, 60, 90)}
+        BackgroundTransparency={0.15}
+        Text="📦"
+        TextScaled={true}
+        Font={Enum.Font.GothamBold}
+        BorderSizePixel={0}
+        Event={{ Activated: () => toggleCatalog() }}
+      >
+        <uicorner CornerRadius={new UDim(0, 8)} />
+        <uistroke Color={Color3.fromRGB(100, 100, 140)} Thickness={1} />
+      </textbutton>
     </React.Fragment>
   );
 }

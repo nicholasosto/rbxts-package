@@ -8,6 +8,7 @@ import { scaffold } from './scaffold';
 import { HudScreen } from './hud/hud-screen';
 import { InventoryScreen } from './screens/inventory-screen';
 import { MenuScreen } from './screens/menu-screen';
+import { AssetCatalogScreen } from './screens/asset-catalog-screen';
 
 /**
  * App — Root UI Controller
@@ -40,6 +41,7 @@ export class App implements OnStart {
         {createPortal(<HudScreen />, scaffold.gameplay.hud)}
         {createPortal(<MenuScreen />, scaffold.gameplay.menuContent)}
         {createPortal(<InventoryScreen />, scaffold.gameplay.inventoryContent)}
+        {createPortal(<AssetCatalogScreen />, scaffold.gameplay.catalogContent)}
       </ReflexProvider>,
     );
 

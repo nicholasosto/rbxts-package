@@ -4,6 +4,7 @@
 export { registerTextGenerationTool } from './text-generation.js';
 export { registerImageGenerationTool } from './image-generation.js';
 export { registerImageAnalysisTool } from './image-analysis.js';
+export { registerAssetImagePipelineTool } from './asset-image-pipeline.js';
 export { registerDatastoreTools } from './roblox-datastores.js';
 export { registerMessagingTools } from './roblox-messaging.js';
 export { registerAssetTools } from './roblox-assets.js';

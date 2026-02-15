@@ -15,7 +15,8 @@ import { Players } from '@rbxts/services';
  *   │   │   ├── HUD (CanvasGroup)
  *   │   │   └── Panels (Folder)
  *   │   │       ├── Menu (Frame) → Content (CanvasGroup)
- *   │   │       └── Inventory (Frame) → Content (CanvasGroup)
+ *   │   │   │   ├── Inventory (Frame) → Content (CanvasGroup)
+ *   │   │   │   └── Catalog (Frame) → Content (CanvasGroup)
  *   │   ├── Start (ScreenGui, DisplayOrder 20)
  *   │   │   └── Content (CanvasGroup)
  *   │   ├── Loading (ScreenGui, DisplayOrder 30)
@@ -43,6 +44,9 @@ const menuContent = menuFrame.WaitForChild('Content') as CanvasGroup;
 const inventoryFrame = panelsFolder.WaitForChild('Inventory') as Frame;
 const inventoryContent = inventoryFrame.WaitForChild('Content') as CanvasGroup;
 
+const catalogFrame = panelsFolder.WaitForChild('Catalog') as Frame;
+const catalogContent = catalogFrame.WaitForChild('Content') as CanvasGroup;
+
 // ── Layer content containers ───────────────────────────────
 const startContent = startGui.WaitForChild('Content') as CanvasGroup;
 const loadingContent = loadingGui.WaitForChild('Content') as CanvasGroup;
@@ -64,6 +68,8 @@ export const scaffold = {
     menuContent,
     inventoryFrame,
     inventoryContent,
+    catalogFrame,
+    catalogContent,
   },
 
   /** Top-level content containers for other layers */

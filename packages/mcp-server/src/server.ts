@@ -11,6 +11,7 @@ import {
   registerTextGenerationTool,
   registerImageGenerationTool,
   registerImageAnalysisTool,
+  registerAssetImagePipelineTool,
   registerDatastoreTools,
   registerMessagingTools,
   registerAssetTools,
@@ -40,6 +41,9 @@ export function createServer(): McpServer {
   registerTextGenerationTool(server);
   registerImageGenerationTool(server);
   registerImageAnalysisTool(server);
+
+  // Asset image pipeline (generate → upload combined)
+  registerAssetImagePipelineTool(server);
 
   // Roblox Open Cloud tools
   registerDatastoreTools(server);

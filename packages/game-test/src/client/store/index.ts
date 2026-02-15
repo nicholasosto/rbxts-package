@@ -10,6 +10,7 @@ export {
   selectAbilities,
   selectIsMenuOpen,
   selectIsInventoryOpen,
+  selectIsCatalogOpen,
   selectIsProfileLoaded,
   selectLevel,
   selectExperience,

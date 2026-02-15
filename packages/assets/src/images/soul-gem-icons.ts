@@ -7,6 +7,6 @@ export const SoulGemIcons = {
   FledglingSoulShard: asImageAsset('rbxassetid://94792536824771'),
   TravelersComfort: asImageAsset('rbxassetid://72225362452862'),
   PrimordialSoulNexus: asImageAsset('rbxassetid://116316685367117'),
-  ScholarsInsight: asImageAsset('rbxassetid://0'), // TODO: Replace placeholder
-  ForgottenSoulsWhisper: asImageAsset('rbxassetid://0'), // TODO: Replace placeholder
+  ScholarsInsight: asImageAsset('rbxassetid://138094085577880'),
+  ForgottenSoulsWhisper: asImageAsset('rbxassetid://140570800049629'),
 } as const satisfies Record<string, ImageAsset>;

@@ -16,6 +16,7 @@ export const selectAbilities = (state: RootState) => state.abilities.slots;
 // --- UI selectors ---
 export const selectIsMenuOpen = (state: RootState) => state.ui.isMenuOpen;
 export const selectIsInventoryOpen = (state: RootState) => state.ui.isInventoryOpen;
+export const selectIsCatalogOpen = (state: RootState) => state.ui.isCatalogOpen;
 
 // --- Profile selectors ---
 export const selectIsProfileLoaded = (state: RootState) => state.profile.isLoaded;

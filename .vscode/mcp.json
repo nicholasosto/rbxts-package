@@ -1,0 +1,10 @@
+{
+  "servers": {
+    "rbxts-mcp": {
+      "type": "stdio",
+      "command": "bash",
+      "args": ["-c", "set -a && source .env && set +a && npx tsx packages/mcp-server/src/index.ts"],
+      "cwd": "${workspaceFolder}"
+    }
+  }
+}

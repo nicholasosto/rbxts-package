@@ -5,12 +5,13 @@
   "type": "module",
   "description": "OpenAI API wrapper for text and image generation",
   "main": "dist/index.js",
-  "types": "src/index.ts",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.build.json",
     "clean": "rm -rf dist"
   },
   "dependencies": {
+    "@nicholasosto/node-tools": "workspace:*",
     "openai": "^6.22.0"
   },
   "devDependencies": {

@@ -4,17 +4,9 @@
  * Node.js dev tooling and scripts for the rbxts monorepo.
  * Add CLI tools, build scripts, asset pipeline helpers, etc.
  */
-
-// ─── Types ─────────────────────────────────────────────────────────────────────
-
-export type { OpenAIConfig, RobloxCloudConfig, ServiceConfigMap, ServiceName } from './types.js';
-
 // ─── Environment Loader ───────────────────────────────────────────────────────
-
 export { loadEnv, getRequiredEnv, getOpenAIConfig, getRobloxCloudConfig } from './env.js';
-
 // ─── Utilities ─────────────────────────────────────────────────────────────────
-
-export function greet(name: string): string {
-  return `Hello from node-tools, ${name}!`;
+export function greet(name) {
+    return `Hello from node-tools, ${name}!`;
 }

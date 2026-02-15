@@ -2,21 +2,15 @@
  * Quick smoke test for @nicholasosto/ai-tools
  *
  * Usage:
- *   OPENAI_API_KEY="sk-..." node --loader ts-node/esm packages/ai-tools/src/test.ts
+ *   npx tsx packages/ai-tools/src/test.ts
  *
- *   — or after building —
- *   OPENAI_API_KEY="sk-..." node packages/ai-tools/dist/test.js
+ * Reads OPENAI_API_KEY from the monorepo root .env file automatically.
+ * See .env.example for the expected keys.
  */
 
-import { createAISession } from './index.js';
+import { createAISessionFromEnv } from './index.js';
 
-const apiKey = process.env['OPENAI_API_KEY'];
-if (!apiKey) {
-  console.error('❌  Set OPENAI_API_KEY env var before running this test.');
-  process.exit(1);
-}
-
-const session = createAISession({ apiKey });
+const session = createAISessionFromEnv();
 
 console.log('── Text Generation ──');
 const textResult = await session.generateText('Say hello in three languages.', {

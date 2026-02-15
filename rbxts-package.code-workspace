@@ -36,6 +36,10 @@
       "name": "ai-tools",
       "path": "packages/ai-tools",
     },
+    {
+      "name": "mcp-server",
+      "path": "packages/mcp-server",
+    },
   ],
   "settings": {
     "typescript.tsdk": "node_modules/typescript/lib",

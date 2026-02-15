@@ -14,10 +14,15 @@
     "baseUrl": ".",
     "paths": {
       "@nicholasosto/node-tools": ["packages/node-tools/src/index.ts"],
-      "@nicholasosto/ai-tools": ["packages/ai-tools/src/index.ts"]
+      "@nicholasosto/ai-tools": ["packages/ai-tools/src/index.ts"],
+      "@nicholasosto/mcp-server": ["packages/mcp-server/src/index.ts"]
     }
   },
   "files": [],
   "exclude": ["node_modules", "out", "dist", "include", "packages"],
-  "references": [{ "path": "packages/node-tools" }, { "path": "packages/ai-tools" }]
+  "references": [
+    { "path": "packages/node-tools" },
+    { "path": "packages/ai-tools" },
+    { "path": "packages/mcp-server" }
+  ]
 }

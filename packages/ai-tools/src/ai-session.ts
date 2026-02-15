@@ -6,6 +6,7 @@
  */
 
 import OpenAI from 'openai';
+import { getOpenAIConfig } from '@nicholasosto/node-tools';
 import type {
   AIToolsConfig,
   AISession,
@@ -119,4 +120,21 @@ export function createAISession(config: AIToolsConfig): AISession {
   // ─── Return Session ────────────────────────────────────────────────────
 
   return { generateText, generateImage };
+}
+
+/**
+ * Create an AI session using the API key from environment variables.
+ *
+ * Reads `OPENAI_API_KEY` from the monorepo root `.env` file (via `@nicholasosto/node-tools`).
+ * All other config options can be overridden via the optional `overrides` parameter.
+ *
+ * @example
+ * ```ts
+ * const session = createAISessionFromEnv();
+ * const result = await session.generateText('Hello!');
+ * ```
+ */
+export function createAISessionFromEnv(overrides: Omit<AIToolsConfig, 'apiKey'> = {}): AISession {
+  const { apiKey } = getOpenAIConfig();
+  return createAISession({ apiKey, ...overrides });
 }

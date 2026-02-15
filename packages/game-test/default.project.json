@@ -17,6 +17,12 @@
         }
       }
     },
+    "StarterGui": {
+      "$className": "StarterGui",
+      "UIScaffold": {
+        "$path": "src/ui-scaffold.model.json"
+      }
+    },
     "ReplicatedStorage": {
       "$className": "ReplicatedStorage",
       "TS": {
@@ -53,6 +59,9 @@
             },
             "react-reflex": {
               "$path": "node_modules/@rbxts/react-reflex"
+            },
+            "profile-store": {
+              "$path": "node_modules/@rbxts/profile-store/src"
             }
           },
           "@flamework": {

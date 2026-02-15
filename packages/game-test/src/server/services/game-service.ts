@@ -1,6 +1,7 @@
 import { Service, OnStart } from '@flamework/core';
 import { Players } from '@rbxts/services';
 import { GlobalEvents, GlobalFunctions } from '../../shared/network';
+import { PlayerDataService } from './player-data-service';
 
 /**
  * Core server service — handles incoming client events.
@@ -12,6 +13,8 @@ import { GlobalEvents, GlobalFunctions } from '../../shared/network';
 export class GameService implements OnStart {
   private networkEvents = GlobalEvents.createServer({});
   private networkFunctions = GlobalFunctions.createServer({});
+
+  constructor(private playerDataService: PlayerDataService) {}
 
   onStart(): void {
     // ── Combat Actions ──────────────────────────────────────
@@ -58,8 +61,12 @@ export class GameService implements OnStart {
     });
 
     // ── Ability Loadout ─────────────────────────────────────
-    this.networkFunctions.GetAbilityLoadout.setCallback((_player) => {
-      // TODO: load from data store per player
+    this.networkFunctions.GetAbilityLoadout.setCallback((player) => {
+      const data = this.playerDataService.getData(player);
+      if (data) {
+        return data.abilityLoadout;
+      }
+      // Fallback if profile hasn't loaded yet
       return ['Fireball', 'Shield', 'Heal', 'Dash'];
     });
   }

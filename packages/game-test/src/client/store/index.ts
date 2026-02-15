@@ -10,4 +10,13 @@ export {
   selectAbilities,
   selectIsMenuOpen,
   selectIsInventoryOpen,
+  selectIsProfileLoaded,
+  selectLevel,
+  selectExperience,
+  selectCurrency,
+  selectInventory,
+  selectEquipment,
+  selectSettings,
+  selectBaseAttributes,
+  selectProfile,
 } from './selectors';

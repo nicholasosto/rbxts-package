@@ -15,3 +15,13 @@ export {
   MathUtils,
   StringUtils,
 } from '@nicholasosto/assets';
+
+// --- Player Data types & template ---
+export type {
+  PlayerProfile,
+  InventoryItem,
+  QuestProgress,
+  CurrencyData,
+  PlayerSettings,
+} from './player-data';
+export { DEFAULT_PROFILE } from './player-data';

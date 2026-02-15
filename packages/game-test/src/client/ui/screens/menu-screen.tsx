@@ -1,25 +1,28 @@
-import React from '@rbxts/react';
+import React, { useEffect } from '@rbxts/react';
 import { useSelector } from '@rbxts/react-reflex';
 import { selectIsMenuOpen } from '../../store';
 import { useRootProducer } from '../hooks';
+import { scaffold } from '../scaffold';
 
 /**
  * MenuScreen — Pause/settings menu overlay.
  *
- * Reads visibility from the Reflex store (`ui.isMenuOpen`).
- * Toggled via InputAction.ToggleMenu (Escape key).
+ * Portaled into the scaffold's Gameplay > Panels > Menu > Content.
+ * Toggles the parent Menu Frame's Visible property via the store
+ * so the Rojo-provided Frame acts as the visibility gate.
  */
 export function MenuScreen(): React.Element {
   const isOpen = useSelector(selectIsMenuOpen);
   const { closeAll } = useRootProducer();
 
-  if (!isOpen) {
-    return <frame key="MenuScreen" Visible={false} />;
-  }
+  // Sync scaffold frame visibility with store state
+  useEffect(() => {
+    scaffold.gameplay.menuFrame.Visible = isOpen;
+  }, [isOpen]);
 
   return (
     <frame
-      key="MenuScreen"
+      key="MenuOverlay"
       Size={UDim2.fromScale(1, 1)}
       BackgroundColor3={Color3.fromRGB(0, 0, 0)}
       BackgroundTransparency={0.4}

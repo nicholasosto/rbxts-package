@@ -1,4 +1,5 @@
 import { Networking } from '@flamework/networking';
+import type { PlayerProfile } from './player-data';
 
 /**
  * Events fired from CLIENT → SERVER.
@@ -26,6 +27,9 @@ interface ServerToClientEvents {
 
   /** Broadcast combat state updates (cooldowns, combo reset, etc.) */
   CombatStateUpdate(state: Record<string, unknown>): void;
+
+  /** Sends the full player profile to the client after data loads */
+  ProfileLoaded(profile: PlayerProfile): void;
 }
 
 /**

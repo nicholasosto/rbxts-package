@@ -1,0 +1,137 @@
+{
+  "className": "Folder",
+  "children": [
+    {
+      "name": "Gameplay",
+      "className": "ScreenGui",
+      "properties": {
+        "DisplayOrder": 10,
+        "IgnoreGuiInset": true,
+        "ResetOnSpawn": false,
+        "Enabled": false,
+        "ZIndexBehavior": "Sibling",
+        "ScreenInsets": "None"
+      },
+      "children": [
+        {
+          "name": "HUD",
+          "className": "CanvasGroup",
+          "properties": {
+            "Size": {"UDim2": [[1, 0], [1, 0]]},
+            "BackgroundTransparency": 1
+          }
+        },
+        {
+          "name": "Panels",
+          "className": "Folder",
+          "children": [
+            {
+              "name": "Menu",
+              "className": "Frame",
+              "properties": {
+                "Size": {"UDim2": [[1, 0], [1, 0]]},
+                "BackgroundTransparency": 1,
+                "Visible": false
+              },
+              "children": [
+                {
+                  "name": "Content",
+                  "className": "CanvasGroup",
+                  "properties": {
+                    "Size": {"UDim2": [[1, 0], [1, 0]]},
+                    "BackgroundTransparency": 1
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Inventory",
+              "className": "Frame",
+              "properties": {
+                "Size": {"UDim2": [[1, 0], [1, 0]]},
+                "BackgroundTransparency": 1,
+                "Visible": false
+              },
+              "children": [
+                {
+                  "name": "Content",
+                  "className": "CanvasGroup",
+                  "properties": {
+                    "Size": {"UDim2": [[1, 0], [1, 0]]},
+                    "BackgroundTransparency": 1
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Start",
+      "className": "ScreenGui",
+      "properties": {
+        "DisplayOrder": 20,
+        "IgnoreGuiInset": true,
+        "ResetOnSpawn": false,
+        "Enabled": false,
+        "ZIndexBehavior": "Sibling",
+        "ScreenInsets": "None"
+      },
+      "children": [
+        {
+          "name": "Content",
+          "className": "CanvasGroup",
+          "properties": {
+            "Size": {"UDim2": [[1, 0], [1, 0]]},
+            "BackgroundTransparency": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "Loading",
+      "className": "ScreenGui",
+      "properties": {
+        "DisplayOrder": 30,
+        "IgnoreGuiInset": true,
+        "ResetOnSpawn": false,
+        "Enabled": false,
+        "ZIndexBehavior": "Sibling",
+        "ScreenInsets": "None"
+      },
+      "children": [
+        {
+          "name": "Content",
+          "className": "CanvasGroup",
+          "properties": {
+            "Size": {"UDim2": [[1, 0], [1, 0]]},
+            "BackgroundTransparency": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dialogs",
+      "className": "ScreenGui",
+      "properties": {
+        "DisplayOrder": 40,
+        "IgnoreGuiInset": true,
+        "ResetOnSpawn": false,
+        "Enabled": false,
+        "ZIndexBehavior": "Sibling",
+        "ScreenInsets": "None"
+      },
+      "children": [
+        {
+          "name": "Content",
+          "className": "CanvasGroup",
+          "properties": {
+            "Size": {"UDim2": [[1, 0], [1, 0]]},
+            "BackgroundTransparency": 1
+          }
+        }
+      ]
+    }
+  ]
+}

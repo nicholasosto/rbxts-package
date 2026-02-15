@@ -1,23 +1,25 @@
-import React from '@rbxts/react';
+import React, { useEffect } from '@rbxts/react';
 import { useSelector } from '@rbxts/react-reflex';
 import { selectIsInventoryOpen } from '../../store';
+import { scaffold } from '../scaffold';
 
 /**
  * InventoryScreen — Full-screen inventory overlay.
  *
- * Reads visibility from the Reflex store (`ui.isInventoryOpen`).
- * Toggled via InputAction.ToggleInventory.
+ * Portaled into the scaffold's Gameplay > Panels > Inventory > Content.
+ * Toggles the parent Inventory Frame's Visible property via the store.
  */
 export function InventoryScreen(): React.Element {
   const isOpen = useSelector(selectIsInventoryOpen);
 
-  if (!isOpen) {
-    return <frame key="InventoryScreen" Visible={false} />;
-  }
+  // Sync scaffold frame visibility with store state
+  useEffect(() => {
+    scaffold.gameplay.inventoryFrame.Visible = isOpen;
+  }, [isOpen]);
 
   return (
     <frame
-      key="InventoryScreen"
+      key="InventoryOverlay"
       Size={UDim2.fromScale(1, 1)}
       BackgroundColor3={Color3.fromRGB(20, 20, 30)}
       BackgroundTransparency={0.2}
@@ -37,7 +39,7 @@ export function InventoryScreen(): React.Element {
 
       {/* TODO: Equipment grid, item list, ability loadout slots */}
       <frame
-        key="Content"
+        key="ContentArea"
         AnchorPoint={new Vector2(0.5, 0.5)}
         Position={UDim2.fromScale(0.5, 0.5)}
         Size={UDim2.fromScale(0.8, 0.7)}

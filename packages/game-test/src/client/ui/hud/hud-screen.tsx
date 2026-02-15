@@ -7,16 +7,17 @@ import { AbilityBar } from './ability-bar';
 /**
  * HudScreen — Top-level HUD layout.
  *
- * Always visible during gameplay. Reads health and mana from
- * the Reflex store via selectors rather than polling Humanoid directly.
+ * Portaled into the scaffold's Gameplay > HUD CanvasGroup.
+ * The container is already full-size and transparent, so this
+ * component renders content directly without a wrapper frame.
  */
 export function HudScreen(): React.Element {
   const health = useSelector(selectHealth);
   const mana = useSelector(selectMana);
 
   return (
-    <frame key="HUD" Size={UDim2.fromScale(1, 1)} BackgroundTransparency={1}>
-      {/* Health bar — top center */}
+    <React.Fragment>
+      {/* Resource bars — top center */}
       <frame
         key="ResourceBars"
         AnchorPoint={new Vector2(0.5, 0)}
@@ -47,6 +48,6 @@ export function HudScreen(): React.Element {
 
       {/* Ability bar — bottom center */}
       <AbilityBar abilities={[]} />
-    </frame>
+    </React.Fragment>
   );
 }

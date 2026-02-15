@@ -18,6 +18,8 @@ export type {
   ImageSize,
   ImageQuality,
   ImageOutputFormat,
+  ImageAnalysisOptions,
+  ImageAnalysisResult,
 } from './types.js';
 
 // ─── Core ──────────────────────────────────────────────────────────────────────
@@ -29,6 +31,7 @@ export { createAISession, createAISessionFromEnv } from './ai-session.js';
 export {
   DEFAULT_TEXT_MODEL,
   DEFAULT_IMAGE_MODEL,
+  DEFAULT_VISION_MODEL,
   DEFAULT_MAX_RETRIES,
   DEFAULT_TIMEOUT,
   DEFAULT_IMAGE_SIZE,

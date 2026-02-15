@@ -10,11 +10,13 @@ import { resolve } from 'node:path';
 import {
   registerTextGenerationTool,
   registerImageGenerationTool,
+  registerImageAnalysisTool,
   registerDatastoreTools,
   registerMessagingTools,
   registerAssetTools,
   registerInstanceTools,
   registerInventoryTools,
+  registerThumbnailTools,
   registerPackageInfoTools,
 } from './tools/index.js';
 
@@ -37,6 +39,7 @@ export function createServer(): McpServer {
   // AI / OpenAI tools
   registerTextGenerationTool(server);
   registerImageGenerationTool(server);
+  registerImageAnalysisTool(server);
 
   // Roblox Open Cloud tools
   registerDatastoreTools(server);
@@ -44,6 +47,7 @@ export function createServer(): McpServer {
   registerAssetTools(server);
   registerInstanceTools(server);
   registerInventoryTools(server);
+  registerThumbnailTools(server);
 
   // Monorepo introspection tools
   registerPackageInfoTools(server);

@@ -1,0 +1,1781 @@
+{
+  "timestamp": "2026-02-15T18:43:32.393Z",
+  "totalDecals": 177,
+  "accessible": 120,
+  "inaccessible": 57,
+  "thumbnailsReady": 119,
+  "analyzed": 119,
+  "analysisFails": 0,
+  "records": [
+    {
+      "assetId": "13498955922",
+      "currentName": "Images/Roblox_Button_01",
+      "currentDescription": "madeinstudio",
+      "category": "UI",
+      "aiDescription": "Blue button with \"Click Me!\" text",
+      "proposedName": "UI/Roblox_Button_01",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-40157449188a1508b4266ae51f438e68/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "14900289550",
+      "currentName": "Images/Goku Big",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Full-body image of an animated character.",
+      "proposedName": "Characters/Goku_Big",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-288f6eb91aac57a6a682ca67e7e979cb/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "14900315363",
+      "currentName": "Images/Vegeta Big",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Animated character in battle pose with armor.",
+      "proposedName": "Characters/Vegeta_Big",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-553f102841c6359210de07bc0d2f4796/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "434171996",
+      "currentName": "Black Goku",
+      "currentDescription": "Appearantly Black Goku Is an evil version of goku from the future.  I thought Akira Toriyama Was being racist but they weren't",
+      "category": "Characters",
+      "aiDescription": "Full-body image of anime-style character.",
+      "proposedName": "Characters/Black_Goku",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-3b2c1cccb14e48733bef882e6e4c7f61/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15247153080",
+      "currentName": "Images/kiBlastBtn",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Bright explosion with fiery and glowing tendrils.",
+      "proposedName": "Effects/kiBlastBtn",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-125237fea6ad03754983ec65e3e44008/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15252200378",
+      "currentName": "Images/Charge_Ki_Image",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Stylized character with glowing energy aura.",
+      "proposedName": "Characters/Charge_Ki_Image",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-87547b9b77518d44031304dcfe4492e0/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15310586484",
+      "currentName": "Images/kiBlastBtn",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Bright explosion with fiery and glowing elements.",
+      "proposedName": "Effects/kiBlastBtn",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-125237fea6ad03754983ec65e3e44008/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15429351439",
+      "currentName": "Images/Pits_of_hell",
+      "currentDescription": "madeinstudio",
+      "category": "Backgrounds",
+      "aiDescription": "Intricate geometric starburst pattern with warm colors.",
+      "proposedName": "Backgrounds/Pits_of_hell",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-040bc2d1f5d2115bb4fbf57b50106534/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15429352890",
+      "currentName": "Images/Pits_of_hell",
+      "currentDescription": "madeinstudio",
+      "category": "Backgrounds",
+      "aiDescription": "Intricate geometric starburst pattern design",
+      "proposedName": "Backgrounds/Pits_of_hell",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-040bc2d1f5d2115bb4fbf57b50106534/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15429362597",
+      "currentName": "Images/Pits_of_hell",
+      "currentDescription": "madeinstudio",
+      "category": "Backgrounds",
+      "aiDescription": "Intricate geometric starburst pattern with warm colors.",
+      "proposedName": "Backgrounds/Pits_of_hell",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-040bc2d1f5d2115bb4fbf57b50106534/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15429366163",
+      "currentName": "Images/RobloxGameIcon",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Futuristic character with glowing energy aura.",
+      "proposedName": "Characters/RobloxGameIcon",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-7e995efcba93732a4feefde639d3244e/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15429366559",
+      "currentName": "Images/GamePoster",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Two warriors clashing with energy blasts.",
+      "proposedName": "Characters/GamePoster",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-c46536c5964a3cbb4e562b447999177e/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15450747026",
+      "currentName": "Images/RobloxGameIcon (1)",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Futuristic character with glowing energy aura",
+      "proposedName": "Characters/RobloxGameIcon",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-7e995efcba93732a4feefde639d3244e/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15450748010",
+      "currentName": "Images/GamePoster (1)",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Two warriors clashing with energy blasts.",
+      "proposedName": "Characters/GamePoster",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-c46536c5964a3cbb4e562b447999177e/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15450747426",
+      "currentName": "Images/location_CellGames",
+      "currentDescription": "madeinstudio",
+      "category": "Environment",
+      "aiDescription": "Simple 3D landscape with path and trees.",
+      "proposedName": "Environment/location_CellGames",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-0e5b8cad10c9fff9de47065a3796dd2b/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15450784962",
+      "currentName": "Images/location_01",
+      "currentDescription": "madeinstudio",
+      "category": "Environment",
+      "aiDescription": "Green and gray checkered terrain with platform.",
+      "proposedName": "Environment/location_01",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-7d0b8dd9e017bd72290cc79030e7850c/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15451145442",
+      "currentName": "Images/spawn_zombie",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Zombie character with green skin and drool.",
+      "proposedName": "Characters/spawn_zombie",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-89511d3daeb38cbb1d4771a5c66832e9/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15457943210",
+      "currentName": "Images/zombie_wall",
+      "currentDescription": "madeinstudio",
+      "category": "Textures",
+      "aiDescription": "Cracked, weathered wall with dark stains.",
+      "proposedName": "Textures/zombie_wall",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-70e13f40de180ad3a8c0ea8a9b6c32de/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15457969249",
+      "currentName": "Images/Ceiling_Zombie",
+      "currentDescription": "madeinstudio",
+      "category": "Textures",
+      "aiDescription": "Distressed wall with eerie face and hand.",
+      "proposedName": "Textures/Ceiling_Zombie",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-3c0520ae5c6b55b3c49672bd8dc9d930/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15457968784",
+      "currentName": "Images/Floor Zombie",
+      "currentDescription": "madeinstudio",
+      "category": "Textures",
+      "aiDescription": "Rough, cracked surface with debris and marks.",
+      "proposedName": "Textures/Floor_Zombie",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-f24f83aaa6fc7f116d8d24c255dcb0a3/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15506684607",
+      "currentName": "Images/Kamehameha",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Bright blue energy blast with spikes.",
+      "proposedName": "Effects/Kamehameha",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-0d4377c720c0c7406bcd820396abcca2/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15507391356",
+      "currentName": "Images/Kamehameha",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Bright blue energy blast with spikes",
+      "proposedName": "Effects/Kamehameha",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-0d4377c720c0c7406bcd820396abcca2/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15507394399",
+      "currentName": "Images/Pits_of_hell",
+      "currentDescription": "madeinstudio",
+      "category": "Backgrounds",
+      "aiDescription": "Intricate geometric starburst pattern with warm colors.",
+      "proposedName": "Backgrounds/Pits_of_hell",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-040bc2d1f5d2115bb4fbf57b50106534/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15525190174",
+      "currentName": "Images/Destructo_Disk",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Swirling colorful energy vortex with glowing accents.",
+      "proposedName": "Effects/Destructo_Disk",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-e997dcb3920392c532ee99d9653335a6/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15539064907",
+      "currentName": "Images/PvP_icon",
+      "currentDescription": "madeinstudio",
+      "category": "Icons",
+      "aiDescription": "PvP emblem with swords and shield",
+      "proposedName": "Icons/PvP_icon",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-c17e7d53a4f558ff4c619098fe64b0c0/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15539889677",
+      "currentName": "Images/RobloxGameIcon",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Futuristic warrior with glowing energy aura",
+      "proposedName": "Characters/RobloxGameIcon",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-7e995efcba93732a4feefde639d3244e/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15547099487",
+      "currentName": "Images/Destructo_Disk (1)",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Swirling colorful energy vortex with glowing accents.",
+      "proposedName": "Effects/Destructo_Disk",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-e997dcb3920392c532ee99d9653335a6/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15547302094",
+      "currentName": "Images/question",
+      "currentDescription": "madeinstudio",
+      "category": "Icons",
+      "aiDescription": "3D figure with red question mark",
+      "proposedName": "Icons/question",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-3cb0bc59318c50f8c3407d4b71f73d26/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15547308596",
+      "currentName": "Images/Pits_of_hell",
+      "currentDescription": "madeinstudio",
+      "category": "Backgrounds",
+      "aiDescription": "Intricate geometric starburst pattern with warm tones.",
+      "proposedName": "Backgrounds/Pits_of_hell",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-040bc2d1f5d2115bb4fbf57b50106534/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15547322390",
+      "currentName": "Images/NPC",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Cartoonish robot with glowing jet thrusters.",
+      "proposedName": "Characters/NPC",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-fe2c593d144c5e86f75182d7e21b9d5a/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15547330969",
+      "currentName": "Images/kiBlastBtn",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Bright explosion with fiery energy bursts.",
+      "proposedName": "Effects/kiBlastBtn",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-125237fea6ad03754983ec65e3e44008/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15577505357",
+      "currentName": "Images/Charge_Ki_Image",
+      "currentDescription": "madeinstudio",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": "https://t3.rbxcdn.com/180DAY-a3dd54a897e452a2c6ea835194882df6",
+      "error": null
+    },
+    {
+      "assetId": "15579260136",
+      "currentName": "Images/Angelic_Mesh",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Glowing, intricate, celestial sphere with feathers.",
+      "proposedName": "Effects/Angelic_Mesh",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-7713b0398fd9fcce70b9a24723856af7/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15579404828",
+      "currentName": "Images/FormChange",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Glowing aura with energy and light beams",
+      "proposedName": "Effects/FormChange",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-b4b2cbe170644aa0711e822c9a15bb93/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15584704673",
+      "currentName": "Images/coin_graphic",
+      "currentDescription": "madeinstudio",
+      "category": "Icons",
+      "aiDescription": "Ornate golden circular emblem with symbols.",
+      "proposedName": "Icons/coin_graphic",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-489a052b89ccf0628d66620b79670d5d/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15584751615",
+      "currentName": "Images/Dragonball",
+      "currentDescription": "madeinstudio",
+      "category": "Icons",
+      "aiDescription": "Orange sphere with a central star.",
+      "proposedName": "Icons/Dragonball",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-498382c9fcd746bca1e66fa31c400b50/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15616300636",
+      "currentName": "Images/melee_attack",
+      "currentDescription": "madeinstudio",
+      "category": "Icons",
+      "aiDescription": "Fist icon with red circular border.",
+      "proposedName": "Icons/melee_attack",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-085a41eea07cee0d1de76bafba516adf/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "15616337055",
+      "currentName": "Images/defend",
+      "currentDescription": "madeinstudio",
+      "category": "Icons",
+      "aiDescription": "Shield icon with glowing blue effects.",
+      "proposedName": "Icons/defend",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-7ca19dc56b2290406aba2233c8b70e7c/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16140631026",
+      "currentName": "Images/Aura_Texture",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Colorful, swirling energy and light particles",
+      "proposedName": "Effects/Aura_Texture",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-9be35e67e02d8f0f9e5401248ccddcf4/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16151799536",
+      "currentName": "Images/target_image",
+      "currentDescription": "madeinstudio",
+      "category": "UI",
+      "aiDescription": "Circular target-like HUD element.",
+      "proposedName": "UI/target_image",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-3e9a37613ab3866548759f8b77f8e987/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16151800086",
+      "currentName": "Images/Swords Clashing",
+      "currentDescription": "madeinstudio",
+      "category": "Items",
+      "aiDescription": "Two crossed swords with radiant background",
+      "proposedName": "Items/Swords_Clashing",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-bca22e9d089e6008494f8c7f429f0d8a/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16151811270",
+      "currentName": "Images/roblox_ultru_instinct",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Electrified character with glowing energy aura.",
+      "proposedName": "Characters/roblox_ultru_instinct",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-a58a35ab294e2f29aa836121166b097f/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16151811614",
+      "currentName": "Images/Red_Button",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Stylized character surrounded by flames.",
+      "proposedName": "Characters/Red_Button",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-cb5d3ea8fad925800fe077e240e5c293/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16166243779",
+      "currentName": "Images/Aura_TextureImage",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Abstract red silhouette of a person.",
+      "proposedName": "Characters/Aura_TextureImage",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-7f9950c3429ca360687a20c66e184c8e/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16166276512",
+      "currentName": "Images/Aura_Texture_Invis",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Colorful cosmic energy burst with stars.",
+      "proposedName": "Effects/Aura_Texture_Invis",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-c568cc50c71655e72bb7f49d443328d4/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16166808304",
+      "currentName": "Images/Special Beam Cannon",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Neon spiral with glowing aura effect",
+      "proposedName": "Effects/Special_Beam_Cannon",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-13dd6329d17a8e5607d27a7c919250b0/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16166986854",
+      "currentName": "Images/big_bang_button",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Blue glowing energy burst with rays",
+      "proposedName": "Effects/big_bang_button",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-7961ea55c5aab85ebb6bb3a2538fffc3/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16166996104",
+      "currentName": "Images/Kamehameha_Button",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Blue energy blast with light rays",
+      "proposedName": "Effects/Kamehameha_Button",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-f8bf91dea71cec4415b0199fca073166/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16177578473",
+      "currentName": "Images/lightning_2x2",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Bright, branching lightning bolts on dark background.",
+      "proposedName": "Effects/lightning_2x2",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-014ce86d6cab2346035a4d50cca63f8d/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16177674055",
+      "currentName": "Images/lightning_small",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Lightning-like energy branching effect.",
+      "proposedName": "Effects/lightning_small",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-cb649954bde846b4a107d1692ebac8f5/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16177681436",
+      "currentName": "Images/lightning_01",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Bright, branching lightning bolt effect.",
+      "proposedName": "Effects/lightning_01",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-9e7aaa273ea08a2ca2e5d4ac6f4de7fb/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16177818148",
+      "currentName": "Images/lightning_very_tiny",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Jagged white lightning bolt effect.",
+      "proposedName": "Effects/lightning_very_tiny",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-ad08f74177363fff1a89dd5ab0034e49/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16186397992",
+      "currentName": "Images/Aura_Texture_Test",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Blurry, colorful aura or energy effect.",
+      "proposedName": "Effects/Aura_Texture_Test",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-f1ca8171a3d35213989f4a4c1c752818/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16186488433",
+      "currentName": "Images/Aura_Texture_Test2",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Blurred, colorful glow resembling an aura.",
+      "proposedName": "Effects/Aura_Texture_Test2",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-ff4b98d6bc2144264130f98901c80e28/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16186924095",
+      "currentName": "Images/Aura_Texture_Purple",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Purple glowing aura or energy effect.",
+      "proposedName": "Effects/Aura_Texture_Purple",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-a55c60f1b34dbae2f1e07f336b9b40f2/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16187068056",
+      "currentName": "Images/lightning_512_flip",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Abstract red and purple energy shapes",
+      "proposedName": "Effects/lightning_512_flip",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-02584bab091df999963c06e70b7aa851/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16187099864",
+      "currentName": "Images/lightning_ugly",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Abstract red and purple energy shape",
+      "proposedName": "Effects/lightning_ugly",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-84ca47aef9fcbf7922c7c386c4ca9302/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16187164545",
+      "currentName": "Images/Static_Electricity",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Glowing energy sphere with electric tendrils",
+      "proposedName": "Effects/Static_Electricity",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-5d0ca1a33366a460ea5f9837c55ea7b6/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16187197435",
+      "currentName": "Images/Static_Electricity (1)",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Electric energy blast with vibrant colors.",
+      "proposedName": "Effects/Static_Electricity",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-c8cef2b3725feef92680e80e85877f89/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16187229495",
+      "currentName": "Images/Static_Electricity_tiny",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Electric energy blast with colorful sparks",
+      "proposedName": "Effects/Static_Electricity_tiny",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-1ed3299d886c36ab9e67f73c695528af/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16187259616",
+      "currentName": "Images/Static_Electricity_tiny (1)",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Blue particle or energy effect.",
+      "proposedName": "Effects/Static_Electricity_tiny",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-c99b4863aa1dd58e776352edcc3292d0/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16187609405",
+      "currentName": "Images/resource_pack_thumb",
+      "currentDescription": "madeinstudio",
+      "category": "Backgrounds",
+      "aiDescription": "Vibrant, cosmic-themed scene with music elements.",
+      "proposedName": "Backgrounds/resource_pack_thumb",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-33c83d10fbb23ab1c20eab4a02e0800d/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16192666020",
+      "currentName": "Images/background_panel",
+      "currentDescription": "madeinstudio",
+      "category": "UI",
+      "aiDescription": "Ornate frame with swords and dragons.",
+      "proposedName": "UI/background_panel",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-5a6b228ed4d44fb90b1f2f82201ab36d/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16192666032",
+      "currentName": "Images/background_panel",
+      "currentDescription": "madeinstudio",
+      "category": "UI",
+      "aiDescription": "Ornate frame with swords and dragons",
+      "proposedName": "UI/background_panel",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-5a6b228ed4d44fb90b1f2f82201ab36d/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16192666467",
+      "currentName": "Images/background_panel",
+      "currentDescription": "madeinstudio",
+      "category": "UI",
+      "aiDescription": "Ornate frame with swords and dragons",
+      "proposedName": "UI/background_panel",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-5a6b228ed4d44fb90b1f2f82201ab36d/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16192710968",
+      "currentName": "Images/background_panel",
+      "currentDescription": "madeinstudio",
+      "category": "UI",
+      "aiDescription": "Ornate frame with swords and dragons",
+      "proposedName": "UI/background_panel",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-5a6b228ed4d44fb90b1f2f82201ab36d/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16192712003",
+      "currentName": "Images/background_panel",
+      "currentDescription": "madeinstudio",
+      "category": "UI",
+      "aiDescription": "Ornate frame with swords and dragons",
+      "proposedName": "UI/background_panel",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-5a6b228ed4d44fb90b1f2f82201ab36d/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16196230828",
+      "currentName": "Images/background_panel (1)",
+      "currentDescription": "madeinstudio",
+      "category": "UI",
+      "aiDescription": "Ornate frame with swords and dragons.",
+      "proposedName": "UI/background_panel",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-5a6b228ed4d44fb90b1f2f82201ab36d/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16208805967",
+      "currentName": "Images/Charge_Ki_Image",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Stylized character with glowing energy aura.",
+      "proposedName": "Characters/Charge_Ki_Image",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-87547b9b77518d44031304dcfe4492e0/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16208898074",
+      "currentName": "Images/resource_pack_thumb",
+      "currentDescription": "madeinstudio",
+      "category": "Backgrounds",
+      "aiDescription": "Vibrant scene with music and cosmic elements.",
+      "proposedName": "Backgrounds/resource_pack_thumb",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-33c83d10fbb23ab1c20eab4a02e0800d/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16208914140",
+      "currentName": "Images/coin_graphic",
+      "currentDescription": "madeinstudio",
+      "category": "Icons",
+      "aiDescription": "Ornate golden circular emblem with symbols.",
+      "proposedName": "Icons/coin_graphic",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-489a052b89ccf0628d66620b79670d5d/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16275985708",
+      "currentName": "Images/Aura_Texture_Test",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Blurry, colorful glow resembling an aura.",
+      "proposedName": "Effects/Aura_Texture_Test",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-f1ca8171a3d35213989f4a4c1c752818/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16275998451",
+      "currentName": "Images/Aura_Texture",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Colorful cosmic energy burst with stars.",
+      "proposedName": "Effects/Aura_Texture",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-c568cc50c71655e72bb7f49d443328d4/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16407479195",
+      "currentName": "Images/melee_attack",
+      "currentDescription": "madeinstudio",
+      "category": "Icons",
+      "aiDescription": "Fist icon with red circular border",
+      "proposedName": "Icons/melee_attack",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-085a41eea07cee0d1de76bafba516adf/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16407488815",
+      "currentName": "Images/defend",
+      "currentDescription": "madeinstudio",
+      "category": "Icons",
+      "aiDescription": "Shield icon with glowing blue effects",
+      "proposedName": "Icons/defend",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-7ca19dc56b2290406aba2233c8b70e7c/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16407501348",
+      "currentName": "Images/roblox_ultru_instinct",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Electrified character with glowing energy aura.",
+      "proposedName": "Characters/roblox_ultru_instinct",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-a58a35ab294e2f29aa836121166b097f/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16435665379",
+      "currentName": "Images/snowy mountains",
+      "currentDescription": "madeinstudio",
+      "category": "Environment",
+      "aiDescription": "Snowy mountain landscape with rugged peaks.",
+      "proposedName": "Environment/snowy_mountains",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-f97a87f1f599f59767b4cd8971566d60/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16465021693",
+      "currentName": "Images/button_Flight",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Stylized running superhero in blue circle.",
+      "proposedName": "Characters/button_Flight",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-43a784c532e908bac5e26c66b841a85c/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16466355067",
+      "currentName": "Images/texture_trail",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Purple energy blast or aura shape",
+      "proposedName": "Effects/texture_trail",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-8031dd17963633f43592e4f3bca0234c/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16466403974",
+      "currentName": "Images/texture_trail2",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Purple abstract shape resembling a glow effect.",
+      "proposedName": "Effects/texture_trail2",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-d70da581b1aa1238b22d8520dffcba03/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "14304562294",
+      "currentName": "japanese wave 3",
+      "currentDescription": "Decal",
+      "category": "Environment",
+      "aiDescription": "Stylized wave and boat in ocean scene",
+      "proposedName": "Environment/japanese_wave_3",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-e1c1b703b744a985f582c67282594b1b/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "14304559294",
+      "currentName": "japanese wave 2",
+      "currentDescription": "Decal",
+      "category": "Environment",
+      "aiDescription": "Stylized wave and mountain landscape scene.",
+      "proposedName": "Environment/japanese_wave_2",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-a3ab46c49215e7ca17fd29d5b0580b38/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "14304569634",
+      "currentName": "japanese wave 1",
+      "currentDescription": "Decal",
+      "category": "Environment",
+      "aiDescription": "Stylized wave with boat in ocean scene.",
+      "proposedName": "Environment/japanese_wave_1",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-d4fa8d36b00a8b08e79c464f40a2d8fa/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16578057299",
+      "currentName": "Images/swirly_texture_jpg",
+      "currentDescription": "madeinstudio",
+      "category": "Textures",
+      "aiDescription": "Colorful swirling abstract pattern texture",
+      "proposedName": "Textures/swirly_texture_jpg",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-147800574d672d8b81474e59c5dc9f87/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16578066567",
+      "currentName": "Images/swirly_texture_png",
+      "currentDescription": "madeinstudio",
+      "category": "Backgrounds",
+      "aiDescription": "Colorful abstract swirling pattern design",
+      "proposedName": "Backgrounds/swirly_texture_png",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-ab51b0e0ed98346f6755bee1a2139762/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16578079676",
+      "currentName": "Images/swirly_texture_enclosed",
+      "currentDescription": "madeinstudio",
+      "category": "Backgrounds",
+      "aiDescription": "Colorful abstract swirling pattern design",
+      "proposedName": "Backgrounds/swirly_texture_enclosed",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-d69f944ff3ecda8d4f374835a78e0ef8/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16597302780",
+      "currentName": "Images/defend",
+      "currentDescription": "madeinstudio",
+      "category": "Icons",
+      "aiDescription": "Shield icon with glowing blue effects.",
+      "proposedName": "Icons/defend",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-7ca19dc56b2290406aba2233c8b70e7c/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16866889944",
+      "currentName": "Images/SwirlingVortex",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Swirling neon vortex with glowing stars",
+      "proposedName": "Effects/SwirlingVortex",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-34c1b3965f4f18a282fd65b95acc5401/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16866890156",
+      "currentName": "Images/Portal button",
+      "currentDescription": "madeinstudio",
+      "category": "Backgrounds",
+      "aiDescription": "Spiral galaxy framed by ornate archway",
+      "proposedName": "Backgrounds/Portal_button",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-7514dddb911cba56fb39f8738618b0bb/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16866890389",
+      "currentName": "Images/FormChange",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Glowing aura with energy and light beams",
+      "proposedName": "Effects/FormChange",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-b4b2cbe170644aa0711e822c9a15bb93/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16867737936",
+      "currentName": "Images/DestructoDisk",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Glowing, fiery, circular energy pattern.",
+      "proposedName": "Effects/DestructoDisk",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-9a50a6533105f0b6dca89e7b9d837004/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16867739460",
+      "currentName": "Images/Game_Map_Roblox_Action_RPG",
+      "currentDescription": "madeinstudio",
+      "category": "Environment",
+      "aiDescription": "Colorful fantasy map with diverse landscapes",
+      "proposedName": "Environment/Game_Map_Roblox_Action_RPG",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-c68e5f4172139555b1d9ec56e416825f/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16881963723",
+      "currentName": "Images/Monkey_BG",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Cartoon monkey and robot in warehouse setting.",
+      "proposedName": "Characters/Monkey_BG",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-e0ff04845ccecd78ee40d97b62e35151/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16890063416",
+      "currentName": "Images/knight_helmet",
+      "currentDescription": "madeinstudio",
+      "category": "Items",
+      "aiDescription": "Ornate helmet with red gem and plume.",
+      "proposedName": "Items/knight_helmet",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-913c0f6d2d157a10033ccc97803fc1e5/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16890098049",
+      "currentName": "Images/backpack",
+      "currentDescription": "madeinstudio",
+      "category": "Items",
+      "aiDescription": "Futuristic device with green energy core.",
+      "proposedName": "Items/backpack",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-9a8695a07421aa274f21d87f5f4af58f/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16890972405",
+      "currentName": "Images/Unavailable",
+      "currentDescription": "madeinstudio",
+      "category": "Backgrounds",
+      "aiDescription": "Fiery sun with cosmic ring backdrop",
+      "proposedName": "Backgrounds/Unavailable",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-9ae583d68b8f604f9d9905692c6c8df1/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16908129782",
+      "currentName": "Images/defend (1)",
+      "currentDescription": "madeinstudio",
+      "category": "Icons",
+      "aiDescription": "Shield icon with glowing blue effects",
+      "proposedName": "Icons/defend",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-7ca19dc56b2290406aba2233c8b70e7c/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16914905213",
+      "currentName": "Images/UI Template",
+      "currentDescription": "madeinstudio",
+      "category": "UI",
+      "aiDescription": "Game interface with equipment and skills menu.",
+      "proposedName": "UI/UI_Template",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-3bc283a3b87468e5c9d001d302a3ffc8/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "16944120594",
+      "currentName": "Images/ElectricLava",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Vibrant swirling neon energy pattern",
+      "proposedName": "Effects/ElectricLava",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-2443ec0a45d526582354bf8747c4b9db/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "17161750224",
+      "currentName": "Images/Toadian",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Anthropomorphic frog with a mohawk hairstyle.",
+      "proposedName": "Characters/Toadian",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-55e4da64cb9a486a0156e279bd774ab1/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "17161750370",
+      "currentName": "Images/Soul_Bot",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Yellow and gray robot with claw hands",
+      "proposedName": "Characters/Soul_Bot",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-957b0f28d3201e6e153b7a7cfbaf5293/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "17161750563",
+      "currentName": "Images/Human_Male",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "3D model of a bald humanoid character.",
+      "proposedName": "Characters/Human_Male",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-0bdbe4d5a32882d9a8e213a602886da5/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "17161750725",
+      "currentName": "Images/Human_Female",
+      "currentDescription": "madeinstudio",
+      "category": "Icons",
+      "aiDescription": "Simple white check mark icon",
+      "proposedName": "Icons/Human_Female",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-63cb01f205f7edfabac4e7ab1eb7dc08/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "17161750917",
+      "currentName": "Images/Howler",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Muscular humanoid wolf with black shorts.",
+      "proposedName": "Characters/Howler",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-d4231d6c676d5077035c6e8a39f68187/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "17162124337",
+      "currentName": "Images/FoxPerson",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Cartoonish anthropomorphic character with large ears.",
+      "proposedName": "Characters/FoxPerson",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-fad4b2bfd77e3279bb65949fe88e17bc/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "17207678949",
+      "currentName": "Images/SpiritWarrior_Background",
+      "currentDescription": "madeinstudio",
+      "category": "Backgrounds",
+      "aiDescription": "Cosmic scene with figures and planets.",
+      "proposedName": "Backgrounds/SpiritWarrior_Background",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-d576757958153d3982be8123a6c7a322/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "17239952964",
+      "currentName": "Images/GolemZone",
+      "currentDescription": "madeinstudio",
+      "category": "Environment",
+      "aiDescription": "Alien landscape with dragons and planets.",
+      "proposedName": "Environment/GolemZone",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-892681966dcd3af035190b788d99353f/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "17252792803",
+      "currentName": "Images/Zendude",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Cute blue cartoon character with big eyes",
+      "proposedName": "Characters/Zendude",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-66278a60559b0145a9091fa0061c898b/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "87288514457666",
+      "currentName": "Images/SoulsScythe",
+      "currentDescription": "madeinstudio",
+      "category": "Items",
+      "aiDescription": "Ornate scythe with glowing skulls and swirls",
+      "proposedName": "Items/SoulsScythe",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-774bea97bc64e7230318b4a74bbfd193/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "108999770036606",
+      "currentName": "Images/SoulGuntlet",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Glowing magical hand with swirling energy",
+      "proposedName": "Effects/SoulGuntlet",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-ed2d3c8f3e422bb4df90b9bcd026674f/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "73059844884892",
+      "currentName": "Images/LightCloak",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Hooded figure with glowing mystical symbols.",
+      "proposedName": "Characters/LightCloak",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-ef7c8f6f5c6bf46c06c1a811814ebc2e/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "105534079517857",
+      "currentName": "Images/DarkCloak",
+      "currentDescription": "madeinstudio",
+      "category": "Effects",
+      "aiDescription": "Glowing hooded cloak with mystical symbols.",
+      "proposedName": "Effects/DarkCloak",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-9b129ac4a2cd4a629ad504926c80059f/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "115980847582382",
+      "currentName": "Images/Vampire_Cloak",
+      "currentDescription": "madeinstudio",
+      "category": "Items",
+      "aiDescription": "Ornate red and black fantasy cloak",
+      "proposedName": "Items/Vampire_Cloak",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-7cc625201d47058abb34bfa833582e30/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "78650665044026",
+      "currentName": "Images/Ghoulish_Cloak",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Hooded figure with glowing aura and tattered cloak.",
+      "proposedName": "Characters/Ghoulish_Cloak",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-91b3b77469ea9b7beac4dc7f3e947e48/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "110370150669787",
+      "currentName": "Images/Fire_Cloak",
+      "currentDescription": "madeinstudio",
+      "category": "Items",
+      "aiDescription": "Fiery hoodie with flame effects design",
+      "proposedName": "Items/Fire_Cloak",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-a6dd7a65fbcbddd3e695d8feb44b1dd3/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "122577223348227",
+      "currentName": "Images/Basic_Cloak",
+      "currentDescription": "madeinstudio",
+      "category": "Items",
+      "aiDescription": "Hooded cloak with a mysterious appearance.",
+      "proposedName": "Items/Basic_Cloak",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-bf12769da45377a4f3de936d0f9eb2c6/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "126441930010794",
+      "currentName": "Images/Health_Potion",
+      "currentDescription": "madeinstudio",
+      "category": "Items",
+      "aiDescription": "Red potion with a health symbol",
+      "proposedName": "Items/Health_Potion",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-5cd67519ed761fc3f286d11d97eed50a/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "81406800235812",
+      "currentName": "Images/DeathKnightHelm",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Character with skull mask and dark hair",
+      "proposedName": "Characters/DeathKnightHelm",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-47ea286d4426258f74edc5157333c7be/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "105855326613585",
+      "currentName": "Images/ShadowSkullHelmet",
+      "currentDescription": "madeinstudio",
+      "category": "Icons",
+      "aiDescription": "Stylized helmet icon with intricate design.",
+      "proposedName": "Icons/ShadowSkullHelmet",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-339ff0c4158e3d1a9d348fd43d76631d/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "107650449374457",
+      "currentName": "Images/ShadowSkullHelmet (1)",
+      "currentDescription": "madeinstudio",
+      "category": "Characters",
+      "aiDescription": "Stylized armored warrior helmet portrait",
+      "proposedName": "Characters/ShadowSkullHelmet",
+      "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-339ff0c4158e3d1a9d348fd43d76631d/420/420/Decal/Png/noFilter",
+      "error": null
+    },
+    {
+      "assetId": "129596229414504",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "110493651397645",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "101611590298649",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "124835192607970",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "84462051395576",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "81209374720694",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "90700730552953",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "138684992846761",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "90507632338587",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "136087559181822",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "102624679823531",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "74397061271192",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "132204020756572",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "111819147435906",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "138827764707242",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "126563132873114",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "105639072297411",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "126812770425420",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "114042083899778",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "118600318619330",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "78650010374602",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "104122929992624",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "78876179258475",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "124197225096537",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "90918330920817",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "107080915026612",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "88768467427858",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "84973519260018",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "82104623690631",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "71888701181912",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "136160819397866",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "124589205878031",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "138055692850593",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "131501688269716",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "138321146209686",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "89071690277201",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "119439729479741",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "112553831389036",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "98492765525722",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "76807465739051",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "122075266846364",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "110498008325890",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "131621569686778",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "107121371702879",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "133844539092396",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "116701106801280",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "111422157946824",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "109547621131939",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "99411896822632",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "109295749536238",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "119522647844801",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "105339307639109",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "119623511761095",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "110240473897203",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "120186762977197",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "115300503370492",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    },
+    {
+      "assetId": "75406277412552",
+      "currentName": "(inaccessible)",
+      "currentDescription": "",
+      "category": null,
+      "aiDescription": null,
+      "proposedName": null,
+      "thumbnailUrl": null,
+      "error": "asset_get_info failed - may not be owned by you"
+    }
+  ]
+}

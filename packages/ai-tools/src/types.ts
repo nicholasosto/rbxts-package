@@ -109,6 +109,41 @@ export interface ImageGenerationResult {
   requestId: string;
 }
 
+// ─── Image Analysis (Vision) ───────────────────────────────────────────────────
+
+/** Options for a single image analysis call. */
+export interface ImageAnalysisOptions {
+  /** Override the model for this request. @default "gpt-4o" */
+  model?: string;
+
+  /** System-level instructions that guide the model's behaviour. */
+  instructions?: string;
+
+  /** Sampling temperature (0 = deterministic, 2 = creative). @default 0 */
+  temperature?: number;
+
+  /** Maximum number of tokens to generate. */
+  maxOutputTokens?: number;
+}
+
+/** Result returned from an image analysis call. */
+export interface ImageAnalysisResult {
+  /** The generated analysis text. */
+  text: string;
+
+  /** The model that was actually used. */
+  model: string;
+
+  /** OpenAI request ID for debugging / support tickets. */
+  requestId: string;
+
+  /** Token usage statistics. */
+  usage: {
+    inputTokens: number;
+    outputTokens: number;
+  };
+}
+
 // ─── Session ───────────────────────────────────────────────────────────────────
 
 /** The public interface returned by `createAISession()`. */
@@ -118,4 +153,11 @@ export interface AISession {
 
   /** Generate one or more images from a prompt. */
   generateImage(prompt: string, options?: ImageGenerationOptions): Promise<ImageGenerationResult>;
+
+  /** Analyze an image by URL using a vision-capable model. */
+  analyzeImage(
+    imageUrl: string,
+    prompt: string,
+    options?: ImageAnalysisOptions,
+  ): Promise<ImageAnalysisResult>;
 }

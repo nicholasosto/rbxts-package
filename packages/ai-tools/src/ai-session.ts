@@ -14,10 +14,13 @@ import type {
   TextGenerationResult,
   ImageGenerationOptions,
   ImageGenerationResult,
+  ImageAnalysisOptions,
+  ImageAnalysisResult,
 } from './types.js';
 import {
   DEFAULT_TEXT_MODEL,
   DEFAULT_IMAGE_MODEL,
+  DEFAULT_VISION_MODEL,
   DEFAULT_MAX_RETRIES,
   DEFAULT_TIMEOUT,
   DEFAULT_IMAGE_SIZE,
@@ -117,9 +120,50 @@ export function createAISession(config: AIToolsConfig): AISession {
     };
   }
 
+  // ─── Image Analysis (Vision) ───────────────────────────────────────────────────
+
+  async function analyzeImage(
+    imageUrl: string,
+    prompt: string,
+    options: ImageAnalysisOptions = {},
+  ): Promise<ImageAnalysisResult> {
+    const {
+      model = DEFAULT_VISION_MODEL,
+      instructions,
+      temperature = 0,
+      maxOutputTokens,
+    } = options;
+
+    const response = await client.responses.create({
+      model,
+      input: [
+        {
+          role: 'user' as const,
+          content: [
+            { type: 'input_image' as const, image_url: imageUrl, detail: 'auto' as const },
+            { type: 'input_text' as const, text: prompt },
+          ],
+        },
+      ],
+      ...(instructions && { instructions }),
+      ...(temperature !== undefined && { temperature }),
+      ...(maxOutputTokens !== undefined && { max_output_tokens: maxOutputTokens }),
+    });
+
+    return {
+      text: response.output_text,
+      model: response.model,
+      requestId: (response as unknown as { _request_id?: string })._request_id ?? '',
+      usage: {
+        inputTokens: response.usage?.input_tokens ?? 0,
+        outputTokens: response.usage?.output_tokens ?? 0,
+      },
+    };
+  }
+
   // ─── Return Session ────────────────────────────────────────────────────
 
-  return { generateText, generateImage };
+  return { generateText, generateImage, analyzeImage };
 }
 
 /**

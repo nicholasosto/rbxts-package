@@ -10,6 +10,9 @@ export const DEFAULT_TEXT_MODEL = 'gpt-5.2';
 /** Default model for image generation. */
 export const DEFAULT_IMAGE_MODEL = 'gpt-image-1';
 
+/** Default model for vision / image analysis. */
+export const DEFAULT_VISION_MODEL = 'gpt-4o';
+
 /** Default maximum automatic retries on transient errors. */
 export const DEFAULT_MAX_RETRIES = 2;
 

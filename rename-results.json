@@ -1,0 +1,36 @@
+{
+  "timestamp": "2026-02-15T19:27:27.012Z",
+  "total": 119,
+  "pending": 118,
+  "success": 114,
+  "failed": 4,
+  "alreadyDone": [
+    "13498955922"
+  ],
+  "failures": [
+    {
+      "assetId": "434171996",
+      "name": "Characters/Black_Goku",
+      "status": 403,
+      "body": "{\n  \"code\": \"PERMISSION_DENIED\",\n  \"message\": \"Permission denied to edit asset\"\n}"
+    },
+    {
+      "assetId": "14304562294",
+      "name": "Environment/japanese_wave_3",
+      "status": 403,
+      "body": "{\n  \"code\": \"PERMISSION_DENIED\",\n  \"message\": \"Permission denied to edit asset\"\n}"
+    },
+    {
+      "assetId": "14304559294",
+      "name": "Environment/japanese_wave_2",
+      "status": 403,
+      "body": "{\n  \"code\": \"PERMISSION_DENIED\",\n  \"message\": \"Permission denied to edit asset\"\n}"
+    },
+    {
+      "assetId": "14304569634",
+      "name": "Environment/japanese_wave_1",
+      "status": 403,
+      "body": "{\n  \"code\": \"PERMISSION_DENIED\",\n  \"message\": \"Permission denied to edit asset\"\n}"
+    }
+  ]
+}

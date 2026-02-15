@@ -71,6 +71,9 @@ importers:
       '@nicholasosto/name-generator':
         specifier: workspace:*
         version: link:../name-generator
+      '@nicholasosto/rpg-ui-bars':
+        specifier: workspace:*
+        version: link:../rpg-ui-bars
       '@nicholasosto/timer':
         specifier: workspace:*
         version: link:../timer
@@ -93,9 +96,15 @@ importers:
       '@rbxts/react':
         specifier: ^17.3.7-ts.1
         version: 17.3.7-ts.1
+      '@rbxts/react-reflex':
+        specifier: ^0.3.7
+        version: 0.3.7(@rbxts/react@17.3.7-ts.1)(@rbxts/reflex@4.3.1)
       '@rbxts/react-roblox':
         specifier: ^17.3.7-ts.1
         version: 17.3.7-ts.1(@rbxts/react@17.3.7-ts.1)
+      '@rbxts/reflex':
+        specifier: ^4.3.1
+        version: 4.3.1
       '@rbxts/services':
         specifier: ^1.6.0
         version: 1.6.0
@@ -138,6 +147,30 @@ importers:
       typescript:
         specifier: ^5.5.3
         version: 5.9.3
+
+  packages/rpg-ui-bars:
+    devDependencies:
+      '@rbxts/compiler-types':
+        specifier: 3.0.0-types.0
+        version: 3.0.0-types.0
+      '@rbxts/react':
+        specifier: ^17.3.7-ts.1
+        version: 17.3.7-ts.1
+      '@rbxts/react-roblox':
+        specifier: ^17.3.7-ts.1
+        version: 17.3.7-ts.1(@rbxts/react@17.3.7-ts.1)
+      '@rbxts/services':
+        specifier: ^1.6.0
+        version: 1.6.0
+      '@rbxts/types':
+        specifier: ^1.0.879
+        version: 1.0.906
+      roblox-ts:
+        specifier: ^3.0.0
+        version: 3.0.0
+      typescript:
+        specifier: ^5.5.3
+        version: 5.5.3
 
   packages/timer:
     dependencies:
@@ -945,6 +978,12 @@ packages:
   '@rbxts/object-utils@1.0.4':
     resolution: {integrity: sha512-dLLhf022ipV+9i910sOE7kl9losKHoon0WgeerHqVMQA5EYsLUsVT2AxhJuhk8MiDn5oJ2GiFofE/LadY9TpJQ==}
 
+  '@rbxts/react-reflex@0.3.7':
+    resolution: {integrity: sha512-2hSMSdhJweGi0l5/NkGrxw6rE8gAePb4cD1G6u8DW/9a93CBYEbiFevSkMRP0MqnNQAkyqWg048wSvJBcS0H/g==}
+    peerDependencies:
+      '@rbxts/react': '*'
+      '@rbxts/reflex': '*'
+
   '@rbxts/react-roblox@17.3.7-ts.1':
     resolution: {integrity: sha512-lsH3lP+X0JUS/6Fg5MJfP8OjMn7bjxapbg3r1ajrpvwZGPGU1WOFcFDS/xMMk/2RK/GNYRmkduNM8pQ9vHw54Q==}
     peerDependencies:
@@ -952,6 +991,9 @@ packages:
 
   '@rbxts/react@17.3.7-ts.1':
     resolution: {integrity: sha512-/jqZ2TvyLSAPwC30h95loUmy4XN2PwPhv6fBARJKtZfyozFx2RuxC9FiQSjpEZ2uOOPzr60It0MBUf94D+tsMg==}
+
+  '@rbxts/reflex@4.3.1':
+    resolution: {integrity: sha512-S5MbEpHKeRh9NWhwGJ789WbUsmlAlpQziWaNK4+kz1EpaaQ7uHQMZAuN1DYl4+QkqmOSuPlj04COwmArBGWH1Q==}
 
   '@rbxts/services@1.6.0':
     resolution: {integrity: sha512-YH02E1/tGHeMXB0Mam8qPdAZa2fjQWdylEscSL4Zn0RIaQeByYImA2qUsXM3nBdhcyKHDwltzSznDKyCGfFEWA==}
@@ -3202,6 +3244,11 @@ snapshots:
 
   '@rbxts/object-utils@1.0.4': {}
 
+  '@rbxts/react-reflex@0.3.7(@rbxts/react@17.3.7-ts.1)(@rbxts/reflex@4.3.1)':
+    dependencies:
+      '@rbxts/react': 17.3.7-ts.1
+      '@rbxts/reflex': 4.3.1
+
   '@rbxts/react-roblox@17.3.7-ts.1(@rbxts/react@17.3.7-ts.1)':
     dependencies:
       '@rbxts-js/react-roblox': 17.3.7-ts.1
@@ -3210,6 +3257,8 @@ snapshots:
   '@rbxts/react@17.3.7-ts.1':
     dependencies:
       '@rbxts-js/react': 17.3.7-ts.1
+
+  '@rbxts/reflex@4.3.1': {}
 
   '@rbxts/services@1.6.0': {}
 

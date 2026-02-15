@@ -1,17 +1,17 @@
 import React from '@rbxts/react';
-
-interface InventoryScreenProps {
-  visible: boolean;
-}
+import { useSelector } from '@rbxts/react-reflex';
+import { selectIsInventoryOpen } from '../../store';
 
 /**
  * InventoryScreen — Full-screen inventory overlay.
  *
+ * Reads visibility from the Reflex store (`ui.isInventoryOpen`).
  * Toggled via InputAction.ToggleInventory.
- * Displays equipment, items, and ability loadout.
  */
-export function InventoryScreen({ visible }: InventoryScreenProps): React.Element {
-  if (!visible) {
+export function InventoryScreen(): React.Element {
+  const isOpen = useSelector(selectIsInventoryOpen);
+
+  if (!isOpen) {
     return <frame key="InventoryScreen" Visible={false} />;
   }
 

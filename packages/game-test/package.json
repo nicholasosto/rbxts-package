@@ -14,6 +14,7 @@
     "@nicholasosto/assets": "workspace:*",
     "@nicholasosto/combat-stats": "workspace:*",
     "@nicholasosto/name-generator": "workspace:*",
+    "@nicholasosto/rpg-ui-bars": "workspace:*",
     "@nicholasosto/timer": "workspace:*"
   },
   "devDependencies": {
@@ -23,7 +24,9 @@
     "@rbxts/compiler-types": "3.0.0-types.0",
     "@rbxts/maid": "^1.1.0",
     "@rbxts/react": "^17.3.7-ts.1",
+    "@rbxts/react-reflex": "^0.3.7",
     "@rbxts/react-roblox": "^17.3.7-ts.1",
+    "@rbxts/reflex": "^4.3.1",
     "@rbxts/services": "^1.6.0",
     "@rbxts/signal": "^1.1.1",
     "@rbxts/t": "^3.2.1",

@@ -9,6 +9,10 @@
       "path": "packages/assets",
     },
     {
+      "name": "combat-stats",
+      "path": "packages/combat-stats",
+    },
+    {
       "name": "game-test",
       "path": "packages/game-test",
     },
@@ -19,6 +23,14 @@
     {
       "name": "name-generator",
       "path": "packages/name-generator",
+    },
+    {
+      "name": "rpg-ui-bars",
+      "path": "packages/rpg-ui-bars",
+    },
+    {
+      "name": "timer",
+      "path": "packages/timer",
     },
   ],
   "settings": {

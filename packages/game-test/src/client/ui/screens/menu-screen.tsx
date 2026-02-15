@@ -1,17 +1,19 @@
 import React from '@rbxts/react';
-
-interface MenuScreenProps {
-  visible: boolean;
-}
+import { useSelector } from '@rbxts/react-reflex';
+import { selectIsMenuOpen } from '../../store';
+import { useRootProducer } from '../hooks';
 
 /**
  * MenuScreen — Pause/settings menu overlay.
  *
+ * Reads visibility from the Reflex store (`ui.isMenuOpen`).
  * Toggled via InputAction.ToggleMenu (Escape key).
- * Provides settings, quit, and resume options.
  */
-export function MenuScreen({ visible }: MenuScreenProps): React.Element {
-  if (!visible) {
+export function MenuScreen(): React.Element {
+  const isOpen = useSelector(selectIsMenuOpen);
+  const { closeAll } = useRootProducer();
+
+  if (!isOpen) {
     return <frame key="MenuScreen" Visible={false} />;
   }
 
@@ -49,7 +51,6 @@ export function MenuScreen({ visible }: MenuScreenProps): React.Element {
           Font={Enum.Font.GothamBold}
         />
 
-        {/* TODO: Resume, Settings, Quit buttons */}
         <textbutton
           key="ResumeBtn"
           Size={UDim2.fromScale(0.6, 0.1)}
@@ -59,6 +60,7 @@ export function MenuScreen({ visible }: MenuScreenProps): React.Element {
           TextScaled={true}
           Font={Enum.Font.Gotham}
           BorderSizePixel={0}
+          Event={{ Activated: () => closeAll() }}
         >
           <uicorner CornerRadius={new UDim(0, 8)} />
         </textbutton>

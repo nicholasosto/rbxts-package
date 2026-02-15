@@ -1,7 +1,8 @@
 import { Controller, OnStart } from '@flamework/core';
 import { SoundService } from '@rbxts/services';
+import Maid from '@rbxts/maid';
 import { AUDIO_CATALOG } from '@nicholasosto/assets';
-import { GlobalEvents } from '../../shared/network';
+import { clientEvents } from '../network';
 
 /**
  * AudioController
@@ -17,20 +18,23 @@ export class AudioController implements OnStart {
   /** Currently playing music track */
   private currentMusic?: Sound;
 
-  private networkEvents!: ReturnType<typeof GlobalEvents.createClient>;
+  private maid = new Maid();
 
   onStart(): void {
-    print('[AudioController] Started');
-    this.networkEvents = GlobalEvents.createClient({});
     this.listenForServerEvents();
   }
 
   /** Listen for server-requested audio cues */
   private listenForServerEvents(): void {
-    this.networkEvents.AudioCue.connect((audioKey: string) => {
-      // TODO: Parse audioKey to resolve catalog category + key, then play
-      print(`[AudioController] Server audio cue: ${audioKey}`);
-    });
+    this.maid.GiveTask(
+      clientEvents.AudioCue.connect((audioKey: string) => {
+        // Parse "Category.Key" format from server
+        const parts = audioKey.split('.');
+        if (parts.size() === 2) {
+          this.playSfx(parts[0] as keyof typeof AUDIO_CATALOG, parts[1]);
+        }
+      }),
+    );
   }
 
   /**

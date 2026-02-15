@@ -1,6 +1,8 @@
 import { Controller, OnStart } from '@flamework/core';
 import { UserInputService } from '@rbxts/services';
+import Maid from '@rbxts/maid';
 import { InputAction } from '../types';
+import { producer } from '../store';
 import { CombatController } from './combat-controller';
 
 /**
@@ -25,19 +27,31 @@ export class InputController implements OnStart {
     [Enum.KeyCode.Escape, InputAction.ToggleMenu],
   ]);
 
+  private maid = new Maid();
+
   constructor(private combatController: CombatController) {}
 
   onStart(): void {
-    print('[InputController] Started');
     this.bindInputActions();
   }
 
   /** Wire up UserInputService listeners */
   private bindInputActions(): void {
-    UserInputService.InputBegan.Connect((input: InputObject, gameProcessed: boolean) => {
-      if (gameProcessed) return;
-      this.handleInput(input.KeyCode);
-    });
+    this.maid.GiveTask(
+      UserInputService.InputBegan.Connect((input: InputObject, gameProcessed: boolean) => {
+        if (gameProcessed) return;
+        this.handleInput(input.KeyCode);
+      }),
+    );
+
+    // Handle block release
+    this.maid.GiveTask(
+      UserInputService.InputEnded.Connect((input: InputObject) => {
+        if (input.KeyCode === Enum.KeyCode.Q) {
+          this.combatController.unblock();
+        }
+      }),
+    );
   }
 
   /** Route a keycode to the correct action handler */
@@ -45,25 +59,36 @@ export class InputController implements OnStart {
     const action = this.keyBindings.get(keyCode);
     if (action === undefined) return;
 
-    // TODO: Dispatch to the correct controller based on action
     switch (action) {
       case InputAction.Attack:
+        this.combatController.attack();
+        break;
       case InputAction.Block:
+        this.combatController.block();
+        break;
       case InputAction.Dodge:
-        // TODO: Forward to combatController
+        this.combatController.dodge();
         break;
       case InputAction.Ability1:
+        this.combatController.useAbility('Ability1');
+        break;
       case InputAction.Ability2:
+        this.combatController.useAbility('Ability2');
+        break;
       case InputAction.Ability3:
+        this.combatController.useAbility('Ability3');
+        break;
       case InputAction.Ability4:
-        // TODO: Forward to combatController.useAbility(action)
+        this.combatController.useAbility('Ability4');
         break;
       case InputAction.ToggleInventory:
+        producer.toggleInventory();
+        break;
       case InputAction.ToggleMenu:
-        // TODO: Forward to UI state
+        producer.toggleMenu();
         break;
       case InputAction.Interact:
-        // TODO: Forward to interaction system
+        // Interaction system — placeholder for future implementation
         break;
     }
   }

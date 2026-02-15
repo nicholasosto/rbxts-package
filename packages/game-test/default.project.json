@@ -47,6 +47,12 @@
             },
             "maid": {
               "$path": "node_modules/@rbxts/maid"
+            },
+            "reflex": {
+              "$path": "node_modules/@rbxts/reflex"
+            },
+            "react-reflex": {
+              "$path": "node_modules/@rbxts/react-reflex"
             }
           },
           "@flamework": {
@@ -71,6 +77,9 @@
             },
             "name-generator": {
               "$path": "node_modules/@nicholasosto/name-generator/out"
+            },
+            "rpg-ui-bars": {
+              "$path": "node_modules/@nicholasosto/rpg-ui-bars/out"
             },
             "timer": {
               "$path": "node_modules/@nicholasosto/timer/out"

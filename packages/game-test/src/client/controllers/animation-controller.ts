@@ -1,7 +1,8 @@
 import { Controller, OnStart } from '@flamework/core';
 import { Players } from '@rbxts/services';
+import Maid from '@rbxts/maid';
 import { ANIMATION_CATALOG } from '@nicholasosto/assets';
-import { GlobalEvents } from '../../shared/network';
+import { clientEvents } from '../network';
 
 /**
  * AnimationController
@@ -13,12 +14,9 @@ import { GlobalEvents } from '../../shared/network';
 export class AnimationController implements OnStart {
   private animator?: Animator;
   private loadedTracks = new Map<string, AnimationTrack>();
-
-  private networkEvents!: ReturnType<typeof GlobalEvents.createClient>;
+  private maid = new Maid();
 
   onStart(): void {
-    print('[AnimationController] Started');
-    this.networkEvents = GlobalEvents.createClient({});
     this.setupCharacter();
     this.listenForServerEvents();
   }
@@ -31,19 +29,26 @@ export class AnimationController implements OnStart {
     this.animator = humanoid.WaitForChild('Animator') as Animator;
 
     // Re-setup on respawn
-    player.CharacterAdded.Connect((newChar: Model) => {
-      const hum = newChar.WaitForChild('Humanoid') as Humanoid;
-      this.animator = hum.WaitForChild('Animator') as Animator;
-      this.loadedTracks.clear();
-    });
+    this.maid.GiveTask(
+      player.CharacterAdded.Connect((newChar: Model) => {
+        const hum = newChar.WaitForChild('Humanoid') as Humanoid;
+        this.animator = hum.WaitForChild('Animator') as Animator;
+        this.loadedTracks.clear();
+      }),
+    );
   }
 
   /** Listen for server-requested animations */
   private listenForServerEvents(): void {
-    this.networkEvents.AnimationPlay.connect((animationKey: string, targetId: string) => {
-      // TODO: Resolve target, play animation on them
-      print(`[AnimationController] Server requested: ${animationKey} on ${targetId}`);
-    });
+    this.maid.GiveTask(
+      clientEvents.AnimationPlay.connect((animationKey: string, _targetId: string) => {
+        // Parse "Category.Key" format from server
+        const parts = animationKey.split('.');
+        if (parts.size() === 2) {
+          this.playAnimation(parts[0] as keyof typeof ANIMATION_CATALOG, parts[1]);
+        }
+      }),
+    );
   }
 
   /**

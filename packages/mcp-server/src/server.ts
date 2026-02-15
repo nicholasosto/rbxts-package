@@ -14,6 +14,7 @@ import {
   registerMessagingTools,
   registerAssetTools,
   registerInstanceTools,
+  registerInventoryTools,
   registerPackageInfoTools,
 } from './tools/index.js';
 
@@ -42,6 +43,7 @@ export function createServer(): McpServer {
   registerMessagingTools(server);
   registerAssetTools(server);
   registerInstanceTools(server);
+  registerInventoryTools(server);
 
   // Monorepo introspection tools
   registerPackageInfoTools(server);

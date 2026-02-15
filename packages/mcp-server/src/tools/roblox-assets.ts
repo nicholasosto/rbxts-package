@@ -1,14 +1,27 @@
 /**
- * Roblox Assets Tool
+ * Roblox Assets Tools
  *
  * Exposes Roblox Open Cloud Assets API operations as MCP tools.
- * Docs: https://create.roblox.com/docs/cloud/reference/Asset
+ * Docs: https://create.roblox.com/docs/cloud/reference/features/assets
+ *
+ * Supported endpoints (API Key auth):
+ *   GET    /assets/v1/assets/{assetId}                        – get info
+ *   PATCH  /assets/v1/assets/{assetId}                        – update metadata
+ *   POST   /assets/v1/assets                                  – create / upload
+ *   GET    /assets/v1/assets/{assetId}/versions                – list versions
+ *   GET    /assets/v1/assets/{assetId}/versions/{versionNumber} – get version
+ *   POST   /assets/v1/assets/{assetId}/versions:rollback       – rollback
+ *   POST   /assets/v1/assets/{assetId}:archive                 – archive
+ *   POST   /assets/v1/assets/{assetId}:restore                 – restore
+ *   GET    /toolbox-service/v2/assets:search                   – search Creator Store
  */
 
 import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { getRobloxCloudConfig } from '@nicholasosto/node-tools';
 import { ROBLOX_CLOUD_BASE, robloxHeaders } from '../types.js';
+
+type AnyJson = Record<string, unknown>;
 
 export function registerAssetTools(server: McpServer): void {
   const { apiKey } = getRobloxCloudConfig();
@@ -17,12 +30,17 @@ export function registerAssetTools(server: McpServer): void {
 
   server.tool(
     'asset_get_info',
-    'Get information about a Roblox asset by its ID.',
+    'Get information about a Roblox asset by its ID. Include readMask for additional metadata.',
     {
       assetId: z.string().describe('The asset ID to look up'),
+      readMask: z
+        .string()
+        .optional()
+        .describe('Comma-separated fields to include (e.g. "description,displayName,path")'),
     },
-    async ({ assetId }) => {
-      const url = `${ROBLOX_CLOUD_BASE}/assets/v1/assets/${assetId}`;
+    async ({ assetId, readMask }) => {
+      const params = readMask ? `?readMask=${encodeURIComponent(readMask)}` : '';
+      const url = `${ROBLOX_CLOUD_BASE}/assets/v1/assets/${assetId}${params}`;
       const res = await fetch(url, { headers: robloxHeaders(apiKey) });
       const body = await res.text();
 
@@ -32,30 +50,178 @@ export function registerAssetTools(server: McpServer): void {
     },
   );
 
-  // ── List Assets (by creator) ─────────────────────────────────────────
+  // ── Update Asset Metadata ────────────────────────────────────────────
 
   server.tool(
-    'asset_list',
-    'List assets owned by a user or group.',
+    'asset_update',
+    "Update an existing asset's metadata (display name, description). Use PATCH.",
     {
-      creatorType: z.enum(['User', 'Group']).describe('Type of creator'),
-      creatorId: z.string().describe('The user or group ID'),
+      assetId: z.string().describe('The asset ID to update'),
+      displayName: z.string().optional().describe('New display name'),
+      description: z.string().optional().describe('New description'),
+    },
+    async ({ assetId, displayName, description }) => {
+      const updateMask: string[] = [];
+      const body: AnyJson = {};
+      if (displayName !== undefined) {
+        updateMask.push('displayName');
+        body.displayName = displayName;
+      }
+      if (description !== undefined) {
+        updateMask.push('description');
+        body.description = description;
+      }
+      const url = `${ROBLOX_CLOUD_BASE}/assets/v1/assets/${assetId}?updateMask=${updateMask.join(',')}`;
+      const res = await fetch(url, {
+        method: 'PATCH',
+        headers: robloxHeaders(apiKey),
+        body: JSON.stringify(body),
+      });
+      const resBody = await res.text();
+
+      return {
+        content: [
+          { type: 'text' as const, text: res.ok ? resBody : `Error ${res.status}: ${resBody}` },
+        ],
+      };
+    },
+  );
+
+  // ── List Asset Versions ──────────────────────────────────────────────
+
+  server.tool(
+    'asset_list_versions',
+    'List all versions of a Roblox asset.',
+    {
+      assetId: z.string().describe('The asset ID'),
+      pageToken: z.string().optional().describe('Pagination token from a previous response'),
+    },
+    async ({ assetId, pageToken }) => {
+      const params = pageToken ? `?pageToken=${encodeURIComponent(pageToken)}` : '';
+      const url = `${ROBLOX_CLOUD_BASE}/assets/v1/assets/${assetId}/versions${params}`;
+      const res = await fetch(url, { headers: robloxHeaders(apiKey) });
+      const body = await res.text();
+
+      return {
+        content: [{ type: 'text' as const, text: res.ok ? body : `Error ${res.status}: ${body}` }],
+      };
+    },
+  );
+
+  // ── Get Asset Version ────────────────────────────────────────────────
+
+  server.tool(
+    'asset_get_version',
+    'Get details about a specific version of an asset.',
+    {
+      assetId: z.string().describe('The asset ID'),
+      versionNumber: z.string().describe('The version number to retrieve'),
+    },
+    async ({ assetId, versionNumber }) => {
+      const url = `${ROBLOX_CLOUD_BASE}/assets/v1/assets/${assetId}/versions/${versionNumber}`;
+      const res = await fetch(url, { headers: robloxHeaders(apiKey) });
+      const body = await res.text();
+
+      return {
+        content: [{ type: 'text' as const, text: res.ok ? body : `Error ${res.status}: ${body}` }],
+      };
+    },
+  );
+
+  // ── Rollback Asset Version ───────────────────────────────────────────
+
+  server.tool(
+    'asset_rollback_version',
+    'Rollback an asset to a previous version.',
+    {
+      assetId: z.string().describe('The asset ID'),
+      versionNumber: z.string().describe('The version number to rollback to'),
+    },
+    async ({ assetId, versionNumber }) => {
+      const url = `${ROBLOX_CLOUD_BASE}/assets/v1/assets/${assetId}/versions:rollback`;
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: robloxHeaders(apiKey),
+        body: JSON.stringify({ assetVersion: `assets/${assetId}/versions/${versionNumber}` }),
+      });
+      const body = await res.text();
+
+      return {
+        content: [{ type: 'text' as const, text: res.ok ? body : `Error ${res.status}: ${body}` }],
+      };
+    },
+  );
+
+  // ── Archive Asset ────────────────────────────────────────────────────
+
+  server.tool(
+    'asset_archive',
+    'Archive a Roblox asset, making it inaccessible.',
+    {
+      assetId: z.string().describe('The asset ID to archive'),
+    },
+    async ({ assetId }) => {
+      const url = `${ROBLOX_CLOUD_BASE}/assets/v1/assets/${assetId}:archive`;
+      const res = await fetch(url, { method: 'POST', headers: robloxHeaders(apiKey) });
+      const body = await res.text();
+
+      return {
+        content: [
+          {
+            type: 'text' as const,
+            text: res.ok ? `Asset ${assetId} archived.` : `Error ${res.status}: ${body}`,
+          },
+        ],
+      };
+    },
+  );
+
+  // ── Restore Archived Asset ───────────────────────────────────────────
+
+  server.tool(
+    'asset_restore',
+    'Restore a previously archived Roblox asset.',
+    {
+      assetId: z.string().describe('The asset ID to restore'),
+    },
+    async ({ assetId }) => {
+      const url = `${ROBLOX_CLOUD_BASE}/assets/v1/assets/${assetId}:restore`;
+      const res = await fetch(url, { method: 'POST', headers: robloxHeaders(apiKey) });
+      const body = await res.text();
+
+      return {
+        content: [
+          {
+            type: 'text' as const,
+            text: res.ok ? `Asset ${assetId} restored.` : `Error ${res.status}: ${body}`,
+          },
+        ],
+      };
+    },
+  );
+
+  // ── Search Creator Store ─────────────────────────────────────────────
+
+  server.tool(
+    'asset_search_creator_store',
+    'Search the Roblox Creator Store for assets (models, meshes, audio, images, etc.).',
+    {
+      keyword: z.string().optional().describe('Search keyword'),
       assetType: z
         .string()
         .optional()
-        .describe('Filter by asset type (e.g. "Decal", "Audio", "Model")'),
-      pageSize: z.number().min(1).max(50).optional().describe('Results per page'),
+        .describe('Filter by asset type (e.g. "Model", "Decal", "Audio", "Mesh")'),
+      pageSize: z.number().min(1).max(50).optional().describe('Results per page (default 10)'),
       pageToken: z.string().optional().describe('Pagination token from a previous response'),
     },
-    async ({ creatorType, creatorId, assetType, pageSize, pageToken }) => {
+    async ({ keyword, assetType, pageSize, pageToken }) => {
       const params = new URLSearchParams();
-      params.set('creatorType', creatorType);
-      params.set('creatorTargetId', creatorId);
+      if (keyword) params.set('keyword', keyword);
       if (assetType) params.set('assetType', assetType);
       if (pageSize) params.set('pageSize', String(pageSize));
       if (pageToken) params.set('pageToken', pageToken);
 
-      const url = `${ROBLOX_CLOUD_BASE}/assets/v1/assets?${params.toString()}`;
+      const url = `${ROBLOX_CLOUD_BASE}/toolbox-service/v2/assets:search?${params.toString()}`;
       const res = await fetch(url, { headers: robloxHeaders(apiKey) });
       const body = await res.text();
 

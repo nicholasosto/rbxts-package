@@ -7,4 +7,5 @@ export { registerDatastoreTools } from './roblox-datastores.js';
 export { registerMessagingTools } from './roblox-messaging.js';
 export { registerAssetTools } from './roblox-assets.js';
 export { registerInstanceTools } from './roblox-instances.js';
+export { registerInventoryTools } from './roblox-inventories.js';
 export { registerPackageInfoTools } from './package-info.js';

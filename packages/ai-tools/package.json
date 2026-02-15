@@ -1,0 +1,19 @@
+{
+  "name": "@nicholasosto/ai-tools",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "OpenAI API wrapper for text and image generation",
+  "main": "dist/index.js",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "openai": "^6.22.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.3"
+  }
+}

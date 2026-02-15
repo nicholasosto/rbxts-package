@@ -32,6 +32,10 @@
       "name": "timer",
       "path": "packages/timer",
     },
+    {
+      "name": "ai-tools",
+      "path": "packages/ai-tools",
+    },
   ],
   "settings": {
     "typescript.tsdk": "node_modules/typescript/lib",

@@ -25,32 +25,56 @@ import { Players } from '@rbxts/services';
  *   │       └── Content (CanvasGroup)
  */
 
+print('[scaffold] Resolving PlayerGui...');
 const playerGui = Players.LocalPlayer.WaitForChild('PlayerGui') as PlayerGui;
 const uiScaffold = playerGui.WaitForChild('UIScaffold') as Folder;
+print('[scaffold] UIScaffold found — resolving ScreenGuis...');
 
 // ── ScreenGui references ───────────────────────────────────
 const gameplayGui = uiScaffold.WaitForChild('Gameplay') as ScreenGui;
 const startGui = uiScaffold.WaitForChild('Start') as ScreenGui;
 const loadingGui = uiScaffold.WaitForChild('Loading') as ScreenGui;
 const dialogsGui = uiScaffold.WaitForChild('Dialogs') as ScreenGui;
+print('[scaffold] ScreenGuis resolved — resolving Gameplay children...');
 
 // ── Gameplay containers ────────────────────────────────────
-const hudContainer = gameplayGui.WaitForChild('HUD') as CanvasGroup;
-const panelsFolder = gameplayGui.WaitForChild('Panels') as Folder;
+print(
+  `[scaffold] Gameplay has ${gameplayGui.GetChildren().size()} children: ${gameplayGui
+    .GetChildren()
+    .map((c) => c.Name)
+    .join(', ')}`,
+);
+const hudContainer = gameplayGui.WaitForChild('HUD', 10) as CanvasGroup | undefined;
+if (!hudContainer) {
+  warn(
+    '[scaffold] FATAL: HUD not found in Gameplay after 10s! Check ui-scaffold.model.json and Rojo sync.',
+  );
+  warn(
+    `[scaffold] Gameplay children: ${gameplayGui
+      .GetChildren()
+      .map((c) => `${c.Name} (${c.ClassName})`)
+      .join(', ')}`,
+  );
+}
+const panelsFolder = gameplayGui.WaitForChild('Panels', 10) as Folder | undefined;
+if (!panelsFolder) {
+  warn('[scaffold] FATAL: Panels folder not found in Gameplay after 10s!');
+}
 
-const menuFrame = panelsFolder.WaitForChild('Menu') as Frame;
-const menuContent = menuFrame.WaitForChild('Content') as CanvasGroup;
+const menuFrame = panelsFolder?.WaitForChild('Menu') as Frame;
+const menuContent = menuFrame?.WaitForChild('Content') as CanvasGroup;
 
-const inventoryFrame = panelsFolder.WaitForChild('Inventory') as Frame;
-const inventoryContent = inventoryFrame.WaitForChild('Content') as CanvasGroup;
+const inventoryFrame = panelsFolder?.WaitForChild('Inventory') as Frame;
+const inventoryContent = inventoryFrame?.WaitForChild('Content') as CanvasGroup;
 
-const catalogFrame = panelsFolder.WaitForChild('Catalog') as Frame;
-const catalogContent = catalogFrame.WaitForChild('Content') as CanvasGroup;
+const catalogFrame = panelsFolder?.WaitForChild('Catalog') as Frame;
+const catalogContent = catalogFrame?.WaitForChild('Content') as CanvasGroup;
 
 // ── Layer content containers ───────────────────────────────
 const startContent = startGui.WaitForChild('Content') as CanvasGroup;
 const loadingContent = loadingGui.WaitForChild('Content') as CanvasGroup;
 const dialogsContent = dialogsGui.WaitForChild('Content') as CanvasGroup;
+print('[scaffold] All scaffold containers resolved ✓');
 
 export const scaffold = {
   /** ScreenGui references — use to toggle Enabled */

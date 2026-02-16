@@ -30,26 +30,78 @@ import { AssetCatalogScreen } from './screens/asset-catalog-screen';
 @Controller({})
 export class App implements OnStart {
   onStart(): void {
+    print('[App] onStart — initializing UI controller');
+
+    // Disable legacy ScreenGuis baked into the .rbxl that overlay our scaffold
+    const playerGui = scaffold.screens.gameplay.Parent!.Parent as PlayerGui;
+    const legacyNames = ['FlameworkGUI', 'ScreenButtons', 'InventorySystem'];
+    for (const name of legacyNames) {
+      const gui = playerGui.FindFirstChild(name) as ScreenGui | undefined;
+      if (gui && gui.IsA('ScreenGui')) {
+        gui.Enabled = false;
+        warn(`[App] Disabled legacy ScreenGui: ${name}`);
+      }
+    }
+
+    // Verify scaffold containers exist before mounting React
+    if (!scaffold.gameplay.hud) {
+      warn('[App] FATAL: scaffold.gameplay.hud is nil — cannot mount React UI');
+      // Force-enable Gameplay so at least something is visible
+      scaffold.screens.gameplay.Enabled = true;
+      return;
+    }
+
     // Show the Loading layer while we wait for data
     scaffold.screens.loading.Enabled = true;
 
     // Mount the React tree into the Gameplay ScreenGui.
     // Portals project each screen into its scaffold container.
+    print('[App] Mounting React tree...');
     const root = createRoot(scaffold.screens.gameplay);
     root.render(
       <ReflexProvider producer={producer}>
         {createPortal(<HudScreen />, scaffold.gameplay.hud)}
-        {createPortal(<MenuScreen />, scaffold.gameplay.menuContent)}
-        {createPortal(<InventoryScreen />, scaffold.gameplay.inventoryContent)}
-        {createPortal(<AssetCatalogScreen />, scaffold.gameplay.catalogContent)}
+        {scaffold.gameplay.menuContent &&
+          createPortal(<MenuScreen />, scaffold.gameplay.menuContent)}
+        {scaffold.gameplay.inventoryContent &&
+          createPortal(<InventoryScreen />, scaffold.gameplay.inventoryContent)}
+        {scaffold.gameplay.catalogContent &&
+          createPortal(<AssetCatalogScreen />, scaffold.gameplay.catalogContent)}
       </ReflexProvider>,
     );
+    print('[App] React tree mounted ✓');
 
-    // Wait for profile data to load, then swap layers
+    // Wait for profile data to load, then swap layers.
+    let shown = false;
+    const showGameplay = () => {
+      if (shown) return;
+      shown = true;
+      scaffold.screens.gameplay.Enabled = true;
+      scaffold.screens.loading.Enabled = false;
+      print('[App] Gameplay layer ENABLED ✓');
+    };
+
     const unsubscribe = producer.subscribe(selectIsProfileLoaded, (isLoaded) => {
       if (isLoaded) {
-        scaffold.screens.gameplay.Enabled = true;
-        scaffold.screens.loading.Enabled = false;
+        print('[App] Profile loaded (via subscribe) — enabling Gameplay');
+        showGameplay();
+        unsubscribe();
+      }
+    });
+
+    // Immediately check current state — fixes race where DataController
+    // hydrates the profile BEFORE App subscribes (subscribe only fires on changes).
+    if (selectIsProfileLoaded(producer.getState())) {
+      print('[App] Profile already loaded — enabling Gameplay immediately');
+      showGameplay();
+      unsubscribe();
+    }
+
+    // Final fallback: force-show after 2s so UI is always visible in Studio.
+    task.delay(2, () => {
+      if (!shown) {
+        warn('[App] Profile not loaded after 2s — showing UI anyway');
+        showGameplay();
         unsubscribe();
       }
     });

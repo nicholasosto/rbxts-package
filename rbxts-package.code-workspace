@@ -2,48 +2,395 @@
   "folders": [
     {
       "name": "root",
-      "path": ".",
+      "path": "."
     },
     {
-      "name": "assets",
-      "path": "packages/assets",
+      "name": "\ud83c\udfae game-test",
+      "path": "packages/game-test"
     },
     {
-      "name": "combat-stats",
-      "path": "packages/combat-stats",
+      "name": "\ud83d\udce6 assets",
+      "path": "packages/assets"
     },
     {
-      "name": "game-test",
-      "path": "packages/game-test",
+      "name": "\u2694\ufe0f combat-stats",
+      "path": "packages/combat-stats"
     },
     {
-      "name": "node-tools",
-      "path": "packages/node-tools",
+      "name": "\u23f1\ufe0f timer",
+      "path": "packages/timer"
     },
     {
-      "name": "name-generator",
-      "path": "packages/name-generator",
+      "name": "\ud83d\udcca rpg-ui-bars",
+      "path": "packages/rpg-ui-bars"
     },
     {
-      "name": "rpg-ui-bars",
-      "path": "packages/rpg-ui-bars",
+      "name": "\ud83c\udff7\ufe0f name-generator",
+      "path": "packages/name-generator"
     },
     {
-      "name": "timer",
-      "path": "packages/timer",
+      "name": "\ud83e\udd16 ai-tools",
+      "path": "packages/ai-tools"
     },
     {
-      "name": "ai-tools",
-      "path": "packages/ai-tools",
+      "name": "\ud83d\udd27 node-tools",
+      "path": "packages/node-tools"
     },
     {
-      "name": "mcp-server",
-      "path": "packages/mcp-server",
-    },
+      "name": "\ud83d\udd0c mcp-server",
+      "path": "packages/mcp-server"
+    }
   ],
+
   "settings": {
+    // ── TypeScript ──────────────────────────────────────────
     "typescript.tsdk": "node_modules/typescript/lib",
+    "typescript.enablePromptUseWorkspaceTsdk": true,
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "typescript.suggest.autoImports": true,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+
+    // ── Editor ─────────────────────────────────────────────
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
+    "editor.linkedEditing": true,
+    "editor.stickyScroll.enabled": true,
+    "editor.inlineSuggest.enabled": true,
+    "editor.quickSuggestions": {
+      "strings": "on"
+    },
+
+    // ── Prettier (matches .prettierrc) ─────────────────────
+    "prettier.singleQuote": true,
+    "prettier.trailingComma": "all",
+    "prettier.printWidth": 100,
+    "prettier.tabWidth": 2,
+    "prettier.semi": true,
+
+    // ── ESLint ─────────────────────────────────────────────
+    "eslint.workingDirectories": [{ "mode": "auto" }],
+    "eslint.validate": ["typescript", "typescriptreact"],
+
+    // ── File Associations & Languages ──────────────────────
+    "files.associations": {
+      "*.project.json": "json",
+      "*.model.json": "json",
+      "default.project.json": "json"
+    },
+    "[lua]": {
+      "editor.defaultFormatter": "JohnnyMorganz.stylua"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+
+    // ── Search & Explorer ──────────────────────────────────
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/out": true,
+      "**/dist": true,
+      "**/include": true,
+      "**/.nx": true,
+      "**/pnpm-lock.yaml": true,
+      "**/sourcemap.json": true
+    },
+    "files.exclude": {
+      "**/.DS_Store": true,
+      "**/out/": false,
+      "**/dist/": false
+    },
+    "files.watcherExclude": {
+      "**/node_modules/**": true,
+      "**/out/**": true,
+      "**/dist/**": true,
+      "**/.nx/**": true,
+      "**/include/**": true
+    },
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.expand": false,
+    "explorer.fileNesting.patterns": {
+      "tsconfig.json": "tsconfig.*.json",
+      "package.json": "package-lock.json, pnpm-lock.yaml, pnpm-workspace.yaml, .npmrc, .prettierrc, .env, .env.example, nx.json",
+      "default.project.json": "sourcemap.json, *.model.json"
+    },
+
+    // ── Nx Integration ─────────────────────────────────────
+    "nxConsole.showNodeVersionOnStartup": false,
+
+    // ── Terminal ────────────────────────────────────────────
+    "terminal.integrated.cwd": "${workspaceFolder:root}",
+    "terminal.integrated.env.osx": {
+      "NODE_OPTIONS": ""
+    },
+
+    // ── Git ────────────────────────────────────────────────
+    "git.autofetch": true,
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+
+    // ── Roblox-TS Specifics ────────────────────────────────
+    // Hide compiled Lua output from cluttering the editor
+    "files.readonlyInclude": {
+      "**/out/**/*.lua": true,
+      "**/include/**": true
+    }
   },
+
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Build All",
+        "type": "shell",
+        "command": "pnpm build",
+        "group": "build",
+        "problemMatcher": ["$tsc"],
+        "presentation": {
+          "reveal": "silent",
+          "panel": "shared"
+        }
+      },
+      {
+        "label": "Build: game-test",
+        "type": "shell",
+        "command": "pnpm build:game-test",
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "problemMatcher": ["$tsc"],
+        "presentation": {
+          "reveal": "silent",
+          "panel": "shared"
+        }
+      },
+      {
+        "label": "Watch: game-test",
+        "type": "shell",
+        "command": "pnpm watch:game-test",
+        "isBackground": true,
+        "group": "build",
+        "problemMatcher": {
+          "owner": "rbxtsc",
+          "fileLocation": "absolute",
+          "pattern": {
+            "regexp": "^(.+)\\((\\d+),(\\d+)\\):\\s+(error|warning)\\s+(.+)$",
+            "file": 1,
+            "line": 2,
+            "column": 3,
+            "severity": 4,
+            "message": 5
+          },
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": "^Starting compilation",
+            "endsPattern": "^Successfully compiled"
+          }
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "dedicated",
+          "group": "dev"
+        }
+      },
+      {
+        "label": "Rojo Serve: game-test",
+        "type": "shell",
+        "command": "pnpm serve:game-test",
+        "isBackground": true,
+        "problemMatcher": [],
+        "presentation": {
+          "reveal": "always",
+          "panel": "dedicated",
+          "group": "dev"
+        }
+      },
+      {
+        "label": "Dev: game-test (Watch + Rojo)",
+        "dependsOn": [
+          "Watch: game-test",
+          "Rojo Serve: game-test"
+        ],
+        "dependsOrder": "parallel",
+        "group": "build",
+        "problemMatcher": [],
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared",
+          "group": "dev"
+        }
+      },
+      {
+        "label": "Build: ai-tools",
+        "type": "shell",
+        "command": "pnpm build:ai-tools",
+        "group": "build",
+        "problemMatcher": ["$tsc"]
+      },
+      {
+        "label": "Build: node-tools",
+        "type": "shell",
+        "command": "pnpm build:node-tools",
+        "group": "build",
+        "problemMatcher": ["$tsc"]
+      },
+      {
+        "label": "Build: assets",
+        "type": "shell",
+        "command": "pnpm build:assets",
+        "group": "build",
+        "problemMatcher": ["$tsc"]
+      },
+      {
+        "label": "Build: name-generator",
+        "type": "shell",
+        "command": "pnpm build:name-generator",
+        "group": "build",
+        "problemMatcher": ["$tsc"]
+      },
+      {
+        "label": "Lint All",
+        "type": "shell",
+        "command": "pnpm lint",
+        "group": "test",
+        "problemMatcher": ["$eslint-stylish"]
+      },
+      {
+        "label": "Clean All",
+        "type": "shell",
+        "command": "pnpm clean",
+        "group": "none",
+        "problemMatcher": []
+      },
+      {
+        "label": "Nx Graph",
+        "type": "shell",
+        "command": "pnpm graph",
+        "group": "none",
+        "problemMatcher": [],
+        "presentation": {
+          "reveal": "always"
+        }
+      },
+      {
+        "label": "MCP Server: Start",
+        "type": "shell",
+        "command": "npx tsx packages/mcp-server/src/index.ts",
+        "group": "none",
+        "problemMatcher": [],
+        "presentation": {
+          "reveal": "always",
+          "panel": "dedicated"
+        },
+        "options": {
+          "cwd": "${workspaceFolder:root}"
+        }
+      }
+    ]
+  },
+
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug: MCP Server",
+        "type": "node",
+        "request": "launch",
+        "runtimeExecutable": "npx",
+        "runtimeArgs": ["tsx"],
+        "args": ["packages/mcp-server/src/index.ts"],
+        "cwd": "${workspaceFolder:root}",
+        "env": {
+          "NODE_ENV": "development"
+        },
+        "console": "integratedTerminal",
+        "sourceMaps": true,
+        "skipFiles": ["<node_internals>/**", "**/node_modules/**"]
+      },
+      {
+        "name": "Debug: AI Tools (current file)",
+        "type": "node",
+        "request": "launch",
+        "runtimeExecutable": "npx",
+        "runtimeArgs": ["tsx", "${file}"],
+        "cwd": "${workspaceFolder:root}",
+        "env": {
+          "NODE_ENV": "development"
+        },
+        "console": "integratedTerminal",
+        "sourceMaps": true,
+        "skipFiles": ["<node_internals>/**", "**/node_modules/**"]
+      },
+      {
+        "name": "Debug: Node Tools (current file)",
+        "type": "node",
+        "request": "launch",
+        "runtimeExecutable": "npx",
+        "runtimeArgs": ["tsx", "${file}"],
+        "cwd": "${workspaceFolder:root}",
+        "env": {
+          "NODE_ENV": "development"
+        },
+        "console": "integratedTerminal",
+        "sourceMaps": true,
+        "skipFiles": ["<node_internals>/**", "**/node_modules/**"]
+      }
+    ],
+    "compounds": [
+      {
+        "name": "Debug: MCP + AI Tools",
+        "configurations": ["Debug: MCP Server"]
+      }
+    ]
+  },
+
+  "extensions": {
+    "recommendations": [
+      // Core formatting & linting
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+
+      // Roblox-TS & Lua
+      "roblox-ts.vscode-roblox-ts",
+      "sumneko.lua",
+      "JohnnyMorganz.stylua",
+      "evaera.vscode-rojo",
+
+      // Nx monorepo
+      "nrwl.angular-console",
+
+      // TypeScript & React
+      "ms-vscode.vscode-typescript-next",
+
+      // Git & collaboration
+      "eamodio.gitlens",
+      "mhutchie.git-graph",
+
+      // DX quality of life
+      "streetsidesoftware.code-spell-checker",
+      "christian-kohler.path-intellisense",
+      "aaron-bond.better-comments",
+      "gruntfuggly.todo-tree",
+
+      // JSON & config
+      "zainchen.json"
+    ],
+    "unwantedRecommendations": []
+  }
 }

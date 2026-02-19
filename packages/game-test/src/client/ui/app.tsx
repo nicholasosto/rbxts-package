@@ -1,14 +1,15 @@
 import { Controller, type OnStart } from '@flamework/core';
+import { DARK_THEME, ThemeProvider } from '@nicholasosto/ultra-ui';
 import React from '@rbxts/react';
-import { createRoot, createPortal } from '@rbxts/react-roblox';
 import { ReflexProvider } from '@rbxts/react-reflex';
+import { createPortal, createRoot } from '@rbxts/react-roblox';
 import { producer } from '../store';
 import { selectIsProfileLoaded } from '../store/selectors';
-import { scaffold } from './scaffold';
 import { HudScreen } from './hud/hud-screen';
+import { scaffold } from './scaffold';
+import { AssetCatalogScreen } from './screens/asset-catalog-screen';
 import { InventoryScreen } from './screens/inventory-screen';
 import { MenuScreen } from './screens/menu-screen';
-import { AssetCatalogScreen } from './screens/asset-catalog-screen';
 
 /**
  * App — Root UI Controller
@@ -60,13 +61,17 @@ export class App implements OnStart {
     const root = createRoot(scaffold.screens.gameplay);
     root.render(
       <ReflexProvider producer={producer}>
-        {createPortal(<HudScreen />, scaffold.gameplay.hud)}
-        {scaffold.gameplay.menuContent &&
-          createPortal(<MenuScreen />, scaffold.gameplay.menuContent)}
-        {scaffold.gameplay.inventoryContent &&
-          createPortal(<InventoryScreen />, scaffold.gameplay.inventoryContent)}
-        {scaffold.gameplay.catalogContent &&
-          createPortal(<AssetCatalogScreen />, scaffold.gameplay.catalogContent)}
+        <ThemeProvider theme={DARK_THEME}>
+          <React.Fragment>
+            {createPortal(<HudScreen />, scaffold.gameplay.hud)}
+            {scaffold.gameplay.menuContent &&
+              createPortal(<MenuScreen />, scaffold.gameplay.menuContent)}
+            {scaffold.gameplay.inventoryContent &&
+              createPortal(<InventoryScreen />, scaffold.gameplay.inventoryContent)}
+            {scaffold.gameplay.catalogContent &&
+              createPortal(<AssetCatalogScreen />, scaffold.gameplay.catalogContent)}
+          </React.Fragment>
+        </ThemeProvider>
       </ReflexProvider>,
     );
     print('[App] React tree mounted ✓');

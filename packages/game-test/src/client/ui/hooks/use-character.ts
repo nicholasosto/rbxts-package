@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from '@rbxts/react';
+import { useEffect, useState } from '@rbxts/react';
 import { Players } from '@rbxts/services';
 
 /**

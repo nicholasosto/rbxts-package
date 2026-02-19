@@ -1,11 +1,11 @@
 import { createProducer } from '@rbxts/reflex';
-import type {
-  PlayerProfile,
-  InventoryItem,
-  CurrencyData,
-  PlayerSettings,
+import {
+  DEFAULT_PROFILE,
+  type CurrencyData,
+  type InventoryItem,
+  type PlayerProfile,
+  type PlayerSettings,
 } from '../../shared/player-data';
-import { DEFAULT_PROFILE } from '../../shared/player-data';
 
 /**
  * Profile slice — holds the raw persisted player data on the client.

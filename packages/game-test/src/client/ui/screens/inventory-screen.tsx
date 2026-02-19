@@ -1,54 +1,118 @@
-import React, { useEffect } from '@rbxts/react';
+import {
+  EquipmentPaper,
+  InventoryGrid,
+  TabContainer,
+  type EquipmentMap,
+  type EquipmentSlotId,
+  type InventoryItemData,
+  type ItemRarity,
+} from '@nicholasosto/ultra-ui';
+import React, { useEffect, useState } from '@rbxts/react';
 import { useSelector } from '@rbxts/react-reflex';
-import { selectIsInventoryOpen } from '../../store';
+import { selectEquipment, selectInventory, selectIsInventoryOpen } from '../../store';
+import { useRootProducer } from '../hooks';
 import { scaffold } from '../scaffold';
 
 /**
- * InventoryScreen — Full-screen inventory overlay.
+ * Map the player-data rarity string to ultra-ui ItemRarity.
+ */
+function mapRarity(rarity: string): ItemRarity {
+  const lookup: Record<string, ItemRarity> = {
+    common: 'Common',
+    uncommon: 'Uncommon',
+    rare: 'Rare',
+    epic: 'Epic',
+    legendary: 'Legendary',
+  };
+  return lookup[rarity] ?? 'Common';
+}
+
+/**
+ * InventoryScreen — Panel-based inventory with grid + equipment views.
  *
- * Portaled into the scaffold's Gameplay > Panels > Inventory > Content.
- * Toggles the parent Inventory Frame's Visible property via the store.
+ * Uses ultra-ui Panel, TabContainer, InventoryGrid, and EquipmentPaper.
  */
 export function InventoryScreen(): React.Element {
   const isOpen = useSelector(selectIsInventoryOpen);
+  const inventory = useSelector(selectInventory);
+  const equipment = useSelector(selectEquipment);
+  const { toggleInventory } = useRootProducer();
+  const [selectedItemId, setSelectedItemId] = useState<string | undefined>(undefined);
 
   // Sync scaffold frame visibility with store state
   useEffect(() => {
     scaffold.gameplay.inventoryFrame.Visible = isOpen;
   }, [isOpen]);
 
-  return (
-    <frame
-      key="InventoryOverlay"
-      Size={UDim2.fromScale(1, 1)}
-      BackgroundColor3={Color3.fromRGB(20, 20, 30)}
-      BackgroundTransparency={0.2}
-    >
-      {/* Header */}
-      <textlabel
-        key="Title"
-        AnchorPoint={new Vector2(0.5, 0)}
-        Position={UDim2.fromScale(0.5, 0.05)}
-        Size={UDim2.fromScale(0.3, 0.06)}
-        BackgroundTransparency={1}
-        Text="Inventory"
-        TextColor3={Color3.fromRGB(255, 255, 255)}
-        TextScaled={true}
-        Font={Enum.Font.GothamBold}
-      />
+  // Convert player-data InventoryItem[] → ultra-ui InventoryItemData[]
+  const gridItems: InventoryItemData[] = inventory.map((item) => ({
+    itemId: item.itemId,
+    displayName: item.displayName,
+    iconImage: '', // Asset images not populated yet — will show empty slots
+    rarity: mapRarity(item.rarity),
+    quantity: item.quantity,
+    equipSlot: undefined,
+    description: item.category,
+  }));
 
-      {/* TODO: Equipment grid, item list, ability loadout slots */}
-      <frame
-        key="ContentArea"
-        AnchorPoint={new Vector2(0.5, 0.5)}
-        Position={UDim2.fromScale(0.5, 0.5)}
-        Size={UDim2.fromScale(0.8, 0.7)}
-        BackgroundColor3={Color3.fromRGB(40, 40, 50)}
-        BackgroundTransparency={0.3}
-        BorderSizePixel={0}
-      >
-        <uicorner CornerRadius={new UDim(0, 12)} />
-      </frame>
-    </frame>
+  // Build equipment record for EquipmentPaper
+  const slotMapping: Record<string, EquipmentSlotId> = {
+    mainHand: 'Weapon',
+    helmet: 'Helmet',
+    chest: 'Armor',
+    accessory: 'Accessory',
+  };
+  const equippedItems: EquipmentMap = {};
+  for (const [slotName, itemId] of pairs(equipment)) {
+    if (itemId !== undefined) {
+      const mappedSlot = slotMapping[slotName as string];
+      if (mappedSlot) {
+        const item = inventory.find((i) => i.itemId === itemId);
+        if (item) {
+          equippedItems[mappedSlot] = {
+            itemId: item.itemId,
+            displayName: item.displayName,
+            iconImage: '',
+            rarity: mapRarity(item.rarity),
+            quantity: 1,
+          };
+        }
+      }
+    }
+  }
+
+  const tabs = [
+    {
+      label: 'Items',
+      content: (
+        <InventoryGrid
+          items={gridItems}
+          columns={5}
+          totalSlots={20}
+          selectedItemId={selectedItemId}
+          onSlotActivate={(item) => setSelectedItemId(item.itemId)}
+        />
+      ),
+    },
+    {
+      label: 'Equipment',
+      content: (
+        <EquipmentPaper
+          equipment={equippedItems}
+          onSlotActivate={(item) => print(`[Inventory] Equipment slot: ${item.displayName}`)}
+        />
+      ),
+    },
+  ];
+
+  return (
+    <TabContainer
+      title="Inventory"
+      tabs={tabs}
+      isOpen={isOpen}
+      onClose={() => toggleInventory()}
+      size={UDim2.fromScale(0.5, 0.65)}
+      position={UDim2.fromScale(0.5, 0.5)}
+    />
   );
 }

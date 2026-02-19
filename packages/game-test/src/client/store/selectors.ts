@@ -18,6 +18,12 @@ export const selectIsMenuOpen = (state: RootState) => state.ui.isMenuOpen;
 export const selectIsInventoryOpen = (state: RootState) => state.ui.isInventoryOpen;
 export const selectIsCatalogOpen = (state: RootState) => state.ui.isCatalogOpen;
 
+// --- Notification selectors ---
+export const selectToasts = (state: RootState) => state.notifications.toasts;
+
+// --- Buff selectors ---
+export const selectBuffs = (state: RootState) => state.buffs.buffs;
+
 // --- Profile selectors ---
 export const selectIsProfileLoaded = (state: RootState) => state.profile.isLoaded;
 export const selectLevel = (state: RootState) => state.profile.level;

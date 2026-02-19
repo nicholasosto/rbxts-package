@@ -1,6 +1,7 @@
 {
   "name": "@nicholasosto/ai-tools",
   "sourceType": "ai-tools",
+  "tags": ["scope:node", "type:lib"],
   "targets": {
     "build": {
       "executor": "nx:run-commands",
@@ -11,6 +12,16 @@
       "cache": true,
       "inputs": ["default"],
       "outputs": ["{projectRoot}/dist"]
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "vitest run",
+        "cwd": "packages/ai-tools"
+      },
+      "cache": true,
+      "inputs": ["default"],
+      "outputs": []
     },
     "clean": {
       "executor": "nx:run-commands",

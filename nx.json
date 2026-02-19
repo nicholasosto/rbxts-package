@@ -17,6 +17,11 @@
     "lint": {
       "cache": true
     },
+    "test": {
+      "cache": true,
+      "inputs": ["default"],
+      "dependsOn": ["build"]
+    },
     "clean": {
       "cache": false
     }

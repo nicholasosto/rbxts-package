@@ -1,6 +1,7 @@
 {
   "name": "@nicholasosto/name-generator",
   "sourceType": "name-generator",
+  "tags": ["scope:roblox", "type:lib"],
   "targets": {
     "build": {
       "executor": "nx:run-commands",

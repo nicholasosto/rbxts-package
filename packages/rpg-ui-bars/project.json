@@ -1,6 +1,7 @@
 {
   "name": "@nicholasosto/rpg-ui-bars",
   "sourceType": "rpg-ui-bars",
+  "tags": ["scope:roblox", "type:lib"],
   "targets": {
     "build": {
       "executor": "nx:run-commands",

@@ -1,0 +1,61 @@
+name: Weekly Maintenance
+
+on:
+  # Run every Monday at 8am UTC
+  schedule:
+    - cron: '0 8 * * 1'
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  maintenance:
+    name: Full Health Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: '10.15.0'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # ── Full checks (all packages, not just affected) ─────
+      - name: Lint all packages
+        run: npx nx run-many -t lint --parallel=3
+        continue-on-error: true
+
+      - name: Typecheck all packages
+        run: npx nx run-many -t typecheck --parallel=3
+        continue-on-error: true
+
+      - name: Build all packages
+        run: npx nx run-many -t build --parallel=3
+
+      - name: Test all packages
+        run: npx nx run-many -t test --parallel=3
+        continue-on-error: true
+
+      - name: Dead export detection (knip)
+        run: pnpm check:exports
+        continue-on-error: true
+
+      - name: Dependency analysis (knip)
+        run: pnpm check:deps
+        continue-on-error: true
+
+      - name: Format check
+        run: pnpm format:check
+        continue-on-error: true

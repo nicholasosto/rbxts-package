@@ -87,8 +87,8 @@
             "name-generator": {
               "$path": "node_modules/@nicholasosto/name-generator/out"
             },
-            "rpg-ui-bars": {
-              "$path": "node_modules/@nicholasosto/rpg-ui-bars/out"
+            "ultra-ui": {
+              "$path": "node_modules/@nicholasosto/ultra-ui/out"
             },
             "timer": {
               "$path": "node_modules/@nicholasosto/timer/out"

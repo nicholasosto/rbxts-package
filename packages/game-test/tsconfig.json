@@ -30,7 +30,7 @@
       "@nicholasosto/assets": ["./node_modules/@nicholasosto/assets/out"],
       "@nicholasosto/combat-stats": ["./node_modules/@nicholasosto/combat-stats/out"],
       "@nicholasosto/name-generator": ["./node_modules/@nicholasosto/name-generator/out"],
-      "@nicholasosto/rpg-ui-bars": ["./node_modules/@nicholasosto/rpg-ui-bars/out"],
+      "@nicholasosto/ultra-ui": ["./node_modules/@nicholasosto/ultra-ui/out"],
       "@nicholasosto/timer": ["./node_modules/@nicholasosto/timer/out"]
     }
   },

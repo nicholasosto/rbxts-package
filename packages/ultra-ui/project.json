@@ -1,0 +1,31 @@
+{
+  "name": "@nicholasosto/ultra-ui",
+  "sourceType": "ultra-ui",
+  "tags": ["scope:roblox", "type:lib"],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "rbxtsc",
+        "cwd": "packages/ultra-ui"
+      },
+      "cache": true,
+      "inputs": ["default"],
+      "outputs": ["{projectRoot}/out"]
+    },
+    "watch": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "rbxtsc -w",
+        "cwd": "packages/ultra-ui"
+      }
+    },
+    "clean": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "rm -rf out include",
+        "cwd": "packages/ultra-ui"
+      }
+    }
+  }
+}

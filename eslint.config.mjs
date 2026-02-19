@@ -1,6 +1,6 @@
+import nxPlugin from '@nx/eslint-plugin';
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsparser from '@typescript-eslint/parser';
-import nxPlugin from '@nx/eslint-plugin';
 
 export default [
   // ── Global ignores ───────────────────────────────────────
@@ -108,8 +108,8 @@ export default [
       'packages/combat-stats/src/**/*.ts',
       'packages/timer/src/**/*.ts',
       'packages/name-generator/src/**/*.ts',
-      'packages/rpg-ui-bars/src/**/*.ts',
-      'packages/rpg-ui-bars/src/**/*.tsx',
+      'packages/ultra-ui/src/**/*.ts',
+      'packages/ultra-ui/src/**/*.tsx',
       'packages/game-test/src/**/*.ts',
       'packages/game-test/src/**/*.tsx',
     ],

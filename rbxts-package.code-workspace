@@ -2,44 +2,44 @@
   "folders": [
     {
       "name": "root",
-      "path": "."
+      "path": ".",
     },
     {
       "name": "\ud83c\udfae game-test",
-      "path": "packages/game-test"
+      "path": "packages/game-test",
     },
     {
       "name": "\ud83d\udce6 assets",
-      "path": "packages/assets"
+      "path": "packages/assets",
     },
     {
       "name": "\u2694\ufe0f combat-stats",
-      "path": "packages/combat-stats"
+      "path": "packages/combat-stats",
     },
     {
       "name": "\u23f1\ufe0f timer",
-      "path": "packages/timer"
+      "path": "packages/timer",
     },
     {
-      "name": "\ud83d\udcca rpg-ui-bars",
-      "path": "packages/rpg-ui-bars"
+      "name": "\ud83d\udcca ultra-ui",
+      "path": "packages/ultra-ui",
     },
     {
       "name": "\ud83c\udff7\ufe0f name-generator",
-      "path": "packages/name-generator"
+      "path": "packages/name-generator",
     },
     {
       "name": "\ud83e\udd16 ai-tools",
-      "path": "packages/ai-tools"
+      "path": "packages/ai-tools",
     },
     {
       "name": "\ud83d\udd27 node-tools",
-      "path": "packages/node-tools"
+      "path": "packages/node-tools",
     },
     {
       "name": "\ud83d\udd0c mcp-server",
-      "path": "packages/mcp-server"
-    }
+      "path": "packages/mcp-server",
+    },
   ],
 
   "settings": {
@@ -54,7 +54,7 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.codeActionsOnSave": {
-      "source.organizeImports": "explicit"
+      "source.organizeImports": "explicit",
     },
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
@@ -64,7 +64,7 @@
     "editor.stickyScroll.enabled": true,
     "editor.inlineSuggest.enabled": true,
     "editor.quickSuggestions": {
-      "strings": "on"
+      "strings": "on",
     },
 
     // ── Prettier (matches .prettierrc) ─────────────────────
@@ -82,22 +82,22 @@
     "files.associations": {
       "*.project.json": "json",
       "*.model.json": "json",
-      "default.project.json": "json"
+      "default.project.json": "json",
     },
     "[lua]": {
-      "editor.defaultFormatter": "JohnnyMorganz.stylua"
+      "editor.defaultFormatter": "JohnnyMorganz.stylua",
     },
     "[json]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "[jsonc]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "[typescript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "[typescriptreact]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
 
     // ── Search & Explorer ──────────────────────────────────
@@ -108,26 +108,26 @@
       "**/include": true,
       "**/.nx": true,
       "**/pnpm-lock.yaml": true,
-      "**/sourcemap.json": true
+      "**/sourcemap.json": true,
     },
     "files.exclude": {
       "**/.DS_Store": true,
       "**/out/": false,
-      "**/dist/": false
+      "**/dist/": false,
     },
     "files.watcherExclude": {
       "**/node_modules/**": true,
       "**/out/**": true,
       "**/dist/**": true,
       "**/.nx/**": true,
-      "**/include/**": true
+      "**/include/**": true,
     },
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.expand": false,
     "explorer.fileNesting.patterns": {
       "tsconfig.json": "tsconfig.*.json",
       "package.json": "package-lock.json, pnpm-lock.yaml, pnpm-workspace.yaml, .npmrc, .prettierrc, .env, .env.example, nx.json",
-      "default.project.json": "sourcemap.json, *.model.json"
+      "default.project.json": "sourcemap.json, *.model.json",
     },
 
     // ── Nx Integration ─────────────────────────────────────
@@ -136,7 +136,7 @@
     // ── Terminal ────────────────────────────────────────────
     "terminal.integrated.cwd": "${workspaceFolder:root}",
     "terminal.integrated.env.osx": {
-      "NODE_OPTIONS": ""
+      "NODE_OPTIONS": "",
     },
 
     // ── Git ────────────────────────────────────────────────
@@ -148,8 +148,8 @@
     // Hide compiled Lua output from cluttering the editor
     "files.readonlyInclude": {
       "**/out/**/*.lua": true,
-      "**/include/**": true
-    }
+      "**/include/**": true,
+    },
   },
 
   "tasks": {
@@ -163,8 +163,8 @@
         "problemMatcher": ["$tsc"],
         "presentation": {
           "reveal": "silent",
-          "panel": "shared"
-        }
+          "panel": "shared",
+        },
       },
       {
         "label": "Build: game-test",
@@ -172,13 +172,13 @@
         "command": "pnpm build:game-test",
         "group": {
           "kind": "build",
-          "isDefault": true
+          "isDefault": true,
         },
         "problemMatcher": ["$tsc"],
         "presentation": {
           "reveal": "silent",
-          "panel": "shared"
-        }
+          "panel": "shared",
+        },
       },
       {
         "label": "Watch: game-test",
@@ -195,19 +195,19 @@
             "line": 2,
             "column": 3,
             "severity": 4,
-            "message": 5
+            "message": 5,
           },
           "background": {
             "activeOnStart": true,
             "beginsPattern": "^Starting compilation",
-            "endsPattern": "^Successfully compiled"
-          }
+            "endsPattern": "^Successfully compiled",
+          },
         },
         "presentation": {
           "reveal": "always",
           "panel": "dedicated",
-          "group": "dev"
-        }
+          "group": "dev",
+        },
       },
       {
         "label": "Rojo Serve: game-test",
@@ -218,65 +218,62 @@
         "presentation": {
           "reveal": "always",
           "panel": "dedicated",
-          "group": "dev"
-        }
+          "group": "dev",
+        },
       },
       {
         "label": "Dev: game-test (Watch + Rojo)",
-        "dependsOn": [
-          "Watch: game-test",
-          "Rojo Serve: game-test"
-        ],
+        "dependsOn": ["Watch: game-test", "Rojo Serve: game-test"],
         "dependsOrder": "parallel",
         "group": "build",
         "problemMatcher": [],
         "presentation": {
           "reveal": "always",
           "panel": "shared",
-          "group": "dev"
-        }
+          "group": "dev",
+        },
       },
       {
         "label": "Build: ai-tools",
         "type": "shell",
         "command": "pnpm build:ai-tools",
         "group": "build",
-        "problemMatcher": ["$tsc"]
+        "problemMatcher": ["$tsc"],
       },
       {
         "label": "Build: node-tools",
         "type": "shell",
         "command": "pnpm build:node-tools",
         "group": "build",
-        "problemMatcher": ["$tsc"]
+        "problemMatcher": ["$tsc"],
       },
       {
         "label": "Build: assets",
         "type": "shell",
         "command": "pnpm build:assets",
         "group": "build",
-        "problemMatcher": ["$tsc"]
+        "problemMatcher": ["$tsc"],
       },
       {
         "label": "Build: name-generator",
         "type": "shell",
         "command": "pnpm build:name-generator",
         "group": "build",
-        "problemMatcher": ["$tsc"]
+        "problemMatcher": ["$tsc"],
       },
       {
         "label": "Lint All",
         "type": "shell",
         "command": "pnpm lint",
         "group": "test",
-        "problemMatcher": ["$eslint-stylish"]
+        "problemMatcher": ["$eslint-stylish"],
       },
       {
         "label": "Clean All",
         "type": "shell",
         "command": "pnpm clean",
         "group": "none",
-        "problemMatcher": []
+        "problemMatcher": [],
       },
       {
         "label": "Nx Graph",
@@ -285,8 +282,8 @@
         "group": "none",
         "problemMatcher": [],
         "presentation": {
-          "reveal": "always"
-        }
+          "reveal": "always",
+        },
       },
       {
         "label": "MCP Server: Start",
@@ -296,13 +293,13 @@
         "problemMatcher": [],
         "presentation": {
           "reveal": "always",
-          "panel": "dedicated"
+          "panel": "dedicated",
         },
         "options": {
-          "cwd": "${workspaceFolder:root}"
-        }
-      }
-    ]
+          "cwd": "${workspaceFolder:root}",
+        },
+      },
+    ],
   },
 
   "launch": {
@@ -317,11 +314,11 @@
         "args": ["packages/mcp-server/src/index.ts"],
         "cwd": "${workspaceFolder:root}",
         "env": {
-          "NODE_ENV": "development"
+          "NODE_ENV": "development",
         },
         "console": "integratedTerminal",
         "sourceMaps": true,
-        "skipFiles": ["<node_internals>/**", "**/node_modules/**"]
+        "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
       },
       {
         "name": "Debug: AI Tools (current file)",
@@ -331,11 +328,11 @@
         "runtimeArgs": ["tsx", "${file}"],
         "cwd": "${workspaceFolder:root}",
         "env": {
-          "NODE_ENV": "development"
+          "NODE_ENV": "development",
         },
         "console": "integratedTerminal",
         "sourceMaps": true,
-        "skipFiles": ["<node_internals>/**", "**/node_modules/**"]
+        "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
       },
       {
         "name": "Debug: Node Tools (current file)",
@@ -345,19 +342,19 @@
         "runtimeArgs": ["tsx", "${file}"],
         "cwd": "${workspaceFolder:root}",
         "env": {
-          "NODE_ENV": "development"
+          "NODE_ENV": "development",
         },
         "console": "integratedTerminal",
         "sourceMaps": true,
-        "skipFiles": ["<node_internals>/**", "**/node_modules/**"]
-      }
+        "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      },
     ],
     "compounds": [
       {
         "name": "Debug: MCP + AI Tools",
-        "configurations": ["Debug: MCP Server"]
-      }
-    ]
+        "configurations": ["Debug: MCP Server"],
+      },
+    ],
   },
 
   "extensions": {
@@ -389,8 +386,8 @@
       "gruntfuggly.todo-tree",
 
       // JSON & config
-      "zainchen.json"
+      "zainchen.json",
     ],
-    "unwantedRecommendations": []
-  }
+    "unwantedRecommendations": [],
+  },
 }

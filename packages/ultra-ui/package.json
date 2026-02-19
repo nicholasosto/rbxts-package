@@ -1,0 +1,23 @@
+{
+  "name": "@nicholasosto/ultra-ui",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Ultimate UI toolkit for Roblox-TS games — bars, action bars, panels, inventory, nameplates, notifications, and timers",
+  "main": "out/init.lua",
+  "types": "out/index.d.ts",
+  "scripts": {
+    "build": "rbxtsc",
+    "watch": "rbxtsc -w",
+    "clean": "rm -rf out include"
+  },
+  "devDependencies": {
+    "@nicholasosto/assets": "workspace:*",
+    "@rbxts/compiler-types": "3.0.0-types.0",
+    "@rbxts/react": "^17.3.7-ts.1",
+    "@rbxts/react-roblox": "^17.3.7-ts.1",
+    "@rbxts/services": "^1.6.0",
+    "@rbxts/types": "^1.0.879",
+    "roblox-ts": "^3.0.0",
+    "typescript": "^5.5.3"
+  }
+}

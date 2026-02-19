@@ -1,6 +1,6 @@
+import { ResourceBar, ResourceBarStyle } from '@nicholasosto/ultra-ui';
 import React from '@rbxts/react';
 import { useSelector } from '@rbxts/react-reflex';
-import { ResourceBar, ResourceBarStyle } from '@nicholasosto/rpg-ui-bars';
 import { selectHealth, selectMana } from '../../store';
 import { useRootProducer } from '../hooks';
 import { AbilityBar } from './ability-bar';

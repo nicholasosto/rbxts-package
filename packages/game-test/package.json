@@ -14,7 +14,7 @@
     "@nicholasosto/assets": "workspace:*",
     "@nicholasosto/combat-stats": "workspace:*",
     "@nicholasosto/name-generator": "workspace:*",
-    "@nicholasosto/rpg-ui-bars": "workspace:*",
+    "@nicholasosto/ultra-ui": "workspace:*",
     "@nicholasosto/timer": "workspace:*",
     "@rbxts/profile-store": "^1.0.3"
   },

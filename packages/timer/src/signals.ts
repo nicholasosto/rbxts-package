@@ -1,6 +1,10 @@
 // ─── Timer Package: Signal System & Global Hooks ─────────────────────────────
 import Signal from '@rbxts/signal';
-import { TimerTickPayload, TimerLifecyclePayload, TimerThresholdPayload } from './types';
+import {
+  type TimerTickPayload,
+  type TimerLifecyclePayload,
+  type TimerThresholdPayload,
+} from './types';
 
 // ─── Global event bus ────────────────────────────────────────────────────────
 

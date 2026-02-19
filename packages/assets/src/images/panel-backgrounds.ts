@@ -1,4 +1,4 @@
-import { ImageAsset, asImageAsset } from '../types';
+import { type ImageAsset, asImageAsset } from '../types';
 
 /** Domain-themed panel background images */
 export const PanelBackgrounds = {

@@ -1,4 +1,4 @@
-import { ImageAsset, asImageAsset } from '../types';
+import { type ImageAsset, asImageAsset } from '../types';
 
 /** Main menu panel navigation icons */
 export const MenuPanelIcons = {

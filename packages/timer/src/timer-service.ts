@@ -1,7 +1,7 @@
 // ─── Timer Package: Flamework Server Service ─────────────────────────────────
-import { Service, OnInit } from '@flamework/core';
+import { Service, type OnInit } from '@flamework/core';
 import { Timer } from './timer';
-import { TimerOptions } from './types';
+import { type TimerOptions } from './types';
 
 /**
  * Server-side authoritative timer management.

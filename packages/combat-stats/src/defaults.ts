@@ -7,7 +7,7 @@
  * sensible RPG-style derivation formulas.
  */
 
-import { AttributeDefinition, DerivedStatDefinition } from './types';
+import { type AttributeDefinition, type DerivedStatDefinition } from './types';
 import { AttributeRegistry } from './attribute-registry';
 
 // ─── Default Base Attributes ─────────────────────────────────────────────────

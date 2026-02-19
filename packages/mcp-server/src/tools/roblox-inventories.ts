@@ -10,7 +10,7 @@
  */
 
 import { z } from 'zod';
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { type McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { getRobloxCloudConfig } from '@nicholasosto/node-tools';
 import { ROBLOX_CLOUD_BASE, robloxHeaders } from '../types.js';
 

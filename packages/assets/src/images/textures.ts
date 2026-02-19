@@ -1,4 +1,4 @@
-import { ImageAsset, asImageAsset } from '../types';
+import { type ImageAsset, asImageAsset } from '../types';
 
 /** Surface textures and tiling patterns */
 export const Textures = {

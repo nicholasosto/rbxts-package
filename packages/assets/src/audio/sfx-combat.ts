@@ -1,4 +1,4 @@
-import { AudioAsset, asAudioAsset } from '../types';
+import { type AudioAsset, asAudioAsset } from '../types';
 
 /** Combat-related sound effects */
 export const SfxCombat = {

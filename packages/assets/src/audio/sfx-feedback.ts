@@ -1,4 +1,4 @@
-import { AudioAsset, asAudioAsset } from '../types';
+import { type AudioAsset, asAudioAsset } from '../types';
 
 /** Player feedback sound effects */
 export const SfxFeedback = {

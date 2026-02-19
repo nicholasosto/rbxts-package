@@ -1,4 +1,4 @@
-import { ImageAsset, asImageAsset } from '../types';
+import { type ImageAsset, asImageAsset } from '../types';
 
 /** Beam effect textures (two-part for Roblox Beam instances) */
 export const BeamTextures = {

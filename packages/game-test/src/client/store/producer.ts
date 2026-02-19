@@ -1,4 +1,4 @@
-import { combineProducers, InferState } from '@rbxts/reflex';
+import { combineProducers, type InferState } from '@rbxts/reflex';
 import { healthSlice } from './health-slice';
 import { manaSlice } from './mana-slice';
 import { abilitiesSlice } from './abilities-slice';

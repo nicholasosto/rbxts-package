@@ -3,11 +3,11 @@ import { HttpService } from '@rbxts/services';
 import {
   TimerAnchor,
   TimerDirection,
-  TimerDisplayConfig,
+  type TimerDisplayConfig,
   TimerEffect,
   TimerFormat,
-  TimerOptions,
-  ResolvedTimerConfig,
+  type TimerOptions,
+  type ResolvedTimerConfig,
 } from './types';
 
 // ─── Anchor → Position / AnchorPoint map ────────────────────────────────────

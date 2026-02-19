@@ -1,4 +1,4 @@
-import { ImageAsset, asImageAsset } from '../types';
+import { type ImageAsset, asImageAsset } from '../types';
 
 /** In-game currency icons */
 export const CurrencyIcons = {

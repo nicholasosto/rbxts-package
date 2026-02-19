@@ -1,8 +1,8 @@
 // ─── Timer Package: Flamework Client Controller ──────────────────────────────
-import { Controller, OnInit } from '@flamework/core';
-import { Timer } from './timer';
+import { Controller, type OnInit } from '@flamework/core';
 import { TimerDisplay } from './display';
-import { TimerOptions, TimerDisplayConfig, TimerFormat, TimerTickPayload } from './types';
+import { Timer } from './timer';
+import { type TimerDisplayConfig, type TimerOptions, type TimerTickPayload } from './types';
 
 interface ManagedTimer {
   timer: Timer;

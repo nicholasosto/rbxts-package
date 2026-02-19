@@ -1,4 +1,4 @@
-import { AnimationAsset, asAnimationAsset } from '../types';
+import { type AnimationAsset, asAnimationAsset } from '../types';
 
 /** Humanoid locomotion and idle animations */
 export const Humanoid = {

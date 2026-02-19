@@ -1,4 +1,4 @@
-import { UseProducerHook, useProducer } from '@rbxts/react-reflex';
+import { type UseProducerHook, useProducer } from '@rbxts/react-reflex';
 import type { RootProducer } from '../../store';
 
 /**

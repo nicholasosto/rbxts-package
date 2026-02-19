@@ -1,4 +1,4 @@
-import { AnimationAsset, asAnimationAsset } from '../types';
+import { type AnimationAsset, asAnimationAsset } from '../types';
 
 /** Combat reaction and dodge animations */
 export const Combat = {

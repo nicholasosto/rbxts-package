@@ -1,4 +1,4 @@
-import { AudioAsset, asAudioAsset } from '../types';
+import { type AudioAsset, asAudioAsset } from '../types';
 
 /** Background music tracks */
 export const Music = {

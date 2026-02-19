@@ -1,4 +1,4 @@
-import { AudioAsset, asAudioAsset } from '../types';
+import { type AudioAsset, asAudioAsset } from '../types';
 
 /** UI interaction sound effects */
 export const SfxUi = {

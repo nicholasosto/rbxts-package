@@ -1,4 +1,4 @@
-import { AnimationAsset, asAnimationAsset } from '../types';
+import { type AnimationAsset, asAnimationAsset } from '../types';
 
 /** Magic cast, projectile, and AOE animations */
 export const Magic = {

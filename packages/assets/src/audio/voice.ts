@@ -1,4 +1,4 @@
-import { AudioAsset, asAudioAsset } from '../types';
+import { type AudioAsset, asAudioAsset } from '../types';
 
 /** Boss voice lines — Penitent Knight */
 export const VoicePenitentKnight = {

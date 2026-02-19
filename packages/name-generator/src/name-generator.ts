@@ -4,7 +4,7 @@
  * Core name generator with configurable pools of first names, last names, and monikers.
  */
 
-import { GenerateNameOptions } from './types';
+import { type GenerateNameOptions } from './types';
 import { DEFAULT_FIRST_NAMES, DEFAULT_LAST_NAMES, DEFAULT_MONIKERS } from './defaults';
 
 /** Pick a random element from an array using Roblox's math.random */

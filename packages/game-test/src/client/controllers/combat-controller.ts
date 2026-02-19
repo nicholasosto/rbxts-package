@@ -1,10 +1,10 @@
-import { Controller, OnStart } from '@flamework/core';
+import { Controller, type OnStart } from '@flamework/core';
 import Maid from '@rbxts/maid';
 import { clientEvents } from '../network';
 import { producer } from '../store';
-import { AnimationController } from './animation-controller';
-import { AudioController } from './audio-controller';
-import { CombatState } from '../types';
+import { type AnimationController } from './animation-controller';
+import { type AudioController } from './audio-controller';
+import { type CombatState } from '../types';
 
 const COMBO_TIMEOUT = 1.5; // seconds before combo resets
 const ATTACK_COOLDOWN = 0.4; // seconds between attacks

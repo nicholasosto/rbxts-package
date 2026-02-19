@@ -1,4 +1,4 @@
-import { AnimationAsset, asAnimationAsset } from '../types';
+import { type AnimationAsset, asAnimationAsset } from '../types';
 
 /** Physical melee attack animations */
 export const Melee = {

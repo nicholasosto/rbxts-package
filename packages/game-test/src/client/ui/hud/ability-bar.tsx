@@ -1,5 +1,5 @@
 import React from '@rbxts/react';
-import { AbilitySlot } from '../../types';
+import { type AbilitySlot } from '../../types';
 
 interface AbilityBarProps {
   abilities: AbilitySlot[];

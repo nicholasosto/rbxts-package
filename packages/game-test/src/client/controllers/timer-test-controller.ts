@@ -1,11 +1,11 @@
-import { Controller, OnStart } from '@flamework/core';
+import { Controller, type OnStart } from '@flamework/core';
 import { UserInputService } from '@rbxts/services';
 import {
-  TimerController,
+  type TimerController,
   TimerAnchor,
   TimerEffect,
   TimerFormat,
-  Timer,
+  type Timer,
   TimerHooks,
 } from '@nicholasosto/timer';
 

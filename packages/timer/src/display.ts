@@ -1,9 +1,9 @@
 // ─── Timer Package: ScreenGui Display Builder ────────────────────────────────
 import { Players } from '@rbxts/services';
-import { TimerDisplayConfig, TimerFormat, TimerTickPayload, EffectEntry } from './types';
 import { ANCHOR_MAP, resolveDisplayConfig } from './defaults';
+import { EffectsEngine, type DisplayElements } from './effects';
 import { formatTime } from './format';
-import { EffectsEngine, DisplayElements } from './effects';
+import { type TimerDisplayConfig, type TimerTickPayload } from './types';
 
 /**
  * Manages a ScreenGui-based timer display for a single timer.

@@ -1,9 +1,9 @@
-import { Controller, OnStart } from '@flamework/core';
+import { Controller, type OnStart } from '@flamework/core';
 import { UserInputService } from '@rbxts/services';
 import Maid from '@rbxts/maid';
 import { InputAction } from '../types';
 import { producer } from '../store';
-import { CombatController } from './combat-controller';
+import { type CombatController } from './combat-controller';
 
 /**
  * InputController

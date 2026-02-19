@@ -7,18 +7,21 @@
  * experimental decorators, not TC39 Stage 3 decorators.
  */
 
-/* eslint-disable @typescript-eslint/no-empty-interface */
-
 interface ClassDecoratorContext<
-  Class extends abstract new (...args: never) => unknown = abstract new (...args: never) => unknown,
+  _Class extends abstract new (...args: never) => unknown = abstract new (
+    ...args: never
+  ) => unknown,
 > {
   readonly kind: 'class';
   readonly name: string | undefined;
 }
 
 interface ClassMethodDecoratorContext<
-  This = unknown,
-  Value extends (this: This, ...args: never) => unknown = (this: This, ...args: never) => unknown,
+  _This = unknown,
+  _Value extends (this: _This, ...args: never) => unknown = (
+    this: _This,
+    ...args: never
+  ) => unknown,
 > {
   readonly kind: 'method';
   readonly name: string | symbol;
@@ -26,28 +29,28 @@ interface ClassMethodDecoratorContext<
   readonly private: boolean;
 }
 
-interface ClassGetterDecoratorContext<This = unknown, Value = unknown> {
+interface ClassGetterDecoratorContext<_This = unknown, _Value = unknown> {
   readonly kind: 'getter';
   readonly name: string | symbol;
   readonly static: boolean;
   readonly private: boolean;
 }
 
-interface ClassSetterDecoratorContext<This = unknown, Value = unknown> {
+interface ClassSetterDecoratorContext<_This = unknown, _Value = unknown> {
   readonly kind: 'setter';
   readonly name: string | symbol;
   readonly static: boolean;
   readonly private: boolean;
 }
 
-interface ClassAccessorDecoratorContext<This = unknown, Value = unknown> {
+interface ClassAccessorDecoratorContext<_This = unknown, _Value = unknown> {
   readonly kind: 'accessor';
   readonly name: string | symbol;
   readonly static: boolean;
   readonly private: boolean;
 }
 
-interface ClassFieldDecoratorContext<This = unknown, Value = unknown> {
+interface ClassFieldDecoratorContext<_This = unknown, _Value = unknown> {
   readonly kind: 'field';
   readonly name: string | symbol;
   readonly static: boolean;

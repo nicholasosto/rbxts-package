@@ -4,8 +4,8 @@
  * Utility functions for manipulating attributes and stat values.
  */
 
-import { AttributeDefinition, AttributeSet } from './types';
-import { AttributeRegistry } from './attribute-registry';
+import { type AttributeDefinition, type AttributeSet } from './types';
+import { type AttributeRegistry } from './attribute-registry';
 
 /**
  * Clamp a value to the min/max range of an attribute definition.

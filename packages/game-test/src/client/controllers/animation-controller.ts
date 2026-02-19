@@ -1,4 +1,4 @@
-import { Controller, OnStart } from '@flamework/core';
+import { Controller, type OnStart } from '@flamework/core';
 import { Players } from '@rbxts/services';
 import Maid from '@rbxts/maid';
 import { ANIMATION_CATALOG } from '@nicholasosto/assets';

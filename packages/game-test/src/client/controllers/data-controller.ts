@@ -1,8 +1,8 @@
-import { Controller, OnStart } from '@flamework/core';
-import { clientEvents } from '../network';
-import { producer } from '../store';
+import { Controller, type OnStart } from '@flamework/core';
 import { createDefaultRegistry } from '@nicholasosto/combat-stats';
 import type { PlayerProfile } from '../../shared/player-data';
+import { clientEvents } from '../network';
+import { producer } from '../store';
 
 /**
  * DataController
@@ -44,7 +44,7 @@ export class DataController implements OnStart {
     producer.setMana(maxMana, maxMana);
 
     // Hydrate ability slots from the loadout
-    const abilitySlots = profile.abilityLoadout.map((abilityId, index) => ({
+    const abilitySlots = profile.abilityLoadout.map((abilityId, _index) => ({
       abilityId,
       displayName: abilityId,
       iconImage: '',

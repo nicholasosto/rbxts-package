@@ -1,7 +1,6 @@
-import { Service, OnStart } from '@flamework/core';
+import { Service, type OnStart } from '@flamework/core';
+import ProfileStore, { type Profile } from '@rbxts/profile-store';
 import { Players } from '@rbxts/services';
-import ProfileStore from '@rbxts/profile-store';
-import type { Profile } from '@rbxts/profile-store';
 import { GlobalEvents } from '../../shared/network';
 import { DEFAULT_PROFILE, type PlayerProfile } from '../../shared/player-data';
 

@@ -3,14 +3,14 @@ import { RunService } from '@rbxts/services';
 import Signal from '@rbxts/signal';
 import {
   TimerDirection,
-  TimerDisplayConfig,
-  TimerLifecyclePayload,
-  TimerOptions,
+  type TimerDisplayConfig,
+  type TimerLifecyclePayload,
+  type TimerOptions,
   TimerState,
-  TimerThreshold,
-  TimerThresholdPayload,
-  TimerTickPayload,
-  ResolvedTimerConfig,
+  type TimerThreshold,
+  type TimerThresholdPayload,
+  type TimerTickPayload,
+  type ResolvedTimerConfig,
 } from './types';
 import { resolveTimerConfig } from './defaults';
 import { TimerHooks } from './signals';

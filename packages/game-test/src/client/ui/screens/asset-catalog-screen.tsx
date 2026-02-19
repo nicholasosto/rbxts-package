@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from '@rbxts/react';
 import { useSelector } from '@rbxts/react-reflex';
-import { IMAGE_CATALOG, ImageAsset } from '@nicholasosto/assets';
+import { IMAGE_CATALOG, type ImageAsset } from '@nicholasosto/assets';
 import { selectIsCatalogOpen } from '../../store';
 import { useRootProducer } from '../hooks';
 import { scaffold } from '../scaffold';

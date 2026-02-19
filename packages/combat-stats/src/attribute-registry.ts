@@ -7,11 +7,11 @@
  */
 
 import {
-  AttributeDefinition,
-  AttributeSet,
-  DerivedStatDefinition,
-  DerivedStatSet,
-  StatProfile,
+  type AttributeDefinition,
+  type AttributeSet,
+  type DerivedStatDefinition,
+  type DerivedStatSet,
+  type StatProfile,
 } from './types';
 
 /**

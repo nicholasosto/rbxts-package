@@ -1,7 +1,6 @@
-import { Service, OnStart } from '@flamework/core';
-import { Players } from '@rbxts/services';
+import { Service, type OnStart } from '@flamework/core';
 import { GlobalEvents, GlobalFunctions } from '../../shared/network';
-import { PlayerDataService } from './player-data-service';
+import { type PlayerDataService } from './player-data-service';
 
 /**
  * Core server service — handles incoming client events.

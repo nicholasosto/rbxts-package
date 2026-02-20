@@ -15,7 +15,7 @@
     "preserveSymlinks": true,
     "rootDir": "src",
     "outDir": "out",
-    "declaration": false,
+    "declaration": true,
     "sourceMap": false,
     "incremental": true,
     "tsBuildInfoFile": "out/tsconfig.tsbuildinfo",
@@ -27,9 +27,6 @@
       }
     ],
     "paths": {
-      "@rbxts/react": ["./node_modules/@rbxts/react/src"],
-      "@rbxts/react-roblox": ["./node_modules/@rbxts/react-roblox/src"],
-      "@rbxts/services": ["./node_modules/@rbxts/services"],
       "@nicholasosto/assets": ["./node_modules/@nicholasosto/assets/out"],
       "@nicholasosto/combat-stats": ["./node_modules/@nicholasosto/combat-stats/out"],
       "@nicholasosto/name-generator": ["./node_modules/@nicholasosto/name-generator/out"],

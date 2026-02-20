@@ -4,7 +4,7 @@ import type { PlayerProfile } from './player-data';
 /**
  * Events fired from CLIENT → SERVER.
  */
-interface ClientToServerEvents {
+export interface ClientToServerEvents {
   /** Player requests a combat action (swing, block, etc.) */
   CombatAction(action: string, targetId?: string): void;
 
@@ -15,7 +15,7 @@ interface ClientToServerEvents {
 /**
  * Events fired from SERVER → CLIENT.
  */
-interface ServerToClientEvents {
+export interface ServerToClientEvents {
   /** Notify the client it took damage */
   PlayerDamaged(amount: number, sourceId?: string): void;
 
@@ -35,12 +35,12 @@ interface ServerToClientEvents {
 /**
  * Request/Response functions (CLIENT → SERVER with return value).
  */
-interface ClientToServerFunctions {
+export interface ClientToServerFunctions {
   /** Request current ability loadout from server */
   GetAbilityLoadout(): string[];
 }
 
-interface ServerToClientFunctions {}
+export interface ServerToClientFunctions {}
 
 export const GlobalEvents = Networking.createEvent<ClientToServerEvents, ServerToClientEvents>();
 export const GlobalFunctions = Networking.createFunction<

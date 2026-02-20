@@ -99,6 +99,9 @@
                   "services": {
                     "$path": "node_modules/@nicholasosto/ultra-ui/node_modules/@rbxts/services"
                   }
+                },
+                "@rbxts-js": {
+                  "$path": "../../node_modules/@rbxts-js"
                 }
               }
             },

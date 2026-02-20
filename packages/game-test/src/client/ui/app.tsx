@@ -55,10 +55,15 @@ export class App implements OnStart {
     // Show the Loading layer while we wait for data
     scaffold.screens.loading.Enabled = true;
 
-    // Mount the React tree into the Gameplay ScreenGui.
-    // Portals project each screen into its scaffold container.
+    // Mount the React tree into a dedicated host instance so React-Roblox
+    // doesn't take ownership of the Gameplay ScreenGui's children.
+    // All actual UI is projected via createPortal into scaffold containers.
     print('[App] Mounting React tree...');
-    const root = createRoot(scaffold.screens.gameplay);
+    const reactHost = new Instance('Folder');
+    reactHost.Name = 'ReactHost';
+    reactHost.Parent = scaffold.screens.gameplay;
+
+    const root = createRoot(reactHost);
     root.render(
       <ReflexProvider producer={producer}>
         <ThemeProvider theme={DARK_THEME}>

@@ -27,6 +27,8 @@
       }
     ],
     "paths": {
+      "@rbxts/*": ["./node_modules/@rbxts/*"],
+      "@flamework/*": ["./node_modules/@flamework/*"],
       "@nicholasosto/assets": ["./node_modules/@nicholasosto/assets/out"],
       "@nicholasosto/combat-stats": ["./node_modules/@nicholasosto/combat-stats/out"],
       "@nicholasosto/name-generator": ["./node_modules/@nicholasosto/name-generator/out"],

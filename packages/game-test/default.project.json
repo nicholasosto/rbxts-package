@@ -88,22 +88,7 @@
               "$path": "node_modules/@nicholasosto/name-generator/out"
             },
             "ultra-ui": {
-              "$path": "node_modules/@nicholasosto/ultra-ui/out",
-              "node_modules": {
-                "$className": "Folder",
-                "@rbxts": {
-                  "$className": "Folder",
-                  "react": {
-                    "$path": "node_modules/@nicholasosto/ultra-ui/node_modules/@rbxts/react"
-                  },
-                  "services": {
-                    "$path": "node_modules/@nicholasosto/ultra-ui/node_modules/@rbxts/services"
-                  }
-                },
-                "@rbxts-js": {
-                  "$path": "../../node_modules/@rbxts-js"
-                }
-              }
+              "$path": "node_modules/@nicholasosto/ultra-ui/out"
             },
             "timer": {
               "$path": "node_modules/@nicholasosto/timer/out"

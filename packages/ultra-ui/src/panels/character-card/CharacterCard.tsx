@@ -2,6 +2,10 @@
  * CharacterCard — A metallic sci-fi HUD card displaying a character portrait,
  * username, level badge, and health/mana/stamina resource bars.
  *
+ * Layout (left → right):
+ *   Portrait (square) | Username banner + 3 resource bars
+ *   Level badge overlaps bottom-right of portrait.
+ *
  * Designed for ScreenGui placement at the top-left of the screen.
  *
  * @example
@@ -20,7 +24,7 @@ import React from '@rbxts/react';
 import { ResourceBar, ResourceBarStyle } from '../../bars';
 import type { CharacterCardProps } from './types';
 
-// ─── Default Asset IDs ─────────────────────────────────────────────────────
+// ─── Default Asset IDs (Image type) ────────────────────────────────────────
 // Generated via rbxts-mcp generate_and_upload_decal pipeline.
 
 const ASSETS = {
@@ -37,12 +41,17 @@ const COLORS = {
   levelLabel: Color3.fromRGB(255, 200, 60),
   levelNumber: Color3.fromRGB(255, 215, 0),
   portraitBg: Color3.fromRGB(15, 15, 25),
+  cardBg: Color3.fromRGB(20, 20, 30),
 } as const;
 
 // ─── Default Dimensions ────────────────────────────────────────────────────
 
-const DEFAULT_SIZE = UDim2.fromOffset(450, 140);
-const DEFAULT_POSITION = UDim2.fromOffset(20, 20);
+/** Card overall: 380 × 150 px (wider than tall, compact) */
+const DEFAULT_SIZE = UDim2.fromOffset(380, 150);
+const DEFAULT_POSITION = UDim2.fromOffset(16, 16);
+
+/** Portrait is a square matching the card height minus padding. */
+const PORTRAIT_SIZE_PX = 120; // slightly smaller than card height for frame inset
 
 // ─── Component ─────────────────────────────────────────────────────────────
 
@@ -62,8 +71,8 @@ export function CharacterCard(props: CharacterCardProps): React.Element | undefi
 
   if (!visible) return undefined;
 
-  // Bar sizes — slightly narrower to fit inside the card frame
-  const barSize = new UDim2(1, -8, 0, 18);
+  // Bar width fills the right section minus padding
+  const barSize = new UDim2(1, 0, 0, 20);
 
   return (
     <frame
@@ -71,34 +80,43 @@ export function CharacterCard(props: CharacterCardProps): React.Element | undefi
       Size={size}
       Position={position}
       AnchorPoint={anchorPoint}
-      BackgroundTransparency={1}
+      BackgroundColor3={COLORS.cardBg}
+      BackgroundTransparency={0.3}
       BorderSizePixel={0}
     >
-      {/* ── Card Frame Background ───────────────────────────── */}
+      <uicorner CornerRadius={new UDim(0, 6)} />
+
+      {/* ── Card Frame Overlay ──────────────────────────────── */}
       <imagelabel
         key="CardFrame"
         Size={UDim2.fromScale(1, 1)}
         BackgroundTransparency={1}
         Image={ASSETS.CardFrame}
         ScaleType={Enum.ScaleType.Stretch}
-        ImageTransparency={0.05}
-        ZIndex={0}
+        ImageTransparency={0}
+        ZIndex={5}
       />
 
-      {/* ── Portrait Section (left ~30%) ────────────────────── */}
+      {/* ── Portrait Section (left, square) ────────────────── */}
       <frame
         key="PortraitSection"
-        Size={UDim2.fromScale(0.28, 1)}
-        Position={UDim2.fromScale(0, 0)}
+        Size={UDim2.fromOffset(PORTRAIT_SIZE_PX, PORTRAIT_SIZE_PX)}
+        Position={UDim2.fromScale(0, 0.5)}
+        AnchorPoint={new Vector2(0, 0.5)}
         BackgroundTransparency={1}
-        ZIndex={1}
+        ZIndex={2}
       >
+        <uipadding
+          PaddingTop={new UDim(0, 8)}
+          PaddingBottom={new UDim(0, 8)}
+          PaddingLeft={new UDim(0, 8)}
+          PaddingRight={new UDim(0, 4)}
+        />
+
         {/* Portrait background */}
         <frame
           key="PortraitBg"
-          Size={new UDim2(0.85, 0, 0.85, 0)}
-          Position={UDim2.fromScale(0.5, 0.5)}
-          AnchorPoint={new Vector2(0.5, 0.5)}
+          Size={UDim2.fromScale(1, 1)}
           BackgroundColor3={COLORS.portraitBg}
           BorderSizePixel={0}
           ZIndex={1}
@@ -109,55 +127,90 @@ export function CharacterCard(props: CharacterCardProps): React.Element | undefi
           {portraitImage !== undefined && (
             <imagelabel
               key="PortraitImage"
-              Size={UDim2.fromScale(0.92, 0.92)}
-              Position={UDim2.fromScale(0.5, 0.5)}
-              AnchorPoint={new Vector2(0.5, 0.5)}
+              Size={UDim2.fromScale(1, 1)}
               BackgroundTransparency={1}
               Image={portraitImage}
-              ScaleType={Enum.ScaleType.Fit}
+              ScaleType={Enum.ScaleType.Crop}
               ZIndex={2}
-            />
+            >
+              <uicorner CornerRadius={new UDim(0, 4)} />
+            </imagelabel>
           )}
         </frame>
 
-        {/* Portrait border overlay */}
+        {/* Portrait border overlay — sits on top of portrait */}
         <imagelabel
           key="PortraitBorder"
-          Size={new UDim2(0.92, 0, 0.92, 0)}
+          Size={new UDim2(1, 8, 1, 8)}
           Position={UDim2.fromScale(0.5, 0.5)}
           AnchorPoint={new Vector2(0.5, 0.5)}
           BackgroundTransparency={1}
           Image={ASSETS.PortraitBorder}
-          ScaleType={Enum.ScaleType.Fit}
+          ScaleType={Enum.ScaleType.Stretch}
           ZIndex={3}
         />
       </frame>
 
-      {/* ── Info Section (right ~70%) ───────────────────────── */}
+      {/* ── Level Badge (overlaps bottom-right of portrait) ── */}
+      <frame
+        key="LevelBadge"
+        Size={UDim2.fromOffset(48, 28)}
+        Position={UDim2.fromOffset(PORTRAIT_SIZE_PX - 8, PORTRAIT_SIZE_PX - 24)}
+        AnchorPoint={new Vector2(0.5, 0.5)}
+        BackgroundTransparency={1}
+        ZIndex={6}
+      >
+        <imagelabel
+          key="BadgeBg"
+          Size={UDim2.fromScale(1, 1)}
+          BackgroundTransparency={1}
+          Image={ASSETS.LevelBadge}
+          ScaleType={Enum.ScaleType.Stretch}
+          ImageTransparency={0}
+          ZIndex={0}
+        />
+        <textlabel
+          key="LevelText"
+          Size={UDim2.fromScale(1, 1)}
+          BackgroundTransparency={1}
+          Text={`Lv ${level}`}
+          TextColor3={COLORS.levelNumber}
+          Font={Enum.Font.GothamBold}
+          TextSize={13}
+          TextXAlignment={Enum.TextXAlignment.Center}
+          TextYAlignment={Enum.TextYAlignment.Center}
+          TextStrokeTransparency={0.3}
+          TextStrokeColor3={Color3.fromRGB(0, 0, 0)}
+          ZIndex={1}
+        />
+      </frame>
+
+      {/* ── Info Section (right of portrait) ────────────────── */}
       <frame
         key="InfoSection"
-        Size={new UDim2(0.7, 0, 1, 0)}
-        Position={UDim2.fromScale(0.28, 0)}
+        Size={new UDim2(1, -PORTRAIT_SIZE_PX, 1, 0)}
+        Position={UDim2.fromOffset(PORTRAIT_SIZE_PX, 0)}
         BackgroundTransparency={1}
-        ZIndex={1}
+        ZIndex={2}
       >
+        <uipadding
+          PaddingTop={new UDim(0, 10)}
+          PaddingBottom={new UDim(0, 10)}
+          PaddingLeft={new UDim(0, 6)}
+          PaddingRight={new UDim(0, 14)}
+        />
         <uilistlayout
           SortOrder={Enum.SortOrder.LayoutOrder}
           VerticalAlignment={Enum.VerticalAlignment.Top}
           HorizontalAlignment={Enum.HorizontalAlignment.Center}
-          Padding={new UDim(0, 3)}
-        />
-        <uipadding
-          PaddingTop={new UDim(0, 4)}
-          PaddingLeft={new UDim(0, 4)}
-          PaddingRight={new UDim(0, 4)}
+          Padding={new UDim(0, 5)}
         />
 
         {/* ── Username Banner ───────────────────────────────── */}
         <frame
-          key="UsernameBannerContainer"
-          LayoutOrder={1}
-          Size={new UDim2(1, 0, 0, 28)}
+          key="UsernameBanner"
+          LayoutOrder={0}
+          Size={new UDim2(1, 0, 0, 26)}
           BackgroundTransparency={1}
         >
           <imagelabel
@@ -166,6 +219,7 @@ export function CharacterCard(props: CharacterCardProps): React.Element | undefi
             BackgroundTransparency={1}
             Image={ASSETS.UsernameBanner}
             ScaleType={Enum.ScaleType.Stretch}
+            ImageTransparency={0}
             ZIndex={0}
           />
           <textlabel
@@ -175,10 +229,10 @@ export function CharacterCard(props: CharacterCardProps): React.Element | undefi
             Text={username}
             TextColor3={COLORS.username}
             Font={Enum.Font.GothamBold}
-            TextSize={16}
+            TextSize={14}
             TextXAlignment={Enum.TextXAlignment.Center}
             TextYAlignment={Enum.TextYAlignment.Center}
-            TextStrokeTransparency={0.4}
+            TextStrokeTransparency={0.3}
             TextStrokeColor3={Color3.fromRGB(0, 0, 0)}
             ZIndex={1}
           />
@@ -222,59 +276,6 @@ export function CharacterCard(props: CharacterCardProps): React.Element | undefi
           label="SP"
           size={barSize}
         />
-
-        {/* ── Level Badge (bottom-right) ────────────────────── */}
-        <frame
-          key="LevelBadgeContainer"
-          LayoutOrder={5}
-          Size={new UDim2(0.4, 0, 0, 24)}
-          BackgroundTransparency={1}
-          AnchorPoint={new Vector2(1, 1)}
-        >
-          <uilistlayout
-            SortOrder={Enum.SortOrder.LayoutOrder}
-            FillDirection={Enum.FillDirection.Horizontal}
-            VerticalAlignment={Enum.VerticalAlignment.Center}
-            HorizontalAlignment={Enum.HorizontalAlignment.Right}
-            Padding={new UDim(0, 2)}
-          />
-
-          <imagelabel
-            key="BadgeBg"
-            LayoutOrder={1}
-            Size={new UDim2(1, 0, 1, 0)}
-            BackgroundTransparency={1}
-            Image={ASSETS.LevelBadge}
-            ScaleType={Enum.ScaleType.Stretch}
-            ZIndex={0}
-          />
-
-          {/* Level text overlay */}
-          <textlabel
-            key="LvlPrefix"
-            LayoutOrder={1}
-            Size={new UDim2(0.4, 0, 1, 0)}
-            BackgroundTransparency={1}
-            Text="Lvl"
-            TextColor3={COLORS.levelLabel}
-            Font={Enum.Font.GothamMedium}
-            TextSize={12}
-            TextXAlignment={Enum.TextXAlignment.Right}
-            ZIndex={1}
-          />
-          <textlabel
-            key="LvlNumber"
-            LayoutOrder={2}
-            Size={new UDim2(0.55, 0, 1, 0)}
-            BackgroundTransparency={1}
-            Text={tostring(level)}
-            TextColor3={COLORS.levelNumber}
-            Font={Enum.Font.GothamBold}
-            TextSize={18}
-            TextXAlignment={Enum.TextXAlignment.Left}
-            ZIndex={1}
-          />
-        </frame>
       </frame>
     </frame>
   );

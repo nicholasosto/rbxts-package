@@ -80,8 +80,6 @@ export function HudScreen(): React.Element {
         mana={mana}
         stamina={{ current: 100, max: 100 }}
         portraitImage={portraitImage}
-        size={UDim2.fromOffset(450, 140)}
-        position={UDim2.fromOffset(20, 20)}
       />
 
       {/* ── Buff Bar — below resource bars ────────────────── */}

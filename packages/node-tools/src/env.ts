@@ -38,7 +38,9 @@ export function loadEnv(envPath?: string): void {
   const resolvedPath =
     envPath ?? resolve(dirname(fileURLToPath(import.meta.url)), '..', '..', '..', '.env');
 
-  dotenvConfig({ path: resolvedPath });
+  // MCP stdio servers must keep stdout reserved for JSON-RPC frames.
+  // dotenv v17 logs load info to stdout unless quiet is enabled.
+  dotenvConfig({ path: resolvedPath, quiet: true });
   _loaded = true;
 }
 

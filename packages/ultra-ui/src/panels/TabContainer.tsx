@@ -39,6 +39,10 @@ export interface TabContainerProps {
   onClose?: () => void;
   /** Initial active tab index. Default: 0. */
   defaultTab?: number;
+  /** Controlled active tab index (optional). */
+  activeTab?: number;
+  /** Called when a tab is selected. */
+  onTabChange?: (index: number, tab: TabDefinition) => void;
   /** Panel size. Default: 450×350. */
   size?: UDim2;
   /** Position. */
@@ -54,18 +58,45 @@ export function TabContainer(props: TabContainerProps): React.Element | undefine
     isOpen,
     onClose,
     defaultTab = 0,
+    activeTab: controlledActiveTab,
+    onTabChange,
     size = UDim2.fromOffset(450, 350),
     position = UDim2.fromScale(0.5, 0.5),
     anchorPoint = new Vector2(0.5, 0.5),
   } = props;
 
   const theme = useTheme();
-  const [activeIndex, setActiveIndex] = React.useState(defaultTab);
+  const [internalActiveIndex, setInternalActiveIndex] = React.useState(defaultTab);
+  const hasTabs = tabs.size() > 0;
+  const currentIndex = controlledActiveTab ?? internalActiveIndex;
+  const safeIndex = hasTabs ? math.clamp(currentIndex, 0, tabs.size() - 1) : 0;
+  const selectedTab = hasTabs ? tabs[safeIndex] : undefined;
 
-  if (!isOpen || tabs.size() === 0) return undefined;
+  React.useEffect(() => {
+    if (!hasTabs) return;
+    if (controlledActiveTab !== undefined) return;
+    setInternalActiveIndex(defaultTab);
+  }, [controlledActiveTab, defaultTab, hasTabs]);
 
-  const safeIndex = math.clamp(activeIndex, 0, tabs.size() - 1);
-  const activeTab = tabs[safeIndex];
+  React.useEffect(() => {
+    if (!hasTabs) return;
+    if (controlledActiveTab !== undefined) return;
+    if (internalActiveIndex === safeIndex) return;
+    setInternalActiveIndex(safeIndex);
+  }, [controlledActiveTab, hasTabs, internalActiveIndex, safeIndex]);
+
+  const handleTabSelected = (index: number) => {
+    const tab = tabs[index];
+    if (tab === undefined) return;
+
+    if (controlledActiveTab === undefined) {
+      setInternalActiveIndex(index);
+    }
+
+    onTabChange?.(index, tab);
+  };
+
+  if (!isOpen || !hasTabs || selectedTab === undefined) return undefined;
 
   return (
     <frame
@@ -151,7 +182,7 @@ export function TabContainer(props: TabContainerProps): React.Element | undefine
               Font={isActive ? Enum.Font.GothamBold : Enum.Font.GothamMedium}
               BorderSizePixel={0}
               LayoutOrder={idx}
-              Event={{ Activated: () => setActiveIndex(idx) }}
+              Event={{ Activated: () => handleTabSelected(idx) }}
             >
               <uicorner CornerRadius={new UDim(0, 4)} />
             </textbutton>
@@ -173,7 +204,7 @@ export function TabContainer(props: TabContainerProps): React.Element | undefine
           PaddingTop={new UDim(0, 8)}
           PaddingBottom={new UDim(0, 8)}
         />
-        {activeTab.content}
+        {selectedTab.content}
       </frame>
     </frame>
   );

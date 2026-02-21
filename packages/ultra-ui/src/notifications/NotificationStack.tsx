@@ -53,7 +53,7 @@ export function NotificationStack(props: NotificationStackProps): React.Element 
   const timerMap = useRef(new Map<string, thread>());
 
   useEffect(() => {
-    for (const toast of visibleToasts) {
+    for (const toast of toasts) {
       if (!timerMap.current.has(toast.id)) {
         const dur = toast.duration ?? 4;
         const t = task.delay(dur, () => {
@@ -66,13 +66,22 @@ export function NotificationStack(props: NotificationStackProps): React.Element 
 
     // Clean up timers for toasts that no longer exist
     for (const [id, t] of timerMap.current) {
-      const stillExists = visibleToasts.find((toast) => toast.id === id) !== undefined;
+      const stillExists = toasts.find((toast) => toast.id === id) !== undefined;
       if (!stillExists) {
         task.cancel(t);
         timerMap.current.delete(id);
       }
     }
-  }, [visibleToasts]);
+  }, [toasts, onDismiss]);
+
+  useEffect(() => {
+    return () => {
+      for (const [, timer] of timerMap.current) {
+        task.cancel(timer);
+      }
+      timerMap.current.clear();
+    };
+  }, []);
 
   return (
     <frame

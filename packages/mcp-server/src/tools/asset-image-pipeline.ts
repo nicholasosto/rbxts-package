@@ -7,10 +7,10 @@
  * Flow: OpenAI image generation → Roblox asset upload → thumbnail verification
  */
 
-import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { createAISessionFromEnv } from '@nicholasosto/ai-tools';
 import { getRobloxCloudConfig } from '@nicholasosto/node-tools';
+import { z } from 'zod';
 import { ROBLOX_CLOUD_BASE } from '../types.js';
 
 /** Default Roblox user ID for asset uploads. */
@@ -71,9 +71,10 @@ function extractAssetId(body: string): string | undefined {
 export function registerAssetImagePipelineTool(server: McpServer): void {
   server.tool(
     'generate_and_upload_decal',
-    'Generate an AI image and upload it to Roblox as a Decal in one step. ' +
+    'Generate an AI image and upload it to Roblox in one step. ' +
       'Returns the new asset ID. Use thumbnail_get_assets afterward to verify. ' +
-      'A consistent dark-fantasy RPG style guide is automatically applied.',
+      'A consistent dark-fantasy RPG style guide is automatically applied. ' +
+      'Use assetType "Image" for ImageLabel usage, "Decal" for Decal instances.',
     {
       name: z.string().describe('Display name for the asset (e.g. "ScholarsInsight")'),
       description: z
@@ -102,8 +103,23 @@ export function registerAssetImagePipelineTool(server: McpServer): void {
         .boolean()
         .optional()
         .describe('If true, do not prepend the default RPG style guide to the prompt'),
+      assetType: z
+        .enum(['Decal', 'Image'])
+        .optional()
+        .describe(
+          'Roblox asset type: "Image" for ImageLabel usage, "Decal" for Decal instances (default: "Image")',
+        ),
     },
-    async ({ name, description, imagePrompt, creatorId, size, quality, skipStyleGuide }) => {
+    async ({
+      name,
+      description,
+      imagePrompt,
+      creatorId,
+      size,
+      quality,
+      skipStyleGuide,
+      assetType,
+    }) => {
       const content: Array<
         { type: 'text'; text: string } | { type: 'image'; data: string; mimeType: string }
       > = [];
@@ -144,16 +160,17 @@ export function registerAssetImagePipelineTool(server: McpServer): void {
       });
 
       // ── Step 2: Upload to Roblox ────────────────────────────────────
+      const resolvedAssetType = assetType ?? 'Image';
       content.push({
         type: 'text' as const,
-        text: `⏳ Uploading "${name}" to Roblox as Decal…`,
+        text: `⏳ Uploading "${name}" to Roblox as ${resolvedAssetType}…`,
       });
 
       const { apiKey } = getRobloxCloudConfig();
       const uploadCreatorId = creatorId ?? DEFAULT_CREATOR_ID;
 
       const metadata = JSON.stringify({
-        assetType: 'Decal',
+        assetType: resolvedAssetType,
         displayName: name,
         description: description ?? '',
         creationContext: {

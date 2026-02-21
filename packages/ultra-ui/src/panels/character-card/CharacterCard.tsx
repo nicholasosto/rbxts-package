@@ -24,10 +24,10 @@ import type { CharacterCardProps } from './types';
 // Generated via rbxts-mcp generate_and_upload_decal pipeline.
 
 const ASSETS = {
-  CardFrame: 'rbxassetid://138410821291232',
-  PortraitBorder: 'rbxassetid://92582520760630',
-  UsernameBanner: 'rbxassetid://116140735194427',
-  LevelBadge: 'rbxassetid://133034853319749',
+  CardFrame: 'rbxassetid://113565347585990',
+  PortraitBorder: 'rbxassetid://89132910467794',
+  UsernameBanner: 'rbxassetid://123800454254824',
+  LevelBadge: 'rbxassetid://126474240603682',
 } as const;
 
 // ─── Theme Colors ──────────────────────────────────────────────────────────

@@ -1,20 +1,18 @@
 import {
   ActionBar,
   BuffBar,
-  LevelBar,
+  CharacterCard,
   NotificationStack,
-  ResourceBar,
-  ResourceBarStyle,
   type AbilitySlotData,
   type BuffData,
   type ToastData,
 } from '@nicholasosto/ultra-ui';
 import React from '@rbxts/react';
 import { useSelector } from '@rbxts/react-reflex';
+import { Players } from '@rbxts/services';
 import {
   selectAbilities,
   selectBuffs,
-  selectExperience,
   selectHealth,
   selectLevel,
   selectMana,
@@ -33,10 +31,13 @@ export function HudScreen(): React.Element {
   const mana = useSelector(selectMana);
   const abilities = useSelector(selectAbilities);
   const level = useSelector(selectLevel);
-  const experience = useSelector(selectExperience);
   const toasts = useSelector(selectToasts);
   const buffs = useSelector(selectBuffs);
   const { toggleCatalog, toggleInventory, toggleMenu, dismissToast } = useRootProducer();
+
+  const localPlayer = Players.LocalPlayer;
+  const username = localPlayer.DisplayName;
+  const portraitImage = `rbxthumb://type=AvatarHeadShot&id=${localPlayer.UserId}&w=150&h=150`;
 
   // Map combat-stats AbilitySlot[] → ultra-ui AbilitySlotData[]
   const abilitySlotData: AbilitySlotData[] = abilities.map((slot, i) => ({
@@ -69,45 +70,19 @@ export function HudScreen(): React.Element {
     stacks: b.stacks,
   }));
 
-  // XP needed = level * 100 (simple formula for testing)
-  const xpToNextLevel = level * 100;
-
   return (
     <React.Fragment>
-      {/* ── Resource Bars — top center ─────────────────────── */}
-      <frame
-        key="ResourceBars"
-        AnchorPoint={new Vector2(0.5, 0)}
-        Position={UDim2.fromScale(0.5, 0.02)}
-        Size={UDim2.fromScale(0.35, 0.12)}
-        BackgroundTransparency={1}
-      >
-        <uilistlayout
-          FillDirection={Enum.FillDirection.Vertical}
-          Padding={new UDim(0, 4)}
-          HorizontalAlignment={Enum.HorizontalAlignment.Center}
-        />
-        <ResourceBar
-          current={health.current}
-          max={health.max}
-          style={ResourceBarStyle.Health}
-          label="HP"
-          size={UDim2.fromScale(1, 0.3)}
-        />
-        <ResourceBar
-          current={mana.current}
-          max={mana.max}
-          style={ResourceBarStyle.Mana}
-          label="MP"
-          size={UDim2.fromScale(0.85, 0.25)}
-        />
-        <LevelBar
-          level={level}
-          currentXP={experience}
-          requiredXP={xpToNextLevel}
-          size={UDim2.fromScale(0.7, 0.2)}
-        />
-      </frame>
+      {/* ── Character Card — top left ─────────────────────── */}
+      <CharacterCard
+        username={username}
+        level={level}
+        health={health}
+        mana={mana}
+        stamina={{ current: 100, max: 100 }}
+        portraitImage={portraitImage}
+        size={UDim2.fromOffset(450, 140)}
+        position={UDim2.fromOffset(20, 20)}
+      />
 
       {/* ── Buff Bar — below resource bars ────────────────── */}
       <frame

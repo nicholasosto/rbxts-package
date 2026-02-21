@@ -12,3 +12,6 @@ export type { ModalProps } from './Modal';
 
 export { Tooltip } from './Tooltip';
 export type { TooltipProps } from './Tooltip';
+
+export { CharacterCard } from './character-card';
+export type { CharacterCardProps, ResourceValue } from './character-card';

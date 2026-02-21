@@ -1,20 +1,21 @@
 import { AbilityIcons } from './ability-icons';
 import { AttributeIcons } from './attribute-icons';
+import { BeamTextures } from './beam-textures';
+import { CharacterCardImages } from './character-card';
 import { ClassIcons } from './class-icons';
 import { CurrencyIcons } from './currency-icons';
 import { DomainIcons } from './domain-icons';
+import { EquipmentIcons } from './equipment-icons';
+import { GemIcons } from './gem-icons';
 import { ItemSlotIcons } from './item-slot-icons';
 import { MenuPanelIcons } from './menu-panel-icons';
-import { StatusIcons } from './status-icons';
-import { GemIcons } from './gem-icons';
-import { RarityFrames } from './rarity-frames';
 import { PanelBackgrounds } from './panel-backgrounds';
-import { UiControls } from './ui-controls';
-import { Textures } from './textures';
-import { BeamTextures } from './beam-textures';
+import { RarityFrames } from './rarity-frames';
 import { Screens } from './screens';
-import { EquipmentIcons } from './equipment-icons';
 import { SoulGemIcons } from './soul-gem-icons';
+import { StatusIcons } from './status-icons';
+import { Textures } from './textures';
+import { UiControls } from './ui-controls';
 
 /**
  * IMAGE_CATALOG
@@ -40,6 +41,7 @@ export const IMAGE_CATALOG = {
   Screens,
   EquipmentIcons,
   SoulGemIcons,
+  CharacterCardImages,
 } as const;
 
 export type ImageCatalogKey = {

@@ -92,6 +92,9 @@
             },
             "timer": {
               "$path": "node_modules/@nicholasosto/timer/out"
+            },
+            "npc": {
+              "$path": "node_modules/@nicholasosto/npc/out"
             }
           },
           "@rbxts-js": {

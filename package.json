@@ -14,6 +14,7 @@
     "build:node-tools": "nx build @nicholasosto/node-tools",
     "build:ai-tools": "nx build @nicholasosto/ai-tools",
     "build:name-generator": "nx build @nicholasosto/name-generator",
+    "build:npc": "nx build @nicholasosto/npc",
     "watch:game-test": "nx run @nicholasosto/game-test:watch",
     "serve:game-test": "nx run @nicholasosto/game-test:rojo-serve",
     "graph": "nx graph",

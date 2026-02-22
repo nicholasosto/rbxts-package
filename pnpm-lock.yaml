@@ -123,6 +123,9 @@ importers:
       '@nicholasosto/name-generator':
         specifier: workspace:*
         version: link:../name-generator
+      '@nicholasosto/npc':
+        specifier: workspace:*
+        version: link:../npc
       '@nicholasosto/timer':
         specifier: workspace:*
         version: link:../timer
@@ -227,6 +230,31 @@ importers:
       dotenv:
         specifier: ^17.3.1
         version: 17.3.1
+      typescript:
+        specifier: ^5.5.3
+        version: 5.5.3
+
+  packages/npc:
+    dependencies:
+      '@nicholasosto/assets':
+        specifier: workspace:*
+        version: link:../assets
+      '@nicholasosto/combat-stats':
+        specifier: workspace:*
+        version: link:../combat-stats
+      '@nicholasosto/name-generator':
+        specifier: workspace:*
+        version: link:../name-generator
+    devDependencies:
+      '@rbxts/compiler-types':
+        specifier: 3.0.0-types.0
+        version: 3.0.0-types.0
+      '@rbxts/types':
+        specifier: ^1.0.879
+        version: 1.0.908
+      roblox-ts:
+        specifier: ^3.0.0
+        version: 3.0.0
       typescript:
         specifier: ^5.5.3
         version: 5.5.3

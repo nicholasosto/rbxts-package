@@ -6,24 +6,24 @@
 
 // Types
 export {
-  AssetUri,
   AnimationAsset,
-  ImageAsset,
+  AssetUri,
   AudioAsset,
+  ImageAsset,
   MeshAsset,
   asAnimationAsset,
-  asImageAsset,
   asAudioAsset,
+  asImageAsset,
   asMeshAsset,
 } from './types';
 
 // Catalogs
+export { ACCESSORY_CATALOG } from './accessories';
 export { ANIMATION_CATALOG } from './animations';
 export { AUDIO_CATALOG } from './audio';
 export { IMAGE_CATALOG } from './images';
-export { RIG_CATALOG } from './rigs';
-export { ACCESSORY_CATALOG } from './accessories';
 export { PARTICLE_CATALOG } from './particles';
+export { RIG_CATALOG, type RigFaction, type RigName } from './rigs';
 
 // Utilities
 export { MathUtils } from './utilities/math-utils';

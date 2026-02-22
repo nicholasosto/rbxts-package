@@ -6,13 +6,43 @@
 
 import { z } from 'zod';
 import { readdir, readFile } from 'node:fs/promises';
-import { resolve, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
+import { existsSync } from 'node:fs';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { logger } from '../logger.js';
+import { textContent } from '../roblox-helpers.js';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-/** Path to the monorepo packages/ directory. */
-const PACKAGES_DIR = resolve(__dirname, '..', '..', '..');
+/**
+ * Resolve the monorepo packages directory.
+ *
+ * Checks (in order):
+ * 1. MONOREPO_PACKAGES_DIR env var (explicit override)
+ * 2. <cwd>/packages/ (typical for VS Code workspace root)
+ * 3. Three levels up from __dirname (compiled dist/tools/ location)
+ *
+ * Falls back to cwd/packages if nothing matches.
+ */
+function resolvePackagesDir(): string {
+  // 1. Explicit env var
+  if (process.env.MONOREPO_PACKAGES_DIR) {
+    return process.env.MONOREPO_PACKAGES_DIR;
+  }
+
+  // 2. cwd-based (VS Code sets cwd to workspace root)
+  const cwdPackages = resolve(process.cwd(), 'packages');
+  if (existsSync(cwdPackages)) {
+    return cwdPackages;
+  }
+
+  // 3. __dirname-based (compiled location fallback)
+  // import.meta.url not available at function call time, so use cwd fallback
+  const fallback = cwdPackages;
+  logger.warn(
+    'package-info',
+    `Could not locate packages dir at ${cwdPackages}, using fallback: ${fallback}`,
+  );
+  return fallback;
+}
 
 /**
  * Safely read a file, returning null if it doesn't exist.
@@ -33,13 +63,15 @@ export function registerPackageInfoTools(server: McpServer): void {
     'List all packages in the monorepo with their names, descriptions, and dependencies.',
     {},
     async () => {
-      const entries = await readdir(PACKAGES_DIR, { withFileTypes: true });
+      logger.toolCall('list_packages');
+      const packagesDir = resolvePackagesDir();
+      const entries = await readdir(packagesDir, { withFileTypes: true });
       const packages: Array<Record<string, unknown>> = [];
 
       for (const entry of entries) {
         if (!entry.isDirectory()) continue;
 
-        const pkgJsonPath = resolve(PACKAGES_DIR, entry.name, 'package.json');
+        const pkgJsonPath = resolve(packagesDir, entry.name, 'package.json');
         const raw = await safeReadFile(pkgJsonPath);
         if (!raw) continue;
 
@@ -60,12 +92,7 @@ export function registerPackageInfoTools(server: McpServer): void {
       }
 
       return {
-        content: [
-          {
-            type: 'text' as const,
-            text: JSON.stringify(packages, null, 2),
-          },
-        ],
+        content: [textContent(JSON.stringify(packages, null, 2))],
       };
     },
   );
@@ -81,20 +108,18 @@ export function registerPackageInfoTools(server: McpServer): void {
         .describe('Folder name of the package (e.g. "ai-tools", "combat-stats")'),
     },
     async ({ packageName }) => {
-      const indexPath = resolve(PACKAGES_DIR, packageName, 'src', 'index.ts');
+      logger.toolCall('get_package_exports', { packageName });
+      const packagesDir = resolvePackagesDir();
+      const indexPath = resolve(packagesDir, packageName, 'src', 'index.ts');
       const content = await safeReadFile(indexPath);
 
       if (!content) {
         return {
-          content: [
-            { type: 'text' as const, text: `No index.ts found for package "${packageName}".` },
-          ],
+          content: [textContent(`No index.ts found for package "${packageName}".`)],
         };
       }
 
-      return {
-        content: [{ type: 'text' as const, text: content }],
-      };
+      return { content: [textContent(content)] };
     },
   );
 
@@ -109,20 +134,18 @@ export function registerPackageInfoTools(server: McpServer): void {
         .describe('Folder name of the package (e.g. "ai-tools", "combat-stats")'),
     },
     async ({ packageName }) => {
-      const typesPath = resolve(PACKAGES_DIR, packageName, 'src', 'types.ts');
+      logger.toolCall('get_package_types', { packageName });
+      const packagesDir = resolvePackagesDir();
+      const typesPath = resolve(packagesDir, packageName, 'src', 'types.ts');
       const content = await safeReadFile(typesPath);
 
       if (!content) {
         return {
-          content: [
-            { type: 'text' as const, text: `No types.ts found for package "${packageName}".` },
-          ],
+          content: [textContent(`No types.ts found for package "${packageName}".`)],
         };
       }
 
-      return {
-        content: [{ type: 'text' as const, text: content }],
-      };
+      return { content: [textContent(content)] };
     },
   );
 
@@ -136,25 +159,26 @@ export function registerPackageInfoTools(server: McpServer): void {
       filePath: z.string().describe('Relative path within the package (e.g. "src/defaults.ts")'),
     },
     async ({ packageName, filePath }) => {
+      logger.toolCall('get_package_file', { packageName, filePath });
+
       // Prevent directory traversal
       if (filePath.includes('..')) {
         return {
-          content: [{ type: 'text' as const, text: 'Error: path traversal is not allowed.' }],
+          content: [textContent('Error: path traversal is not allowed.')],
         };
       }
 
-      const fullPath = resolve(PACKAGES_DIR, packageName, filePath);
+      const packagesDir = resolvePackagesDir();
+      const fullPath = resolve(packagesDir, packageName, filePath);
       const content = await safeReadFile(fullPath);
 
       if (!content) {
         return {
-          content: [{ type: 'text' as const, text: `File not found: ${packageName}/${filePath}` }],
+          content: [textContent(`File not found: ${packageName}/${filePath}`)],
         };
       }
 
-      return {
-        content: [{ type: 'text' as const, text: content }],
-      };
+      return { content: [textContent(content)] };
     },
   );
 }

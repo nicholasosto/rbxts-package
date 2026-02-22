@@ -7,6 +7,8 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { loadEnv } from '@nicholasosto/node-tools';
 import { resolve } from 'node:path';
+import { validateEnvironment } from './config.js';
+import { logger } from './logger.js';
 import {
   registerTextGenerationTool,
   registerImageGenerationTool,
@@ -29,6 +31,21 @@ export function createServer(): McpServer {
   // then fall back to __dirname-based resolution.
   const cwdEnv = resolve(process.cwd(), '.env');
   loadEnv(cwdEnv);
+
+  // Validate environment and log warnings/errors
+  const env = validateEnvironment();
+  for (const warning of env.warnings) {
+    logger.warn('config', warning);
+  }
+  for (const error of env.errors) {
+    logger.error('config', error);
+  }
+  if (!env.valid) {
+    logger.error(
+      'config',
+      'Server starting with missing required environment variables. Some tools will fail.',
+    );
+  }
 
   const server = new McpServer({
     name: 'rbxts-mcp',
@@ -55,6 +72,8 @@ export function createServer(): McpServer {
 
   // Monorepo introspection tools
   registerPackageInfoTools(server);
+
+  logger.info('server', `Registered tools on rbxts-mcp v0.1.0`);
 
   return server;
 }

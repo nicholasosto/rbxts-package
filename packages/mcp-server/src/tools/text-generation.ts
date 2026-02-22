@@ -7,6 +7,7 @@
 import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { createAISessionFromEnv } from '@nicholasosto/ai-tools';
+import { logger } from '../logger.js';
 
 /** Zod schema for the generate_text tool input. */
 const GenerateTextInput = {
@@ -26,6 +27,8 @@ export function registerTextGenerationTool(server: McpServer): void {
     'Generate text using OpenAI. Provide a prompt and optional model/temperature overrides.',
     GenerateTextInput,
     async ({ prompt, model, instructions, temperature, maxOutputTokens }) => {
+      logger.toolCall('generate_text', { model, temperature, maxOutputTokens });
+
       const session = createAISessionFromEnv();
       const result = await session.generateText(prompt, {
         model,

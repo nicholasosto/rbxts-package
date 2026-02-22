@@ -7,8 +7,16 @@
 
 import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { getRobloxCloudConfig } from '@nicholasosto/node-tools';
-import { ROBLOX_CLOUD_BASE, DEFAULT_UNIVERSE_ID, robloxHeaders } from '../types.js';
+import { NumericId, getDefaultUniverseId } from '../config.js';
+import { logger } from '../logger.js';
+import {
+  ROBLOX_CLOUD_BASE,
+  robloxFetch,
+  robloxHeaders,
+  textContent,
+  errorResponse,
+  successResponse,
+} from '../roblox-helpers.js';
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -19,36 +27,29 @@ function datastoreUrl(universeId: string, path: string): string {
 // ─── Tools ─────────────────────────────────────────────────────────────────────
 
 export function registerDatastoreTools(server: McpServer): void {
-  const { apiKey } = getRobloxCloudConfig();
-
   // ── List DataStores ──────────────────────────────────────────────────
 
   server.tool(
     'datastore_list_stores',
     'List all DataStores in a Roblox universe.',
     {
-      universeId: z
-        .string()
-        .optional()
-        .describe(`Universe ID (defaults to ${DEFAULT_UNIVERSE_ID})`),
+      universeId: NumericId.optional().describe(`Universe ID (defaults to env ROBLOX_UNIVERSE_ID)`),
       prefix: z.string().optional().describe('Filter stores by name prefix'),
       limit: z.number().min(1).max(100).optional().describe('Max results to return'),
       cursor: z.string().optional().describe('Pagination cursor from a previous response'),
     },
     async ({ universeId, prefix, limit, cursor }) => {
-      const uid = universeId ?? DEFAULT_UNIVERSE_ID;
+      logger.toolCall('datastore_list_stores', { universeId, prefix, limit });
+      const uid = universeId ?? getDefaultUniverseId();
       const params = new URLSearchParams();
       if (prefix) params.set('prefix', prefix);
       if (limit) params.set('limit', String(limit));
       if (cursor) params.set('cursor', cursor);
 
       const url = datastoreUrl(uid, `/standard-datastores?${params.toString()}`);
-      const res = await fetch(url, { headers: robloxHeaders(apiKey) });
-      const body = await res.text();
+      const res = await robloxFetch(url);
 
-      return {
-        content: [{ type: 'text' as const, text: res.ok ? body : `Error ${res.status}: ${body}` }],
-      };
+      return res.ok ? successResponse(res.body) : errorResponse(res.status, res.body, url);
     },
   );
 
@@ -59,17 +60,15 @@ export function registerDatastoreTools(server: McpServer): void {
     'List keys in a specific DataStore.',
     {
       datastoreName: z.string().describe('Name of the DataStore'),
-      universeId: z
-        .string()
-        .optional()
-        .describe(`Universe ID (defaults to ${DEFAULT_UNIVERSE_ID})`),
+      universeId: NumericId.optional().describe(`Universe ID (defaults to env ROBLOX_UNIVERSE_ID)`),
       prefix: z.string().optional().describe('Filter keys by prefix'),
       limit: z.number().min(1).max(100).optional().describe('Max results to return'),
       cursor: z.string().optional().describe('Pagination cursor'),
       scope: z.string().optional().describe('DataStore scope (default: "global")'),
     },
     async ({ datastoreName, universeId, prefix, limit, cursor, scope }) => {
-      const uid = universeId ?? DEFAULT_UNIVERSE_ID;
+      logger.toolCall('datastore_list_keys', { datastoreName, universeId });
+      const uid = universeId ?? getDefaultUniverseId();
       const params = new URLSearchParams({ datastoreName });
       if (prefix) params.set('prefix', prefix);
       if (limit) params.set('limit', String(limit));
@@ -77,12 +76,9 @@ export function registerDatastoreTools(server: McpServer): void {
       if (scope) params.set('scope', scope);
 
       const url = datastoreUrl(uid, `/standard-datastores/datastore/entries?${params.toString()}`);
-      const res = await fetch(url, { headers: robloxHeaders(apiKey) });
-      const body = await res.text();
+      const res = await robloxFetch(url);
 
-      return {
-        content: [{ type: 'text' as const, text: res.ok ? body : `Error ${res.status}: ${body}` }],
-      };
+      return res.ok ? successResponse(res.body) : errorResponse(res.status, res.body, url);
     },
   );
 
@@ -94,14 +90,12 @@ export function registerDatastoreTools(server: McpServer): void {
     {
       datastoreName: z.string().describe('Name of the DataStore'),
       entryKey: z.string().describe('The key to retrieve'),
-      universeId: z
-        .string()
-        .optional()
-        .describe(`Universe ID (defaults to ${DEFAULT_UNIVERSE_ID})`),
+      universeId: NumericId.optional().describe(`Universe ID (defaults to env ROBLOX_UNIVERSE_ID)`),
       scope: z.string().optional().describe('DataStore scope (default: "global")'),
     },
     async ({ datastoreName, entryKey, universeId, scope }) => {
-      const uid = universeId ?? DEFAULT_UNIVERSE_ID;
+      logger.toolCall('datastore_get_entry', { datastoreName, entryKey });
+      const uid = universeId ?? getDefaultUniverseId();
       const params = new URLSearchParams({ datastoreName, entryKey });
       if (scope) params.set('scope', scope);
 
@@ -109,12 +103,9 @@ export function registerDatastoreTools(server: McpServer): void {
         uid,
         `/standard-datastores/datastore/entries/entry?${params.toString()}`,
       );
-      const res = await fetch(url, { headers: robloxHeaders(apiKey) });
-      const body = await res.text();
+      const res = await robloxFetch(url);
 
-      return {
-        content: [{ type: 'text' as const, text: res.ok ? body : `Error ${res.status}: ${body}` }],
-      };
+      return res.ok ? successResponse(res.body) : errorResponse(res.status, res.body, url);
     },
   );
 
@@ -127,14 +118,12 @@ export function registerDatastoreTools(server: McpServer): void {
       datastoreName: z.string().describe('Name of the DataStore'),
       entryKey: z.string().describe('The key to set'),
       value: z.string().describe('JSON string value to store'),
-      universeId: z
-        .string()
-        .optional()
-        .describe(`Universe ID (defaults to ${DEFAULT_UNIVERSE_ID})`),
+      universeId: NumericId.optional().describe(`Universe ID (defaults to env ROBLOX_UNIVERSE_ID)`),
       scope: z.string().optional().describe('DataStore scope (default: "global")'),
     },
     async ({ datastoreName, entryKey, value, universeId, scope }) => {
-      const uid = universeId ?? DEFAULT_UNIVERSE_ID;
+      logger.toolCall('datastore_set_entry', { datastoreName, entryKey });
+      const uid = universeId ?? getDefaultUniverseId();
       const params = new URLSearchParams({ datastoreName, entryKey });
       if (scope) params.set('scope', scope);
 
@@ -142,24 +131,19 @@ export function registerDatastoreTools(server: McpServer): void {
         uid,
         `/standard-datastores/datastore/entries/entry?${params.toString()}`,
       );
-      const res = await fetch(url, {
+      const res = await robloxFetch(url, {
         method: 'POST',
         headers: {
-          ...robloxHeaders(apiKey),
+          ...robloxHeaders(),
           'Content-Type': 'application/json',
         },
         body: value,
       });
-      const body = await res.text();
 
-      return {
-        content: [
-          {
-            type: 'text' as const,
-            text: res.ok ? `Entry set successfully.\n${body}` : `Error ${res.status}: ${body}`,
-          },
-        ],
-      };
+      if (res.ok) {
+        return { content: [textContent(`Entry set successfully.\n${res.body}`)] };
+      }
+      return errorResponse(res.status, res.body, url);
     },
   );
 }

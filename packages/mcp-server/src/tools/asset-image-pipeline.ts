@@ -9,12 +9,16 @@
 
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { createAISessionFromEnv } from '@nicholasosto/ai-tools';
-import { getRobloxCloudConfig } from '@nicholasosto/node-tools';
 import { z } from 'zod';
-import { ROBLOX_CLOUD_BASE } from '../types.js';
-
-/** Default Roblox user ID for asset uploads. */
-const DEFAULT_CREATOR_ID = '3394700055';
+import { NumericId, getDefaultCreatorId } from '../config.js';
+import { logger } from '../logger.js';
+import {
+  ROBLOX_CLOUD_BASE,
+  robloxFetch,
+  buildMultipartBody,
+  extractAssetId,
+  pollOperation,
+} from '../roblox-helpers.js';
 
 /** Style guide prefix applied to all icon generation prompts. */
 const STYLE_GUIDE =
@@ -22,44 +26,6 @@ const STYLE_GUIDE =
   'centered composition, dark textured stone-like background, ' +
   'soft ambient lighting with mystical glow, moderate detail, ' +
   'symmetrical design, suitable for a Roblox game HUD. No text. ';
-
-/**
- * Parse a Roblox asset ID from a creation/upload API response.
- *
- * The Open Cloud Assets v1 create endpoint returns a JSON operation object.
- * The asset ID can appear in several places depending on whether Roblox
- * returns the final result synchronously:
- *
- * 1. `response.assetId`  (direct field)
- * 2. `response.path`     (e.g. "assets/123456")
- * 3. `path`              (top-level operation path)
- */
-function extractAssetId(body: string): string | undefined {
-  try {
-    const json = JSON.parse(body);
-
-    // Case 1: direct assetId field (common in completed operations)
-    if (json.assetId) return String(json.assetId);
-    if (json.response?.assetId) return String(json.response.assetId);
-
-    // Case 2: path field like "assets/123456"
-    const pathStr: string | undefined = json.response?.path ?? json.path;
-    if (pathStr) {
-      const match = pathStr.match(/assets\/(\d+)/);
-      if (match) return match[1];
-    }
-
-    // Case 3: look in done/response
-    if (json.done && json.response) {
-      return extractAssetId(JSON.stringify(json.response));
-    }
-  } catch {
-    // Not JSON — try regex on raw text
-    const match = body.match(/"assetId"\s*:\s*"?(\d+)"?/);
-    if (match) return match[1];
-  }
-  return undefined;
-}
 
 /**
  * Register the `generate_and_upload_decal` tool on the given MCP server.
@@ -87,10 +53,9 @@ export function registerAssetImagePipelineTool(server: McpServer): void {
             'The RPG style guide is prepended automatically. ' +
             'Focus on subject, colors, and distinctive elements.',
         ),
-      creatorId: z
-        .string()
-        .optional()
-        .describe(`Roblox user ID for the creator (default: ${DEFAULT_CREATOR_ID})`),
+      creatorId: NumericId.optional().describe(
+        `Roblox user ID for the creator (default: env ROBLOX_CREATOR_ID)`,
+      ),
       size: z
         .enum(['1024x1024', '1024x1536', '1536x1024', 'auto'])
         .optional()
@@ -120,6 +85,8 @@ export function registerAssetImagePipelineTool(server: McpServer): void {
       skipStyleGuide,
       assetType,
     }) => {
+      logger.toolCall('generate_and_upload_decal', { name, assetType, size, quality });
+
       const content: Array<
         { type: 'text'; text: string } | { type: 'image'; data: string; mimeType: string }
       > = [];
@@ -166,8 +133,7 @@ export function registerAssetImagePipelineTool(server: McpServer): void {
         text: `⏳ Uploading "${name}" to Roblox as ${resolvedAssetType}…`,
       });
 
-      const { apiKey } = getRobloxCloudConfig();
-      const uploadCreatorId = creatorId ?? DEFAULT_CREATOR_ID;
+      const uploadCreatorId = creatorId ?? getDefaultCreatorId();
 
       const metadata = JSON.stringify({
         assetType: resolvedAssetType,
@@ -180,80 +146,52 @@ export function registerAssetImagePipelineTool(server: McpServer): void {
         },
       });
 
-      const boundary = `----MCPBoundary${Date.now()}`;
       const binaryData = Buffer.from(img.b64Data, 'base64');
-
-      // Build multipart body using Buffer to handle binary data correctly
-      const preamble = Buffer.from(
-        [
-          `--${boundary}`,
-          'Content-Disposition: form-data; name="request"',
-          'Content-Type: application/json',
-          '',
-          metadata,
-          `--${boundary}`,
-          'Content-Disposition: form-data; name="fileContent"; filename="asset.png"',
-          'Content-Type: image/png',
-          '',
-          '',
-        ].join('\r\n'),
-      );
-
-      const epilogue = Buffer.from(`\r\n--${boundary}--\r\n`);
-      const body = Buffer.concat([preamble, binaryData, epilogue]);
+      const { body: multipartBody, contentType } = buildMultipartBody([
+        { name: 'request', contentType: 'application/json', data: metadata },
+        { name: 'fileContent', contentType: 'image/png', data: binaryData, filename: 'asset.png' },
+      ]);
 
       const uploadUrl = `${ROBLOX_CLOUD_BASE}/assets/v1/assets`;
-      const res = await fetch(uploadUrl, {
+      const res = await robloxFetch(uploadUrl, {
         method: 'POST',
-        headers: {
-          'x-api-key': apiKey,
-          'Content-Type': `multipart/form-data; boundary=${boundary}`,
-        },
-        body,
+        headers: { 'Content-Type': contentType },
+        body: multipartBody,
       });
-      const resBody = await res.text();
 
       if (!res.ok) {
         content.push({
           type: 'text' as const,
-          text: `❌ Upload failed (${res.status}): ${resBody}`,
+          text: `❌ Upload failed (${res.status}): ${res.body}`,
         });
         return { content };
       }
 
       // ── Step 3: Extract asset ID (poll if async) ──────────────────
-      let assetId = extractAssetId(resBody);
+      let assetId = extractAssetId(res.body);
 
       // The Roblox API often returns an async operation. Poll until done.
       if (!assetId) {
         try {
-          const opJson = JSON.parse(resBody);
-          const opId: string | undefined = opJson.operationId ?? opJson.path?.split('/').pop();
-          if (opId && opJson.done === false) {
+          const opJson = res.json as Record<string, unknown> | undefined;
+          const opId = opJson?.operationId ?? (opJson?.path as string)?.split('/').pop();
+          if (opId && opJson?.done === false) {
             content.push({
               type: 'text' as const,
               text: `⏳ Asset processing (operation ${opId}), polling…`,
             });
 
-            const maxAttempts = 10;
-            const delayMs = 3000;
-            for (let i = 0; i < maxAttempts; i++) {
-              await new Promise((r) => setTimeout(r, delayMs));
-              const pollRes = await fetch(`${ROBLOX_CLOUD_BASE}/assets/v1/operations/${opId}`, {
-                headers: { 'x-api-key': apiKey },
-              });
-              const pollBody = await pollRes.text();
-              if (pollRes.ok) {
-                const pollJson = JSON.parse(pollBody);
-                if (pollJson.done) {
-                  assetId = extractAssetId(pollBody);
-                  break;
-                }
-              }
+            const pollResult = await pollOperation(`assets/v1/operations/${opId}`, 10, 3000);
+            if (pollResult.done && pollResult.response) {
+              assetId = extractAssetId(JSON.stringify(pollResult.response));
             }
           }
-        } catch {
-          // Polling failed — fall through with undefined assetId
+        } catch (err) {
+          logger.error(
+            'asset-pipeline',
+            'Polling failed',
+            err instanceof Error ? err.message : err,
+          );
         }
       }
 
@@ -271,7 +209,7 @@ export function registerAssetImagePipelineTool(server: McpServer): void {
           `2. Update the assets package TypeScript file with the new rbxassetid`,
           ``,
           `**Raw API response:**`,
-          resBody,
+          res.body,
         ].join('\n'),
       });
 

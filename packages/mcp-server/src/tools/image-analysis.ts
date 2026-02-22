@@ -8,6 +8,7 @@
 import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { createAISessionFromEnv } from '@nicholasosto/ai-tools';
+import { logger } from '../logger.js';
 
 /** Zod schema for the analyze_image tool input. */
 const AnalyzeImageInput = {
@@ -35,6 +36,8 @@ export function registerImageAnalysisTool(server: McpServer): void {
       'Useful for categorizing decals, describing textures, reading text in images, etc.',
     AnalyzeImageInput,
     async ({ imageUrl, prompt, model, instructions, temperature, maxOutputTokens }) => {
+      logger.toolCall('analyze_image', { model, temperature });
+
       const session = createAISessionFromEnv();
       const result = await session.analyzeImage(imageUrl, prompt, {
         model,

@@ -7,6 +7,7 @@
 import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { createAISessionFromEnv } from '@nicholasosto/ai-tools';
+import { logger } from '../logger.js';
 
 /** Zod schema for the generate_image tool input. */
 const GenerateImageInput = {
@@ -29,6 +30,8 @@ export function registerImageGenerationTool(server: McpServer): void {
     'Generate images using OpenAI. Provide a prompt and optional size/quality/format settings.',
     GenerateImageInput,
     async ({ prompt, size, quality, outputFormat, n }) => {
+      logger.toolCall('generate_image', { size, quality, outputFormat, n });
+
       const session = createAISessionFromEnv();
       const result = await session.generateImage(prompt, {
         size,

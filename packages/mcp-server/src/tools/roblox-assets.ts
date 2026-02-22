@@ -18,35 +18,40 @@
 
 import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { getRobloxCloudConfig } from '@nicholasosto/node-tools';
-import { ROBLOX_CLOUD_BASE, robloxHeaders } from '../types.js';
+import { NumericId } from '../config.js';
+import { logger } from '../logger.js';
+import {
+  ROBLOX_CLOUD_BASE,
+  robloxFetch,
+  robloxHeaders,
+  buildMultipartBody,
+  textContent,
+  errorResponse,
+  successResponse,
+} from '../roblox-helpers.js';
 
 type AnyJson = Record<string, unknown>;
 
 export function registerAssetTools(server: McpServer): void {
-  const { apiKey } = getRobloxCloudConfig();
-
   // ── Get Asset Info ───────────────────────────────────────────────────
 
   server.tool(
     'asset_get_info',
     'Get information about a Roblox asset by its ID. Include readMask for additional metadata.',
     {
-      assetId: z.string().describe('The asset ID to look up'),
+      assetId: NumericId.describe('The asset ID to look up'),
       readMask: z
         .string()
         .optional()
         .describe('Comma-separated fields to include (e.g. "description,displayName,path")'),
     },
     async ({ assetId, readMask }) => {
+      logger.toolCall('asset_get_info', { assetId, readMask });
       const params = readMask ? `?readMask=${encodeURIComponent(readMask)}` : '';
       const url = `${ROBLOX_CLOUD_BASE}/assets/v1/assets/${assetId}${params}`;
-      const res = await fetch(url, { headers: robloxHeaders(apiKey) });
-      const body = await res.text();
+      const res = await robloxFetch(url);
 
-      return {
-        content: [{ type: 'text' as const, text: res.ok ? body : `Error ${res.status}: ${body}` }],
-      };
+      return res.ok ? successResponse(res.body) : errorResponse(res.status, res.body, url);
     },
   );
 
@@ -56,11 +61,12 @@ export function registerAssetTools(server: McpServer): void {
     'asset_update',
     "Update an existing asset's metadata (display name, description). Use PATCH.",
     {
-      assetId: z.string().describe('The asset ID to update'),
+      assetId: NumericId.describe('The asset ID to update'),
       displayName: z.string().optional().describe('New display name'),
       description: z.string().optional().describe('New description'),
     },
     async ({ assetId, displayName, description }) => {
+      logger.toolCall('asset_update', { assetId, displayName });
       const updateMask: string[] = [];
       const body: AnyJson = {};
       if (displayName !== undefined) {
@@ -72,18 +78,13 @@ export function registerAssetTools(server: McpServer): void {
         body.description = description;
       }
       const url = `${ROBLOX_CLOUD_BASE}/assets/v1/assets/${assetId}?updateMask=${updateMask.join(',')}`;
-      const res = await fetch(url, {
+      const res = await robloxFetch(url, {
         method: 'PATCH',
-        headers: robloxHeaders(apiKey),
+        headers: robloxHeaders(),
         body: JSON.stringify(body),
       });
-      const resBody = await res.text();
 
-      return {
-        content: [
-          { type: 'text' as const, text: res.ok ? resBody : `Error ${res.status}: ${resBody}` },
-        ],
-      };
+      return res.ok ? successResponse(res.body) : errorResponse(res.status, res.body, url);
     },
   );
 
@@ -93,18 +94,16 @@ export function registerAssetTools(server: McpServer): void {
     'asset_list_versions',
     'List all versions of a Roblox asset.',
     {
-      assetId: z.string().describe('The asset ID'),
+      assetId: NumericId.describe('The asset ID'),
       pageToken: z.string().optional().describe('Pagination token from a previous response'),
     },
     async ({ assetId, pageToken }) => {
+      logger.toolCall('asset_list_versions', { assetId });
       const params = pageToken ? `?pageToken=${encodeURIComponent(pageToken)}` : '';
       const url = `${ROBLOX_CLOUD_BASE}/assets/v1/assets/${assetId}/versions${params}`;
-      const res = await fetch(url, { headers: robloxHeaders(apiKey) });
-      const body = await res.text();
+      const res = await robloxFetch(url);
 
-      return {
-        content: [{ type: 'text' as const, text: res.ok ? body : `Error ${res.status}: ${body}` }],
-      };
+      return res.ok ? successResponse(res.body) : errorResponse(res.status, res.body, url);
     },
   );
 
@@ -114,17 +113,18 @@ export function registerAssetTools(server: McpServer): void {
     'asset_get_version',
     'Get details about a specific version of an asset.',
     {
-      assetId: z.string().describe('The asset ID'),
-      versionNumber: z.string().describe('The version number to retrieve'),
+      assetId: NumericId.describe('The asset ID'),
+      versionNumber: z
+        .string()
+        .regex(/^\d+$/, 'Must be a numeric version number')
+        .describe('The version number to retrieve'),
     },
     async ({ assetId, versionNumber }) => {
+      logger.toolCall('asset_get_version', { assetId, versionNumber });
       const url = `${ROBLOX_CLOUD_BASE}/assets/v1/assets/${assetId}/versions/${versionNumber}`;
-      const res = await fetch(url, { headers: robloxHeaders(apiKey) });
-      const body = await res.text();
+      const res = await robloxFetch(url);
 
-      return {
-        content: [{ type: 'text' as const, text: res.ok ? body : `Error ${res.status}: ${body}` }],
-      };
+      return res.ok ? successResponse(res.body) : errorResponse(res.status, res.body, url);
     },
   );
 
@@ -134,21 +134,22 @@ export function registerAssetTools(server: McpServer): void {
     'asset_rollback_version',
     'Rollback an asset to a previous version.',
     {
-      assetId: z.string().describe('The asset ID'),
-      versionNumber: z.string().describe('The version number to rollback to'),
+      assetId: NumericId.describe('The asset ID'),
+      versionNumber: z
+        .string()
+        .regex(/^\d+$/, 'Must be a numeric version number')
+        .describe('The version number to rollback to'),
     },
     async ({ assetId, versionNumber }) => {
+      logger.toolCall('asset_rollback_version', { assetId, versionNumber });
       const url = `${ROBLOX_CLOUD_BASE}/assets/v1/assets/${assetId}/versions:rollback`;
-      const res = await fetch(url, {
+      const res = await robloxFetch(url, {
         method: 'POST',
-        headers: robloxHeaders(apiKey),
+        headers: robloxHeaders(),
         body: JSON.stringify({ assetVersion: `assets/${assetId}/versions/${versionNumber}` }),
       });
-      const body = await res.text();
 
-      return {
-        content: [{ type: 'text' as const, text: res.ok ? body : `Error ${res.status}: ${body}` }],
-      };
+      return res.ok ? successResponse(res.body) : errorResponse(res.status, res.body, url);
     },
   );
 
@@ -158,21 +159,17 @@ export function registerAssetTools(server: McpServer): void {
     'asset_archive',
     'Archive a Roblox asset, making it inaccessible.',
     {
-      assetId: z.string().describe('The asset ID to archive'),
+      assetId: NumericId.describe('The asset ID to archive'),
     },
     async ({ assetId }) => {
+      logger.toolCall('asset_archive', { assetId });
       const url = `${ROBLOX_CLOUD_BASE}/assets/v1/assets/${assetId}:archive`;
-      const res = await fetch(url, { method: 'POST', headers: robloxHeaders(apiKey) });
-      const body = await res.text();
+      const res = await robloxFetch(url, { method: 'POST' });
 
-      return {
-        content: [
-          {
-            type: 'text' as const,
-            text: res.ok ? `Asset ${assetId} archived.` : `Error ${res.status}: ${body}`,
-          },
-        ],
-      };
+      if (res.ok) {
+        return { content: [textContent(`Asset ${assetId} archived.`)] };
+      }
+      return errorResponse(res.status, res.body, url);
     },
   );
 
@@ -182,21 +179,17 @@ export function registerAssetTools(server: McpServer): void {
     'asset_restore',
     'Restore a previously archived Roblox asset.',
     {
-      assetId: z.string().describe('The asset ID to restore'),
+      assetId: NumericId.describe('The asset ID to restore'),
     },
     async ({ assetId }) => {
+      logger.toolCall('asset_restore', { assetId });
       const url = `${ROBLOX_CLOUD_BASE}/assets/v1/assets/${assetId}:restore`;
-      const res = await fetch(url, { method: 'POST', headers: robloxHeaders(apiKey) });
-      const body = await res.text();
+      const res = await robloxFetch(url, { method: 'POST' });
 
-      return {
-        content: [
-          {
-            type: 'text' as const,
-            text: res.ok ? `Asset ${assetId} restored.` : `Error ${res.status}: ${body}`,
-          },
-        ],
-      };
+      if (res.ok) {
+        return { content: [textContent(`Asset ${assetId} restored.`)] };
+      }
+      return errorResponse(res.status, res.body, url);
     },
   );
 
@@ -215,6 +208,7 @@ export function registerAssetTools(server: McpServer): void {
       pageToken: z.string().optional().describe('Pagination token from a previous response'),
     },
     async ({ keyword, assetType, pageSize, pageToken }) => {
+      logger.toolCall('asset_search_creator_store', { keyword, assetType });
       const params = new URLSearchParams();
       if (keyword) params.set('keyword', keyword);
       if (assetType) params.set('assetType', assetType);
@@ -222,16 +216,13 @@ export function registerAssetTools(server: McpServer): void {
       if (pageToken) params.set('pageToken', pageToken);
 
       const url = `${ROBLOX_CLOUD_BASE}/toolbox-service/v2/assets:search?${params.toString()}`;
-      const res = await fetch(url, { headers: robloxHeaders(apiKey) });
-      const body = await res.text();
+      const res = await robloxFetch(url);
 
-      return {
-        content: [{ type: 'text' as const, text: res.ok ? body : `Error ${res.status}: ${body}` }],
-      };
+      return res.ok ? successResponse(res.body) : errorResponse(res.status, res.body, url);
     },
   );
 
-  // ── Upload Asset ─────────────────────────────────────────────────────
+  // ── Upload Asset (binary-safe) ─────────────────────────────────────
 
   server.tool(
     'asset_upload',
@@ -241,14 +232,13 @@ export function registerAssetTools(server: McpServer): void {
       description: z.string().optional().describe('Asset description'),
       assetType: z.string().describe('Asset type (e.g. "Decal", "Audio", "Model")'),
       creatorType: z.enum(['User', 'Group']).describe('Creator type'),
-      creatorId: z.string().describe('Creator user or group ID'),
+      creatorId: NumericId.describe('Creator user or group ID'),
       fileContent: z.string().describe('Base64-encoded file content'),
       contentType: z.string().describe('MIME type of the file (e.g. "image/png", "audio/ogg")'),
     },
     async ({ name, description, assetType, creatorType, creatorId, fileContent, contentType }) => {
-      const url = `${ROBLOX_CLOUD_BASE}/assets/v1/assets`;
+      logger.toolCall('asset_upload', { name, assetType, creatorType, creatorId });
 
-      // Build multipart form
       const metadata = JSON.stringify({
         assetType,
         displayName: name,
@@ -260,41 +250,24 @@ export function registerAssetTools(server: McpServer): void {
         },
       });
 
-      const boundary = `----MCPBoundary${Date.now()}`;
-      const body = [
-        `--${boundary}`,
-        'Content-Disposition: form-data; name="request"',
-        'Content-Type: application/json',
-        '',
-        metadata,
-        `--${boundary}`,
-        `Content-Disposition: form-data; name="fileContent"; filename="asset"`,
-        `Content-Type: ${contentType}`,
-        '',
-        Buffer.from(fileContent, 'base64').toString('binary'),
-        `--${boundary}--`,
-      ].join('\r\n');
+      // Binary-safe multipart construction using Buffer.concat
+      const binaryData = Buffer.from(fileContent, 'base64');
+      const { body: multipartBody, contentType: mpContentType } = buildMultipartBody([
+        { name: 'request', contentType: 'application/json', data: metadata },
+        { name: 'fileContent', contentType, data: binaryData, filename: 'asset' },
+      ]);
 
-      const res = await fetch(url, {
+      const url = `${ROBLOX_CLOUD_BASE}/assets/v1/assets`;
+      const res = await robloxFetch(url, {
         method: 'POST',
-        headers: {
-          'x-api-key': apiKey,
-          'Content-Type': `multipart/form-data; boundary=${boundary}`,
-        },
-        body,
+        headers: { 'Content-Type': mpContentType },
+        body: multipartBody,
       });
-      const resBody = await res.text();
 
-      return {
-        content: [
-          {
-            type: 'text' as const,
-            text: res.ok
-              ? `Asset uploaded successfully.\n${resBody}`
-              : `Error ${res.status}: ${resBody}`,
-          },
-        ],
-      };
+      if (res.ok) {
+        return { content: [textContent(`Asset uploaded successfully.\n${res.body}`)] };
+      }
+      return errorResponse(res.status, res.body, url);
     },
   );
 }

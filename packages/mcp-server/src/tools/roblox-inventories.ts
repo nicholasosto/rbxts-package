@@ -11,12 +11,17 @@
 
 import { z } from 'zod';
 import { type McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { getRobloxCloudConfig } from '@nicholasosto/node-tools';
-import { ROBLOX_CLOUD_BASE, robloxHeaders } from '../types.js';
+import { NumericId, getDefaultUserId } from '../config.js';
+import { logger } from '../logger.js';
+import {
+  ROBLOX_CLOUD_BASE,
+  robloxFetch,
+  textContent,
+  errorResponse,
+  successResponse,
+} from '../roblox-helpers.js';
 
 /* ── helpers ─────────────────────────────────────────────────────────────── */
-
-const DEFAULT_USER_ID = '3394700055';
 
 function inventoryUrl(userId: string): string {
   return `${ROBLOX_CLOUD_BASE}/cloud/v2/users/${userId}/inventory-items`;
@@ -32,7 +37,9 @@ export function registerInventoryTools(server: McpServer): void {
       'badge IDs, game pass IDs, private server IDs, collectibles, and asset types. ' +
       'Filters are semicolon-separated (e.g. "onlyCollectibles=true;inventoryItemAssetTypes=HAT").',
     {
-      userId: z.string().default(DEFAULT_USER_ID).describe('Roblox user ID to list inventory for'),
+      userId: NumericId.default(getDefaultUserId()).describe(
+        'Roblox user ID to list inventory for',
+      ),
       filter: z
         .string()
         .optional()
@@ -56,24 +63,16 @@ export function registerInventoryTools(server: McpServer): void {
         .describe('Page token from a previous response for pagination'),
     },
     async ({ userId, filter, maxPageSize, pageToken }) => {
-      const { apiKey } = getRobloxCloudConfig();
+      logger.toolCall('inventory_list_items', { userId, filter });
       const params = new URLSearchParams();
       params.set('maxPageSize', String(maxPageSize));
       if (filter) params.set('filter', filter);
       if (pageToken) params.set('pageToken', pageToken);
 
       const url = `${inventoryUrl(userId)}?${params.toString()}`;
-      const res = await fetch(url, { headers: robloxHeaders(apiKey) });
-      const body = await res.text();
+      const res = await robloxFetch(url);
 
-      return {
-        content: [
-          {
-            type: 'text' as const,
-            text: res.ok ? body : `Error ${res.status}: ${body}`,
-          },
-        ],
-      };
+      return res.ok ? successResponse(res.body) : errorResponse(res.status, res.body, url);
     },
   );
 
@@ -83,44 +82,46 @@ export function registerInventoryTools(server: McpServer): void {
     'Check whether a Roblox user owns specific assets by their IDs. ' +
       'Returns only the assets from the list that the user actually owns.',
     {
-      userId: z.string().default(DEFAULT_USER_ID).describe('Roblox user ID to check ownership for'),
+      userId: NumericId.default(getDefaultUserId()).describe(
+        'Roblox user ID to check ownership for',
+      ),
       assetIds: z
         .string()
         .describe('Comma-separated asset IDs to check (e.g. "62724852,1028595,4773588762")'),
     },
     async ({ userId, assetIds }) => {
-      const { apiKey } = getRobloxCloudConfig();
+      logger.toolCall('inventory_check_ownership', { userId, assetIds });
       const params = new URLSearchParams({
         filter: `assetIds=${assetIds}`,
       });
 
       const url = `${inventoryUrl(userId)}?${params.toString()}`;
-      const res = await fetch(url, { headers: robloxHeaders(apiKey) });
-      const body = await res.text();
+      const res = await robloxFetch(url);
 
       if (!res.ok) {
-        return {
-          content: [{ type: 'text' as const, text: `Error ${res.status}: ${body}` }],
-        };
+        return errorResponse(res.status, res.body, url);
       }
 
-      const data = JSON.parse(body);
-      const owned = (data.inventoryItems ?? []).map(
-        (item: { assetDetails?: { assetId?: string; inventoryItemAssetType?: string } }) =>
-          item.assetDetails,
-      );
+      try {
+        const data = res.json as Record<string, unknown> | undefined;
+        const items = (data?.inventoryItems ?? []) as Array<{
+          assetDetails?: { assetId?: string; inventoryItemAssetType?: string };
+        }>;
+        const owned = items.map((item) => item.assetDetails);
 
-      return {
-        content: [
-          {
-            type: 'text' as const,
-            text:
+        return {
+          content: [
+            textContent(
               owned.length > 0
                 ? `User owns ${owned.length} of the requested assets:\n${JSON.stringify(owned, null, 2)}`
                 : 'User does not own any of the requested assets.',
-          },
-        ],
-      };
+            ),
+          ],
+        };
+      } catch (err) {
+        logger.error('inventory', 'Failed to parse ownership response', err);
+        return errorResponse(res.status, `Response parse error: ${res.body}`, url);
+      }
     },
   );
 
@@ -129,7 +130,7 @@ export function registerInventoryTools(server: McpServer): void {
     'inventory_list_collectibles',
     'List all collectible/limited items owned by a Roblox user.',
     {
-      userId: z.string().default(DEFAULT_USER_ID).describe('Roblox user ID'),
+      userId: NumericId.default(getDefaultUserId()).describe('Roblox user ID'),
       assetTypes: z
         .string()
         .optional()
@@ -147,7 +148,7 @@ export function registerInventoryTools(server: McpServer): void {
       pageToken: z.string().optional().describe('Page token for pagination'),
     },
     async ({ userId, assetTypes, maxPageSize, pageToken }) => {
-      const { apiKey } = getRobloxCloudConfig();
+      logger.toolCall('inventory_list_collectibles', { userId, assetTypes });
       const types = assetTypes ?? '*';
       const filterStr = `onlyCollectibles=true;inventoryItemAssetTypes=${types}`;
 
@@ -158,17 +159,9 @@ export function registerInventoryTools(server: McpServer): void {
       if (pageToken) params.set('pageToken', pageToken);
 
       const url = `${inventoryUrl(userId)}?${params.toString()}`;
-      const res = await fetch(url, { headers: robloxHeaders(apiKey) });
-      const body = await res.text();
+      const res = await robloxFetch(url);
 
-      return {
-        content: [
-          {
-            type: 'text' as const,
-            text: res.ok ? body : `Error ${res.status}: ${body}`,
-          },
-        ],
-      };
+      return res.ok ? successResponse(res.body) : errorResponse(res.status, res.body, url);
     },
   );
 }

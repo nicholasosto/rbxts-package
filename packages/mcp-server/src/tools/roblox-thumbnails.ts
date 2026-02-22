@@ -9,15 +9,12 @@
 
 import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { logger } from '../logger.js';
+import { delay, jsonResponse, errorResponse } from '../roblox-helpers.js';
 
 /* ── helpers ─────────────────────────────────────────────────────────────── */
 
 const THUMBNAILS_BASE = 'https://thumbnails.roblox.com';
-
-/** Small delay helper for retry logic. */
-function delay(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 
 /* ── registration ────────────────────────────────────────────────────────── */
 
@@ -54,6 +51,8 @@ export function registerThumbnailTools(server: McpServer): void {
       isCircular: z.boolean().default(false).describe('Whether to render as a circular thumbnail'),
     },
     async ({ assetIds, size, format, isCircular }) => {
+      logger.toolCall('thumbnail_get_assets', { assetIds, size });
+
       const params = new URLSearchParams({
         assetIds,
         size,
@@ -63,24 +62,21 @@ export function registerThumbnailTools(server: McpServer): void {
 
       const url = `${THUMBNAILS_BASE}/v1/assets?${params.toString()}`;
 
-      // First request
+      // First request (no auth needed for public thumbnails API)
       let res = await fetch(url);
       let body = (await res.json()) as {
         data?: { targetId: number; state: string; imageUrl: string }[];
       };
 
       if (!res.ok) {
-        return {
-          content: [
-            { type: 'text' as const, text: `Error ${res.status}: ${JSON.stringify(body)}` },
-          ],
-        };
+        return errorResponse(res.status, JSON.stringify(body), url);
       }
 
       // Check if all results are Pending — if so, wait 2s and retry once
       const allPending = (body.data ?? []).every((item) => item.state === 'Pending');
 
       if (allPending && (body.data ?? []).length > 0) {
+        logger.debug('thumbnails', 'All thumbnails pending, retrying in 2s');
         await delay(2000);
         res = await fetch(url);
         body = (await res.json()) as {
@@ -88,14 +84,7 @@ export function registerThumbnailTools(server: McpServer): void {
         };
       }
 
-      return {
-        content: [
-          {
-            type: 'text' as const,
-            text: JSON.stringify(body, null, 2),
-          },
-        ],
-      };
+      return jsonResponse(body);
     },
   );
 }

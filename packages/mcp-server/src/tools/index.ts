@@ -15,3 +15,4 @@ export { registerInventoryTools } from './roblox-inventories.js';
 export { registerMessagingTools } from './roblox-messaging.js';
 export { registerThumbnailTools } from './roblox-thumbnails.js';
 export { registerTextGenerationTool } from './text-generation.js';
+export { registerUploadLocalImageTool } from './upload-local-image.js';

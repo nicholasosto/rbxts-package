@@ -24,6 +24,7 @@ import {
   registerPackageInfoTools,
   registerTextGenerationTool,
   registerThumbnailTools,
+  registerUploadLocalImageTool,
 } from './tools/index.js';
 
 /**
@@ -70,6 +71,9 @@ export function createServer(): McpServer {
 
   // Local image generation (generate → save to local assets folder)
   registerLocalImageGenerationTool(server);
+
+  // Upload existing local image to Roblox (step 2 of two-step workflow)
+  registerUploadLocalImageTool(server);
 
   // Roblox Open Cloud tools
   registerDatastoreTools(server);

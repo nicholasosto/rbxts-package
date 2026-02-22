@@ -6,6 +6,7 @@ import { ClassIcons } from './class-icons';
 import { CurrencyIcons } from './currency-icons';
 import { DomainIcons } from './domain-icons';
 import { EquipmentIcons } from './equipment-icons';
+import { FactionIcons } from './faction-icons';
 import { GemIcons } from './gem-icons';
 import { ItemSlotIcons } from './item-slot-icons';
 import { MenuPanelIcons } from './menu-panel-icons';
@@ -29,6 +30,7 @@ export const IMAGE_CATALOG = {
   ClassIcons,
   CurrencyIcons,
   DomainIcons,
+  FactionIcons,
   ItemSlotIcons,
   MenuPanelIcons,
   StatusIcons,

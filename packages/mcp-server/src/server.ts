@@ -13,6 +13,7 @@ import {
   registerAssetImagePipelineTool,
   registerAssetTools,
   registerDatastoreTools,
+  registerGameDocsTools,
   registerImageAnalysisTool,
   registerImageGenerationTool,
   registerInstanceTools,
@@ -76,6 +77,9 @@ export function createServer(): McpServer {
 
   // Monorepo introspection tools
   registerPackageInfoTools(server);
+
+  // Game documentation tools
+  registerGameDocsTools(server);
 
   logger.info('server', `Registered tools on rbxts-mcp v0.1.0`);
 

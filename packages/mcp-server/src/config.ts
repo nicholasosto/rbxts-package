@@ -49,6 +49,11 @@ export function getLocalAssetsDir(): string {
   return process.env.LOCAL_ASSETS_DIR ?? '/Users/nicholasosto/GameDev/assets';
 }
 
+/** Game docs root directory (soul-steel content). */
+export function getGameDocsRoot(): string {
+  return process.env.GAME_DOCS_ROOT ?? '/Users/nicholasosto/GameDev/game-docs/soul-steel';
+}
+
 // ─── API Keys (call-time reads) ───────────────────────────────────────────────
 
 /** Read the Roblox Cloud API key from environment at call time. */

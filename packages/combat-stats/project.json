@@ -3,12 +3,28 @@
   "sourceType": "combat-stats",
   "tags": ["scope:roblox", "type:lib"],
   "targets": {
+    "codegen": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsx scripts/codegen-game-docs.ts",
+        "cwd": "."
+      },
+      "cache": true,
+      "inputs": [
+        "{workspaceRoot}/../game-docs/soul-steel/bestiary/**/*.yaml",
+        "{workspaceRoot}/../game-docs/soul-steel/abilities/**/*.yaml",
+        "{workspaceRoot}/../game-docs/soul-steel/items/**/*.yaml",
+        "{workspaceRoot}/scripts/codegen-game-docs.ts"
+      ],
+      "outputs": ["{projectRoot}/src/generated"]
+    },
     "build": {
       "executor": "nx:run-commands",
       "options": {
         "command": "rbxtsc",
         "cwd": "packages/combat-stats"
       },
+      "dependsOn": ["codegen"],
       "cache": true,
       "inputs": ["default"],
       "outputs": ["{projectRoot}/out"]

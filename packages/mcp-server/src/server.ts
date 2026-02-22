@@ -18,6 +18,7 @@ import {
   registerImageGenerationTool,
   registerInstanceTools,
   registerInventoryTools,
+  registerLocalAssetSearchTool,
   registerLocalImageGenerationTool,
   registerMessagingTools,
   registerPackageInfoTools,
@@ -63,6 +64,9 @@ export function createServer(): McpServer {
 
   // Asset image pipeline (generate → upload combined)
   registerAssetImagePipelineTool(server);
+
+  // Local asset search (check for existing images before generating)
+  registerLocalAssetSearchTool(server);
 
   // Local image generation (generate → save to local assets folder)
   registerLocalImageGenerationTool(server);

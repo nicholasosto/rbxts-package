@@ -5,6 +5,6 @@
  * Source: game-docs/soul-steel/
  */
 
-export { BESTIARY_CATALOG, type BestiaryId } from './bestiary-catalog';
-export { ABILITY_CATALOG, type AbilityId } from './ability-catalog';
-export { ITEM_CATALOG, type ItemId } from './item-catalog';
+export * from './bestiary-catalog';
+export * from './ability-catalog';
+export * from './item-catalog';

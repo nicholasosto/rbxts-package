@@ -5,6 +5,7 @@ export { registerAssetImagePipelineTool } from './asset-image-pipeline.js';
 export { registerGameDocsTools } from './game-docs.js';
 export { registerImageAnalysisTool } from './image-analysis.js';
 export { registerImageGenerationTool } from './image-generation.js';
+export { registerLocalAssetSearchTool } from './local-asset-search.js';
 export { registerLocalImageGenerationTool } from './local-image-generation.js';
 export { registerPackageInfoTools } from './package-info.js';
 export { registerAssetTools } from './roblox-assets.js';

@@ -294,10 +294,10 @@ async function main() {
     writeFile(resolve(OUTPUT_DIR, 'item-catalog.ts'), generateItemCatalog(items, itemAssets)),
   ]);
 
-  // Generate barrel export
-  const barrel = `${HEADER}export { BESTIARY_CATALOG, type BestiaryId } from './bestiary-catalog';
-export { ABILITY_CATALOG, type AbilityId } from './ability-catalog';
-export { ITEM_CATALOG, type ItemId } from './item-catalog';
+  // Generate barrel export (use `export *` so empty catalogs don't cause TS2305)
+  const barrel = `${HEADER}export * from './bestiary-catalog';
+export * from './ability-catalog';
+export * from './item-catalog';
 `;
   await writeFile(resolve(OUTPUT_DIR, 'index.ts'), barrel);
 

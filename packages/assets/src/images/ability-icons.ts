@@ -14,4 +14,8 @@ export const AbilityIcons = {
   BloodHorror: asImageAsset('rbxassetid://82257212198629'),
   BloodElemental: asImageAsset('rbxassetid://122556254156811'),
   SoulDrain: asImageAsset('rbxassetid://78703065651895'),
+  // Soul Steel abilities
+  BoneStrike: asImageAsset('rbxassetid://100582731663421'),
+  BloodDrain: asImageAsset('rbxassetid://130444383856285'),
+  CrimsonSlash: asImageAsset('rbxassetid://131024768117694'),
 } as const satisfies Record<string, ImageAsset>;

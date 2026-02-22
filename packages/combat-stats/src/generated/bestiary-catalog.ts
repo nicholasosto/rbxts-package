@@ -5,43 +5,5 @@
  * Source: game-docs/soul-steel/
  */
 
-export const BESTIARY_CATALOG = {
-  'blood-fiend': {
-    id: 'blood-fiend',
-    displayName: 'Blood Fiend',
-    domain: 'blood',
-    faction: 'crimson-order',
-    level: 15,
-    rarity: 'rare',
-    baseAttributes: {
-      strength: 22,
-      vitality: 18,
-      agility: 25,
-      intelligence: 10,
-      spirit: 8,
-      luck: 12,
-    },
-    assets: {},
-    tags: ['blood', 'melee', 'vampiric', 'elite'],
-  },
-  'skeleton-warrior': {
-    id: 'skeleton-warrior',
-    displayName: 'Skeleton Warrior',
-    domain: 'blood',
-    faction: 'crimson-order',
-    level: 5,
-    rarity: 'common',
-    baseAttributes: {
-      strength: 14,
-      vitality: 8,
-      agility: 10,
-      intelligence: 3,
-      spirit: 2,
-      luck: 5,
-    },
-    assets: {},
-    tags: ['undead', 'melee', 'blood', 'common-enemy'],
-  },
-} as const;
-
-export type BestiaryId = keyof typeof BESTIARY_CATALOG;
+// No bestiary entries found.
+export {};

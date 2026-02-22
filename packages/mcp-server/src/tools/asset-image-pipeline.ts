@@ -1,23 +1,25 @@
 /**
  * Asset Image Pipeline Tool
  *
- * Combined generate → upload → verify pipeline for creating Roblox decal
- * assets from AI-generated images in a single MCP tool call.
+ * Combined generate → save locally → upload → verify pipeline for creating
+ * Roblox decal assets from AI-generated images in a single MCP tool call.
  *
- * Flow: OpenAI image generation → Roblox asset upload → thumbnail verification
+ * Flow: OpenAI image generation → local save → Roblox asset upload → thumbnail verification
  */
 
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { createAISessionFromEnv } from '@nicholasosto/ai-tools';
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
 import { z } from 'zod';
-import { NumericId, getDefaultCreatorId } from '../config.js';
+import { NumericId, getDefaultCreatorId, getLocalAssetsDir } from '../config.js';
 import { logger } from '../logger.js';
 import {
   ROBLOX_CLOUD_BASE,
-  robloxFetch,
   buildMultipartBody,
   extractAssetId,
   pollOperation,
+  robloxFetch,
 } from '../roblox-helpers.js';
 
 /** Style guide prefix applied to all icon generation prompts. */
@@ -74,6 +76,14 @@ export function registerAssetImagePipelineTool(server: McpServer): void {
         .describe(
           'Roblox asset type: "Image" for ImageLabel usage, "Decal" for Decal instances (default: "Image")',
         ),
+      localPath: z
+        .string()
+        .optional()
+        .describe(
+          'Relative path under LOCAL_ASSETS_DIR/images/ to save the generated PNG locally ' +
+            '(e.g. "abilities/bone-strike/icon.png"). Taken from asset-map suggestedFilename. ' +
+            'If omitted, the image is still uploaded but NOT saved locally.',
+        ),
     },
     async ({
       name,
@@ -84,8 +94,9 @@ export function registerAssetImagePipelineTool(server: McpServer): void {
       quality,
       skipStyleGuide,
       assetType,
+      localPath,
     }) => {
-      logger.toolCall('generate_and_upload_decal', { name, assetType, size, quality });
+      logger.toolCall('generate_and_upload_decal', { name, assetType, size, quality, localPath });
 
       const content: Array<
         { type: 'text'; text: string } | { type: 'image'; data: string; mimeType: string }
@@ -126,6 +137,34 @@ export function registerAssetImagePipelineTool(server: McpServer): void {
         mimeType: 'image/png',
       });
 
+      // ── Step 1b: Save locally (if localPath provided) ──────────────
+      const binaryData = Buffer.from(img.b64Data, 'base64');
+
+      if (localPath) {
+        const assetsDir = getLocalAssetsDir();
+        const targetPath = resolve(assetsDir, 'images', localPath);
+        const targetDir = dirname(targetPath);
+
+        if (!existsSync(targetDir)) {
+          mkdirSync(targetDir, { recursive: true });
+          logger.info('asset-pipeline', `Created directory: ${targetDir}`);
+        }
+
+        if (existsSync(targetPath)) {
+          content.push({
+            type: 'text' as const,
+            text: `⚠️ Local file already exists, skipping save: ${targetPath}`,
+          });
+        } else {
+          writeFileSync(targetPath, binaryData);
+          logger.info('asset-pipeline', `Saved ${binaryData.length} bytes → ${targetPath}`);
+          content.push({
+            type: 'text' as const,
+            text: `💾 Saved locally: ${targetPath} (${(binaryData.length / 1024).toFixed(1)} KB)`,
+          });
+        }
+      }
+
       // ── Step 2: Upload to Roblox ────────────────────────────────────
       const resolvedAssetType = assetType ?? 'Image';
       content.push({
@@ -146,7 +185,6 @@ export function registerAssetImagePipelineTool(server: McpServer): void {
         },
       });
 
-      const binaryData = Buffer.from(img.b64Data, 'base64');
       const { body: multipartBody, contentType } = buildMultipartBody([
         { name: 'request', contentType: 'application/json', data: metadata },
         { name: 'fileContent', contentType: 'image/png', data: binaryData, filename: 'asset.png' },

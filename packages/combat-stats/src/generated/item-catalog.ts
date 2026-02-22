@@ -5,29 +5,5 @@
  * Source: game-docs/soul-steel/
  */
 
-export const ITEM_CATALOG = {
-  'crimson-pendant': {
-    id: 'crimson-pendant',
-    displayName: 'Crimson Pendant',
-    type: 'accessory',
-    slot: 'neck',
-    rarity: 'rare',
-    domain: 'blood',
-    stats: { vitality: 5, spirit: 3, intelligence: 2 },
-    assets: {},
-    tags: ['accessory', 'vampiric', 'blood', 'sustain'],
-  },
-  'tattered-blade': {
-    id: 'tattered-blade',
-    displayName: 'Tattered Blade',
-    type: 'weapon',
-    slot: 'mainHand',
-    rarity: 'common',
-    domain: 'blood',
-    stats: { strength: 3, agility: 1 },
-    assets: {},
-    tags: ['weapon', 'sword', 'blood', 'starter'],
-  },
-} as const;
-
-export type ItemId = keyof typeof ITEM_CATALOG;
+// No item entries found.
+export {};

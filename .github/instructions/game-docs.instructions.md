@@ -87,6 +87,40 @@ drops:
 - Secondary stats: `base = 10 + (level × 0.4)`
 - Boss (epic+): multiply all stats by 3-5×
 
+## Asset Mapping
+
+Each category has a single `asset-map.yaml` tracking visual/audio assets per entity.
+
+### Lifecycle States
+
+`missing` → `prompted` → `generated` → `reviewed` → `uploaded` → `assigned`
+
+### Reference Types
+
+| Type       | Use Case                  | Example                  |
+| ---------- | ------------------------- | ------------------------ |
+| `assetRef` | Images, audio, animations | `rbxassetid://123456789` |
+| `modelRef` | Rigs, accessories, meshes | `SkeletonWarriorRig`     |
+
+### Filename Convention
+
+`{category}/{entity-id}/{slot}.{ext}` — e.g. `bestiary/skeleton-warrior/icon.png`
+
+### Asset Slots by Category
+
+- **Bestiary**: `icon`, `portrait`, `rig`, `idle-anim`, `attack-anim`, `death-anim`, `hit-sfx`, `death-sfx`, `ambient-sfx`
+- **Abilities**: `icon`, `cast-anim`, `projectile`, `impact-vfx`, `cast-sfx`, `impact-sfx`
+- **Items**: `icon`, `model`, `equip-sfx`, `use-sfx`
+- **Factions**: `icon`, `banner`, `theme-music`
+- **Classes**: `icon`, `portrait`, `rig`, `idle-anim`, `select-sfx`
+
+### Prompt Writing
+
+- Images: specify dims, palette, lighting, "dark-fantasy painterly style"
+- 3D (Meshy.ai): form, materials, "low-poly game-ready mesh, PBR textures"
+- Audio (Eleven Labs): sound character, duration, mood
+- Always reference entity domain aesthetic
+
 ## When Creating Entities
 
 1. Follow the schema — all required fields must be present
@@ -94,3 +128,4 @@ drops:
 3. Maintain domain consistency (a Blood faction shouldn't contain Spirit monsters)
 4. Balance stats relative to level and rarity
 5. Always add new entities to the `_index.yaml`
+6. Create a matching entry in the category's `asset-map.yaml` with at least an `icon` slot

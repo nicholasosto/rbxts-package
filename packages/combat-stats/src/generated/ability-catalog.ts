@@ -24,6 +24,7 @@ export const ABILITY_CATALOG = {
       { attribute: 'intelligence', multiplier: 1.8, base: 12 },
       { attribute: 'spirit', multiplier: 0.5, base: 5 },
     ],
+    assets: {},
     tags: ['magic', 'vampiric', 'sustain', 'blood'],
   },
   'bone-strike': {
@@ -41,6 +42,7 @@ export const ABILITY_CATALOG = {
       cost: 0,
     },
     scaling: [{ attribute: 'strength', multiplier: 2.5, base: 10 }],
+    assets: {},
     tags: ['melee', 'physical', 'basic'],
   },
   'crimson-slash': {
@@ -61,6 +63,7 @@ export const ABILITY_CATALOG = {
       { attribute: 'strength', multiplier: 3, base: 15 },
       { attribute: 'agility', multiplier: 0.8, base: 5 },
     ],
+    assets: {},
     tags: ['melee', 'aoe', 'bleed', 'blood'],
   },
 } as const;

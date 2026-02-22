@@ -47,6 +47,9 @@ MONOREPO_PACKAGES_DIR=/absolute/path/to/packages
 
 # Logging
 LOG_LEVEL=info  # debug | info | warn | error
+
+# Game Docs (required for game_docs_* tools)
+GAME_DOCS_ROOT=/absolute/path/to/game-docs/soul-steel
 ```
 
 The server validates environment variables at startup and logs warnings for any missing optional values.
@@ -103,6 +106,19 @@ The server validates environment variables at startup and logs warnings for any 
 | `inventory_check_ownership`   | Check if a user owns specific assets       |
 | `inventory_list_collectibles` | List limited/collectible items             |
 
+### Game Docs Tools
+
+| Tool                      | Description                                                              |
+| ------------------------- | ------------------------------------------------------------------------ |
+| `game_docs_list`          | List entity files in a category (bestiary, abilities, items, etc.)       |
+| `game_docs_read`          | Read entity YAML + Markdown content by category and ID                   |
+| `game_docs_write`         | Create or update an entity's YAML and/or Markdown                        |
+| `game_docs_validate`      | Validate entity YAML against its JSON Schema                             |
+| `game_docs_search`        | Full-text search across all entity files                                 |
+| `game_docs_stats_summary` | Aggregate stats across a category (counts, attribute ranges, etc.)       |
+| `game_docs_asset_status`  | Show asset pipeline status for entities (missing/prompted/assigned/etc.) |
+| `game_docs_asset_assign`  | Update an asset slot's status, ref, or prompt in the asset map           |
+
 ### Other Tools
 
 | Tool                   | Description                              |
@@ -136,6 +152,7 @@ src/
 │   ├── roblox-instances.ts       # instance_* tools
 │   ├── roblox-inventories.ts     # inventory_* tools
 │   ├── roblox-thumbnails.ts      # thumbnail_get_assets
+│   ├── game-docs.ts              # game_docs_* tools (CRUD, search, asset pipeline)
 │   └── package-info.ts           # list_packages, get_package_*
 ├── categorize-decals.ts  # Standalone: batch decal categorization script
 ├── apply-renames.ts      # Standalone: apply proposed renames

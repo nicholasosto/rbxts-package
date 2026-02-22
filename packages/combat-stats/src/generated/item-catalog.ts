@@ -14,6 +14,7 @@ export const ITEM_CATALOG = {
     rarity: 'rare',
     domain: 'blood',
     stats: { vitality: 5, spirit: 3, intelligence: 2 },
+    assets: {},
     tags: ['accessory', 'vampiric', 'blood', 'sustain'],
   },
   'tattered-blade': {
@@ -24,6 +25,7 @@ export const ITEM_CATALOG = {
     rarity: 'common',
     domain: 'blood',
     stats: { strength: 3, agility: 1 },
+    assets: {},
     tags: ['weapon', 'sword', 'blood', 'starter'],
   },
 } as const;

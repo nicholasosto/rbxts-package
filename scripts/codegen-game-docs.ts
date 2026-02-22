@@ -87,7 +87,31 @@ interface ItemEntry {
   tags?: string[];
 }
 
+// ─── Asset Map Types ─────────────────────────────────────────────────────────
+
+interface AssetSlotData {
+  status: string;
+  assetRef?: string;
+  modelRef?: string;
+  suggestedFilename?: string;
+  prompt?: string;
+}
+
+type AssetMap = Record<string, Record<string, AssetSlotData>>;
+
 // ─── YAML Reader ─────────────────────────────────────────────────────────────
+
+async function readAssetMap(category: string): Promise<AssetMap> {
+  const mapPath = resolve(GAME_DOCS_ROOT, category, 'asset-map.yaml');
+  if (!existsSync(mapPath)) return {};
+  try {
+    const raw = await readFile(mapPath, 'utf-8');
+    return (parseYaml(raw) as AssetMap) ?? {};
+  } catch (err) {
+    console.warn(`  ⚠ Failed to parse ${category}/asset-map.yaml: ${err}`);
+    return {};
+  }
+}
 
 async function readYamlEntities<T>(category: string): Promise<T[]> {
   const dir = resolve(GAME_DOCS_ROOT, category);
@@ -97,7 +121,9 @@ async function readYamlEntities<T>(category: string): Promise<T[]> {
   }
 
   const files = await readdir(dir);
-  const yamlFiles = files.filter((f) => f.endsWith('.yaml') && !f.startsWith('_'));
+  const yamlFiles = files.filter(
+    (f) => f.endsWith('.yaml') && !f.startsWith('_') && f !== 'asset-map.yaml',
+  );
   const entries: T[] = [];
 
   for (const file of yamlFiles) {
@@ -115,11 +141,24 @@ async function readYamlEntities<T>(category: string): Promise<T[]> {
 
 // ─── Code Generators ─────────────────────────────────────────────────────────
 
-function generateBestiaryCatalog(entries: BestiaryEntry[]): string {
+function generateAssetFields(assets: Record<string, AssetSlotData> | undefined): string {
+  if (!assets) return '    assets: {},\n';
+  const slots = Object.entries(assets)
+    .filter(([, v]) => v.assetRef || v.modelRef)
+    .map(([slot, v]) => {
+      if (v.modelRef) return `      '${slot}': { modelRef: '${v.modelRef}' }`;
+      return `      '${slot}': { assetRef: '${v.assetRef}' }`;
+    });
+  if (slots.length === 0) return '    assets: {},\n';
+  return `    assets: {\n${slots.join(',\n')},\n    },\n`;
+}
+
+function generateBestiaryCatalog(entries: BestiaryEntry[], assetMap: AssetMap): string {
   if (entries.length === 0) return HEADER + '// No bestiary entries found.\nexport {};\n';
 
   const items = entries.map((e) => {
     const attrs = e.baseAttributes;
+    const assetFields = generateAssetFields(assetMap[e.id]);
     return `  '${e.id}': {
     id: '${e.id}',
     displayName: '${e.displayName}',
@@ -135,7 +174,7 @@ function generateBestiaryCatalog(entries: BestiaryEntry[]): string {
       spirit: ${attrs.spirit},
       luck: ${attrs.luck},
     },
-    tags: [${(e.tags ?? []).map((t) => `'${t}'`).join(', ')}],
+${assetFields}    tags: [${(e.tags ?? []).map((t) => `'${t}'`).join(', ')}],
   }`;
   });
 
@@ -147,7 +186,7 @@ export type BestiaryId = keyof typeof BESTIARY_CATALOG;
 `;
 }
 
-function generateAbilityCatalog(entries: AbilityEntry[]): string {
+function generateAbilityCatalog(entries: AbilityEntry[], assetMap: AssetMap): string {
   if (entries.length === 0) return HEADER + '// No ability entries found.\nexport {};\n';
 
   const items = entries.map((e) => {
@@ -155,6 +194,7 @@ function generateAbilityCatalog(entries: AbilityEntry[]): string {
     const scaling = (e.scaling ?? [])
       .map((s) => `{ attribute: '${s.attribute}', multiplier: ${s.multiplier}, base: ${s.base} }`)
       .join(', ');
+    const assetFields = generateAssetFields(assetMap[e.id]);
 
     return `  '${e.id}': {
     id: '${e.id}',
@@ -171,7 +211,7 @@ function generateAbilityCatalog(entries: AbilityEntry[]): string {
       cost: ${stats.cost ?? 0},
     },
     scaling: [${scaling}],
-    tags: [${(e.tags ?? []).map((t) => `'${t}'`).join(', ')}],
+${assetFields}    tags: [${(e.tags ?? []).map((t) => `'${t}'`).join(', ')}],
   }`;
   });
 
@@ -183,13 +223,14 @@ export type AbilityId = keyof typeof ABILITY_CATALOG;
 `;
 }
 
-function generateItemCatalog(entries: ItemEntry[]): string {
+function generateItemCatalog(entries: ItemEntry[], assetMap: AssetMap): string {
   if (entries.length === 0) return HEADER + '// No item entries found.\nexport {};\n';
 
   const items = entries.map((e) => {
     const statsEntries = Object.entries(e.stats ?? {})
       .map(([k, v]) => `${k}: ${v}`)
       .join(', ');
+    const assetFields = generateAssetFields(assetMap[e.id]);
 
     return `  '${e.id}': {
     id: '${e.id}',
@@ -199,7 +240,7 @@ function generateItemCatalog(entries: ItemEntry[]): string {
     rarity: '${e.rarity}',
     domain: ${e.domain ? `'${e.domain}'` : 'undefined'},
     stats: { ${statsEntries} },
-    tags: [${(e.tags ?? []).map((t) => `'${t}'`).join(', ')}],
+${assetFields}    tags: [${(e.tags ?? []).map((t) => `'${t}'`).join(', ')}],
   }`;
   });
 
@@ -221,22 +262,36 @@ async function main() {
   // Ensure output dir exists
   await mkdir(OUTPUT_DIR, { recursive: true });
 
-  // Read all entity categories
-  const [bestiary, abilities, items] = await Promise.all([
-    readYamlEntities<BestiaryEntry>('bestiary'),
-    readYamlEntities<AbilityEntry>('abilities'),
-    readYamlEntities<ItemEntry>('items'),
-  ]);
+  // Read all entity categories and asset maps
+  const [bestiary, abilities, items, bestiaryAssets, abilityAssets, itemAssets] = await Promise.all(
+    [
+      readYamlEntities<BestiaryEntry>('bestiary'),
+      readYamlEntities<AbilityEntry>('abilities'),
+      readYamlEntities<ItemEntry>('items'),
+      readAssetMap('bestiary'),
+      readAssetMap('abilities'),
+      readAssetMap('items'),
+    ],
+  );
 
   console.log(
     `  Found: ${bestiary.length} monsters, ${abilities.length} abilities, ${items.length} items`,
   );
+  console.log(
+    `  Asset maps: ${Object.keys(bestiaryAssets).length} monsters, ${Object.keys(abilityAssets).length} abilities, ${Object.keys(itemAssets).length} items`,
+  );
 
   // Generate TypeScript files
   await Promise.all([
-    writeFile(resolve(OUTPUT_DIR, 'bestiary-catalog.ts'), generateBestiaryCatalog(bestiary)),
-    writeFile(resolve(OUTPUT_DIR, 'ability-catalog.ts'), generateAbilityCatalog(abilities)),
-    writeFile(resolve(OUTPUT_DIR, 'item-catalog.ts'), generateItemCatalog(items)),
+    writeFile(
+      resolve(OUTPUT_DIR, 'bestiary-catalog.ts'),
+      generateBestiaryCatalog(bestiary, bestiaryAssets),
+    ),
+    writeFile(
+      resolve(OUTPUT_DIR, 'ability-catalog.ts'),
+      generateAbilityCatalog(abilities, abilityAssets),
+    ),
+    writeFile(resolve(OUTPUT_DIR, 'item-catalog.ts'), generateItemCatalog(items, itemAssets)),
   ]);
 
   // Generate barrel export

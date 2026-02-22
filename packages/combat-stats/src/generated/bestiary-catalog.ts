@@ -21,6 +21,7 @@ export const BESTIARY_CATALOG = {
       spirit: 8,
       luck: 12,
     },
+    assets: {},
     tags: ['blood', 'melee', 'vampiric', 'elite'],
   },
   'skeleton-warrior': {
@@ -38,6 +39,7 @@ export const BESTIARY_CATALOG = {
       spirit: 2,
       luck: 5,
     },
+    assets: {},
     tags: ['undead', 'melee', 'blood', 'common-enemy'],
   },
 } as const;

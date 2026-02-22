@@ -45,7 +45,7 @@ async function safeReadFile(path: string): Promise<string | null> {
 }
 
 /**
- * List all YAML entity files in a category (excludes _template.yaml and _index.yaml).
+ * List all YAML entity files in a category (excludes _template.yaml, _index.yaml, and asset-map.yaml).
  */
 async function listEntityFiles(category: Category): Promise<string[]> {
   const dir = resolve(resolveGameDocsRoot(), category);
@@ -53,7 +53,7 @@ async function listEntityFiles(category: Category): Promise<string[]> {
 
   try {
     const files = await readdir(dir);
-    return files.filter((f) => f.endsWith('.yaml') && !f.startsWith('_'));
+    return files.filter((f) => f.endsWith('.yaml') && !f.startsWith('_') && f !== 'asset-map.yaml');
   } catch {
     return [];
   }
@@ -393,10 +393,322 @@ export function registerGameDocsTools(server: McpServer): void {
     },
   );
 
+  // ── Asset Status ──────────────────────────────────────────────────────
+
+  server.tool(
+    'game_docs_asset_status',
+    'Get asset pipeline status for entities in a category. Reads asset-map.yaml and reports slot statuses. Filter by entity ID or status.',
+    {
+      category: z
+        .enum(['bestiary', 'abilities', 'classes', 'factions', 'items'])
+        .describe('Entity category.'),
+      entityId: z.string().optional().describe('Filter to a single entity ID.'),
+      status: z
+        .enum(['missing', 'prompted', 'generated', 'reviewed', 'uploaded', 'assigned'])
+        .optional()
+        .describe('Filter slots by lifecycle status.'),
+    },
+    async ({ category, entityId, status }) => {
+      const assetMapPath = resolve(resolveGameDocsRoot(), category, 'asset-map.yaml');
+      const content = await safeReadFile(assetMapPath);
+
+      if (!content) {
+        return jsonResponse({
+          category,
+          exists: false,
+          message: `No asset-map.yaml found in ${category}/. Create one from _template.asset-map.yaml.`,
+        });
+      }
+
+      // Parse the asset map using lightweight line-based approach
+      const entries = parseAssetMap(content);
+
+      // Apply filters
+      let filtered = entries;
+      if (entityId) {
+        filtered = filtered.filter((e) => e.entityId === entityId);
+      }
+      if (status) {
+        filtered = filtered
+          .map((e) => ({
+            ...e,
+            slots: e.slots.filter((s) => s.status === status),
+          }))
+          .filter((e) => e.slots.length > 0);
+      }
+
+      // Compute summary
+      const statusCounts: Record<string, number> = {};
+      for (const entry of filtered) {
+        for (const slot of entry.slots) {
+          statusCounts[slot.status] = (statusCounts[slot.status] ?? 0) + 1;
+        }
+      }
+
+      return jsonResponse({
+        category,
+        totalEntities: filtered.length,
+        totalSlots: Object.values(statusCounts).reduce((a, b) => a + b, 0),
+        statusCounts,
+        entities: filtered,
+      });
+    },
+  );
+
+  // ── Asset Assign ──────────────────────────────────────────────────────
+
+  server.tool(
+    'game_docs_asset_assign',
+    'Update an asset slot in asset-map.yaml. Set status, assetRef, or modelRef for a specific entity + slot.',
+    {
+      category: z
+        .enum(['bestiary', 'abilities', 'classes', 'factions', 'items'])
+        .describe('Entity category.'),
+      entityId: z.string().describe('Entity ID (kebab-case).'),
+      slot: z.string().describe('Slot name (e.g. icon, rig, hit-sfx).'),
+      status: z
+        .enum(['missing', 'prompted', 'generated', 'reviewed', 'uploaded', 'assigned'])
+        .describe('New lifecycle status.'),
+      assetRef: z.string().optional().describe('Roblox asset URI (rbxassetid://<number>).'),
+      modelRef: z.string().optional().describe('ReplicatedStorage model name.'),
+    },
+    async ({ category, entityId, slot, status: newStatus, assetRef, modelRef }) => {
+      const assetMapPath = resolve(resolveGameDocsRoot(), category, 'asset-map.yaml');
+      const content = await safeReadFile(assetMapPath);
+
+      if (!content) {
+        return {
+          content: [textContent(`No asset-map.yaml found in ${category}/. Create one first.`)],
+          isError: true,
+        };
+      }
+
+      // Find and update the specific slot using line-based editing
+      const lines = content.split('\n');
+      let inEntity = false;
+      let inSlot = false;
+      let _entityIndent = -1;
+      let _slotIndent = -1;
+      let slotStartLine = -1;
+      let slotEndLine = -1;
+      let found = false;
+
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        const trimmed = line.trimStart();
+        const indent = line.length - trimmed.length;
+
+        // Skip comments and blank lines
+        if (trimmed.startsWith('#') || trimmed === '') continue;
+
+        // Detect entity-level key (zero indent, ends with :)
+        if (indent === 0 && trimmed.endsWith(':') && !trimmed.startsWith(' ')) {
+          const key = trimmed.slice(0, -1);
+          inEntity = key === entityId;
+          _entityIndent = 0;
+          inSlot = false;
+          continue;
+        }
+
+        if (!inEntity) continue;
+
+        // Detect slot-level key (indent = 2, ends with :)
+        if (indent === 2 && trimmed.endsWith(':')) {
+          // Close previous slot if we were tracking one
+          if (inSlot && found) {
+            slotEndLine = i;
+            break;
+          }
+          const key = trimmed.slice(0, -1);
+          if (key === slot) {
+            inSlot = true;
+            found = true;
+            slotStartLine = i;
+            _slotIndent = 2;
+          } else {
+            inSlot = false;
+          }
+          continue;
+        }
+
+        // If we hit a new entity (indent 0), close slot
+        if (indent === 0 && inSlot && found) {
+          slotEndLine = i;
+          break;
+        }
+      }
+
+      if (!found) {
+        return {
+          content: [
+            textContent(
+              `Slot '${slot}' not found for entity '${entityId}' in ${category}/asset-map.yaml.`,
+            ),
+          ],
+          isError: true,
+        };
+      }
+
+      // If slotEndLine wasn't set, it extends to end of file
+      if (slotEndLine === -1) {
+        slotEndLine = lines.length;
+      }
+
+      // Build replacement lines for the slot
+      const newLines: string[] = [`  ${slot}:`];
+      newLines.push(`    status: ${newStatus}`);
+      if (assetRef) {
+        newLines.push(`    assetRef: ${assetRef}`);
+      }
+      if (modelRef) {
+        newLines.push(`    modelRef: ${modelRef}`);
+      }
+
+      // Preserve suggestedFilename and prompt from original if they exist
+      for (let i = slotStartLine + 1; i < slotEndLine; i++) {
+        const trimmed = lines[i].trimStart();
+        if (trimmed.startsWith('suggestedFilename:')) {
+          newLines.push(`    ${trimmed}`);
+        }
+        if (trimmed.startsWith('prompt:')) {
+          // Include the prompt and any continuation lines
+          newLines.push(`    ${trimmed}`);
+          for (let j = i + 1; j < slotEndLine; j++) {
+            const contLine = lines[j];
+            const contTrimmed = contLine.trimStart();
+            const contIndent = contLine.length - contTrimmed.length;
+            if (
+              contIndent >= 6 &&
+              !contTrimmed.startsWith('status:') &&
+              !contTrimmed.startsWith('assetRef:') &&
+              !contTrimmed.startsWith('modelRef:') &&
+              !contTrimmed.startsWith('suggestedFilename:')
+            ) {
+              newLines.push(contLine);
+            } else {
+              break;
+            }
+          }
+        }
+      }
+
+      // Replace the slot lines
+      lines.splice(slotStartLine, slotEndLine - slotStartLine, ...newLines);
+      await writeFile(assetMapPath, lines.join('\n'), 'utf-8');
+
+      logger.info('game-docs', `Updated ${category}/${entityId}/${slot} → ${newStatus}`);
+
+      return jsonResponse({
+        success: true,
+        category,
+        entityId,
+        slot,
+        status: newStatus,
+        assetRef: assetRef ?? null,
+        modelRef: modelRef ?? null,
+      });
+    },
+  );
+
   logger.info('game-docs', 'Registered game docs tools');
 }
 
 // ─── YAML Helpers (lightweight, no external dependency) ──────────────────────
+
+/**
+ * Lightweight parser for asset-map.yaml files.
+ * Returns structured entries with entity IDs and their slot statuses.
+ */
+interface AssetSlotInfo {
+  slot: string;
+  status: string;
+  assetRef?: string;
+  modelRef?: string;
+  suggestedFilename?: string;
+  hasPrompt: boolean;
+}
+
+interface AssetMapEntry {
+  entityId: string;
+  slots: AssetSlotInfo[];
+}
+
+function parseAssetMap(content: string): AssetMapEntry[] {
+  const lines = content.split('\n');
+  const entries: AssetMapEntry[] = [];
+  let currentEntity: AssetMapEntry | null = null;
+  let currentSlot: AssetSlotInfo | null = null;
+
+  for (const line of lines) {
+    const trimmed = line.trimStart();
+    const indent = line.length - trimmed.length;
+
+    // Skip comments and blank lines
+    if (trimmed.startsWith('#') || trimmed === '') continue;
+
+    // Entity-level key (indent 0)
+    if (indent === 0 && trimmed.endsWith(':')) {
+      if (currentEntity && currentSlot) {
+        currentEntity.slots.push(currentSlot);
+        currentSlot = null;
+      }
+      if (currentEntity) entries.push(currentEntity);
+      currentEntity = { entityId: trimmed.slice(0, -1), slots: [] };
+      continue;
+    }
+
+    if (!currentEntity) continue;
+
+    // Slot-level key (indent 2)
+    if (indent === 2 && trimmed.endsWith(':')) {
+      if (currentSlot) currentEntity.slots.push(currentSlot);
+      currentSlot = { slot: trimmed.slice(0, -1), status: 'missing', hasPrompt: false };
+      continue;
+    }
+
+    if (!currentSlot) continue;
+
+    // Slot properties (indent 4+)
+    if (indent >= 4) {
+      const statusMatch = trimmed.match(/^status:\s*(.+)/);
+      if (statusMatch) {
+        currentSlot.status = statusMatch[1].trim();
+        continue;
+      }
+
+      const assetRefMatch = trimmed.match(/^assetRef:\s*(.+)/);
+      if (assetRefMatch) {
+        currentSlot.assetRef = assetRefMatch[1].trim();
+        continue;
+      }
+
+      const modelRefMatch = trimmed.match(/^modelRef:\s*(.+)/);
+      if (modelRefMatch) {
+        currentSlot.modelRef = modelRefMatch[1].trim();
+        continue;
+      }
+
+      const filenameMatch = trimmed.match(/^suggestedFilename:\s*(.+)/);
+      if (filenameMatch) {
+        currentSlot.suggestedFilename = filenameMatch[1].trim();
+        continue;
+      }
+
+      if (trimmed.startsWith('prompt:')) {
+        currentSlot.hasPrompt = true;
+        continue;
+      }
+    }
+  }
+
+  // Flush last slot and entity
+  if (currentEntity) {
+    if (currentSlot) currentEntity.slots.push(currentSlot);
+    entries.push(currentEntity);
+  }
+
+  return entries;
+}
 
 /**
  * Extract a simple top-level YAML field value (handles quoted and unquoted strings).

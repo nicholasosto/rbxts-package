@@ -10,6 +10,13 @@ export interface ClientToServerEvents {
 
   /** Player activates an ability by slot index */
   AbilityUsed(abilityId: string): void;
+
+  // ── NPC Test Events ───────────────────────────────────────
+  /** Request an NPC spawn by faction name */
+  SpawnNpc(faction: string): void;
+
+  /** Request despawning all test NPCs */
+  DespawnAllNpcs(): void;
 }
 
 /**
@@ -30,6 +37,13 @@ export interface ServerToClientEvents {
 
   /** Sends the full player profile to the client after data loads */
   ProfileLoaded(profile: PlayerProfile): void;
+
+  // ── NPC Test Events ───────────────────────────────────────
+  /** Confirms an NPC was spawned (id, faction, display name) */
+  NpcSpawned(npcId: string, faction: string, name: string): void;
+
+  /** Confirms all test NPCs were despawned */
+  NpcsDespawned(count: number): void;
 }
 
 /**

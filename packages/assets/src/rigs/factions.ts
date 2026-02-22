@@ -1,35 +1,36 @@
-/** Rig model names organized by faction — referenced by name in ReplicatedStorage */
+/**
+ * Rig model names organized by faction — referenced by name in ReplicatedStorage.
+ * Matches the "Asset Package - RIGS" (rbxassetid://16034962856) hierarchy.
+ */
 
-export const RobotFaction = {
-  EvilHal: 'Evil_Hal',
-  MonkeyMecha: 'Monkey_Mecha',
-  Steambot: 'Steambot',
-  Worker: 'Worker',
-  FreddyFaz: 'Freddy_Faz',
-} as const;
-
-export const SpiritFaction = {
-  Ghost: 'Ghost',
-  Wisp: 'Wisp',
-  Specter: 'Specter',
-  Elemental: 'Spirit_Elemental',
-  DragonBoy: 'Spirit_Dragon_Boy',
+export const BloodFaction = {
+  BloodToad: 'BloodToad',
 } as const;
 
 export const DecayFaction = {
+  Wendigo: 'Wendigo',
   Zombie: 'Zombie',
-  ZombieHipster: 'Zombie_Hipster',
+  ZombieHipster: 'Zombie Hipster',
 } as const;
 
-export const VoidFaction = {
-  Shadow: 'Shadow',
-  Darkling: 'Darkling',
-  Wendigo: 'Void_Wendigo',
-  VoidMaster: 'Void_Master',
+export const FatelessFaction = {
+  FatelessMaster: 'Fateless Master',
+  WolfMan: 'Wolf Man',
 } as const;
 
-export const BloodFaction = {
-  Vampire: 'Vampire',
-  BloodMist: 'Blood_Mist',
-  BloodToad: 'Blood_Toad',
+export const RobotFaction = {
+  Animatronic: 'Animatronic',
+  EvilLordHal2000: 'Evil Lord Hal 2000',
+  MechaMonkey: 'Mecha Monkey',
+  SteamBot: 'Steam Bot',
+  WorkerBot: 'Worker Bot',
+} as const;
+
+export const SpiritFaction = {
+  Helper2D: '2D_Helper',
+  AnimeFemale: 'Anime Female',
+  AnimeBandanna: 'Anime_Bandanna',
+  DragonBoy: 'Dragon Boy',
+  DragonGirl: 'Dragon Girl',
+  Elemental: 'Elemental',
 } as const;

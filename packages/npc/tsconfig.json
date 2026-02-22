@@ -24,9 +24,9 @@
     "skipLibCheck": true,
     "paths": {
       "@rbxts/*": ["./node_modules/@rbxts/*"],
-      "@nicholasosto/assets": ["./node_modules/@nicholasosto/assets/out"],
-      "@nicholasosto/combat-stats": ["./node_modules/@nicholasosto/combat-stats/out"],
-      "@nicholasosto/name-generator": ["./node_modules/@nicholasosto/name-generator/out"]
+      "@nicholasosto/assets": ["./node_modules/@nicholasosto/assets"],
+      "@nicholasosto/combat-stats": ["./node_modules/@nicholasosto/combat-stats"],
+      "@nicholasosto/name-generator": ["./node_modules/@nicholasosto/name-generator"]
     }
   },
   "include": ["src/**/*"]

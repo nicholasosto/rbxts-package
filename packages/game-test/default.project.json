@@ -79,22 +79,40 @@
           "@nicholasosto": {
             "$className": "Folder",
             "assets": {
-              "$path": "node_modules/@nicholasosto/assets/out"
+              "$className": "Folder",
+              "out": {
+                "$path": "node_modules/@nicholasosto/assets/out"
+              }
             },
             "combat-stats": {
-              "$path": "node_modules/@nicholasosto/combat-stats/out"
+              "$className": "Folder",
+              "out": {
+                "$path": "node_modules/@nicholasosto/combat-stats/out"
+              }
             },
             "name-generator": {
-              "$path": "node_modules/@nicholasosto/name-generator/out"
+              "$className": "Folder",
+              "out": {
+                "$path": "node_modules/@nicholasosto/name-generator/out"
+              }
             },
             "ultra-ui": {
-              "$path": "node_modules/@nicholasosto/ultra-ui/out"
+              "$className": "Folder",
+              "out": {
+                "$path": "node_modules/@nicholasosto/ultra-ui/out"
+              }
             },
             "timer": {
-              "$path": "node_modules/@nicholasosto/timer/out"
+              "$className": "Folder",
+              "out": {
+                "$path": "node_modules/@nicholasosto/timer/out"
+              }
             },
             "npc": {
-              "$path": "node_modules/@nicholasosto/npc/out"
+              "$className": "Folder",
+              "out": {
+                "$path": "node_modules/@nicholasosto/npc/out"
+              }
             }
           },
           "@rbxts-js": {

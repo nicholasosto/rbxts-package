@@ -1,18 +1,24 @@
-import { RobotFaction, SpiritFaction, DecayFaction, VoidFaction, BloodFaction } from './factions';
+import {
+  BloodFaction,
+  DecayFaction,
+  FatelessFaction,
+  RobotFaction,
+  SpiritFaction,
+} from './factions';
 
 /**
  * RIG_CATALOG
  *
  * NPC/enemy rig model names organized by faction.
- * These reference model names in ReplicatedStorage, not asset IDs.
- * Usage: RIG_CATALOG.Robot.Steambot
+ * Matches the "Asset Package - RIGS" (rbxassetid://16034962856) hierarchy.
+ * Usage: RIG_CATALOG.Robot.SteamBot
  */
 export const RIG_CATALOG = {
+  Blood: BloodFaction,
+  Decay: DecayFaction,
+  Fateless: FatelessFaction,
   Robot: RobotFaction,
   Spirit: SpiritFaction,
-  Decay: DecayFaction,
-  Void: VoidFaction,
-  Blood: BloodFaction,
 } as const;
 
 export type RigFaction = keyof typeof RIG_CATALOG;

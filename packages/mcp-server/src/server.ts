@@ -10,17 +10,18 @@ import { resolve } from 'node:path';
 import { validateEnvironment } from './config.js';
 import { logger } from './logger.js';
 import {
-  registerTextGenerationTool,
-  registerImageGenerationTool,
-  registerImageAnalysisTool,
   registerAssetImagePipelineTool,
-  registerDatastoreTools,
-  registerMessagingTools,
   registerAssetTools,
+  registerDatastoreTools,
+  registerImageAnalysisTool,
+  registerImageGenerationTool,
   registerInstanceTools,
   registerInventoryTools,
-  registerThumbnailTools,
+  registerLocalImageGenerationTool,
+  registerMessagingTools,
   registerPackageInfoTools,
+  registerTextGenerationTool,
+  registerThumbnailTools,
 } from './tools/index.js';
 
 /**
@@ -61,6 +62,9 @@ export function createServer(): McpServer {
 
   // Asset image pipeline (generate → upload combined)
   registerAssetImagePipelineTool(server);
+
+  // Local image generation (generate → save to local assets folder)
+  registerLocalImageGenerationTool(server);
 
   // Roblox Open Cloud tools
   registerDatastoreTools(server);

@@ -44,6 +44,11 @@ export function getDefaultUserId(): string {
   return process.env.ROBLOX_USER_ID ?? '3394700055';
 }
 
+/** Local assets directory for saving generated images. */
+export function getLocalAssetsDir(): string {
+  return process.env.LOCAL_ASSETS_DIR ?? '/Users/nicholasosto/GameDev/assets';
+}
+
 // ─── API Keys (call-time reads) ───────────────────────────────────────────────
 
 /** Read the Roblox Cloud API key from environment at call time. */

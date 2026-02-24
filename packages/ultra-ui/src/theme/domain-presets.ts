@@ -7,10 +7,17 @@
  * `backgroundImage` / `backgroundSliceCenter` fields to each.
  *
  * Domains: blood, decay, spirit, robot, fateless
+ *
+ * 9-slice wiring: After uploading domain slice frames to Roblox,
+ * replace rbxassetid://0 in SliceFrames catalog, then uncomment
+ * the backgroundImage / titleBarImage lines below.
  */
 
 import { DARK_THEME } from './presets';
 import { type UltraTheme } from './types';
+
+// import { SliceFrames } from '@nicholasosto/assets';
+// const DOMAIN_SLICE_CENTER = new Rect(128, 128, 896, 896);
 
 // ─── Blood Domain ──────────────────────────────────────────────────────────
 // Crimson thorns, dark red, arterial glow.
@@ -23,8 +30,10 @@ export const BLOOD_THEME: UltraTheme = {
     titleBarColor: Color3.fromRGB(60, 15, 15),
     borderColor: Color3.fromRGB(160, 30, 30),
     titleTextColor: Color3.fromRGB(255, 180, 180),
-    // backgroundImage: "rbxassetid://...",  // Add after upload
-    // backgroundSliceCenter: new Rect(64, 64, 448, 448),
+    // backgroundImage: SliceFrames.BloodPanelFrame.image,
+    // backgroundSliceCenter: DOMAIN_SLICE_CENTER,
+    // titleBarImage: SliceFrames.BloodTitleBar.image,
+    // titleBarSliceCenter: DOMAIN_SLICE_CENTER,
   },
   bar: {
     ...DARK_THEME.bar,
@@ -48,6 +57,10 @@ export const DECAY_THEME: UltraTheme = {
     titleBarColor: Color3.fromRGB(20, 45, 15),
     borderColor: Color3.fromRGB(80, 140, 40),
     titleTextColor: Color3.fromRGB(200, 255, 180),
+    // backgroundImage: SliceFrames.DecayPanelFrame.image,
+    // backgroundSliceCenter: DOMAIN_SLICE_CENTER,
+    // titleBarImage: SliceFrames.DecayTitleBar.image,
+    // titleBarSliceCenter: DOMAIN_SLICE_CENTER,
   },
   bar: {
     ...DARK_THEME.bar,
@@ -72,6 +85,10 @@ export const SPIRIT_THEME: UltraTheme = {
     titleBarColor: Color3.fromRGB(15, 25, 60),
     borderColor: Color3.fromRGB(80, 120, 220),
     titleTextColor: Color3.fromRGB(200, 220, 255),
+    // backgroundImage: SliceFrames.SpiritPanelFrame.image,
+    // backgroundSliceCenter: DOMAIN_SLICE_CENTER,
+    // titleBarImage: SliceFrames.SpiritTitleBar.image,
+    // titleBarSliceCenter: DOMAIN_SLICE_CENTER,
   },
   bar: {
     ...DARK_THEME.bar,
@@ -95,6 +112,10 @@ export const ROBOT_THEME: UltraTheme = {
     titleBarColor: Color3.fromRGB(30, 35, 40),
     borderColor: Color3.fromRGB(0, 200, 220),
     titleTextColor: Color3.fromRGB(0, 240, 255),
+    // backgroundImage: SliceFrames.RobotPanelFrame.image,
+    // backgroundSliceCenter: DOMAIN_SLICE_CENTER,
+    // titleBarImage: SliceFrames.RobotTitleBar.image,
+    // titleBarSliceCenter: DOMAIN_SLICE_CENTER,
   },
   bar: {
     ...DARK_THEME.bar,
@@ -118,6 +139,10 @@ export const FATELESS_THEME: UltraTheme = {
     titleBarColor: Color3.fromRGB(30, 15, 50),
     borderColor: Color3.fromRGB(140, 60, 200),
     titleTextColor: Color3.fromRGB(220, 180, 255),
+    // backgroundImage: SliceFrames.FatelessPanelFrame.image,
+    // backgroundSliceCenter: DOMAIN_SLICE_CENTER,
+    // titleBarImage: SliceFrames.FatelessTitleBar.image,
+    // titleBarSliceCenter: DOMAIN_SLICE_CENTER,
   },
   bar: {
     ...DARK_THEME.bar,

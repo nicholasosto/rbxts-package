@@ -10,6 +10,7 @@ import { scaffold } from './scaffold';
 import { AssetCatalogScreen } from './screens/asset-catalog-screen';
 import { InventoryScreen } from './screens/inventory-screen';
 import { MenuScreen } from './screens/menu-screen';
+import { SliceTestScreen } from './screens/slice-test-screen';
 
 /**
  * App — Root UI Controller
@@ -75,6 +76,7 @@ export class App implements OnStart {
               createPortal(<InventoryScreen />, scaffold.gameplay.inventoryContent)}
             {scaffold.gameplay.catalogContent &&
               createPortal(<AssetCatalogScreen />, scaffold.gameplay.catalogContent)}
+            <SliceTestScreen />
           </React.Fragment>
         </ThemeProvider>
       </ReflexProvider>,

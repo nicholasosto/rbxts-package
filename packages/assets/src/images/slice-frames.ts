@@ -14,20 +14,42 @@
  *   sliceMinX/Y = left/top inset (border width)
  *   sliceMaxX/Y = right/bottom boundary (image size - border width)
  *
- * For a 512x512 image with 64px borders: { sliceMinX: 64, sliceMinY: 64, sliceMaxX: 448, sliceMaxY: 448 }
+ * For a 1024x1024 image with 128px borders:
+ *   { sliceMinX: 128, sliceMinY: 128, sliceMaxX: 896, sliceMaxY: 896 }
+ *
+ * Local files: ~/GameDev/assets/images/slice-frames/Slice Frame - {Domain} {Panel|Title Bar}.png
  */
 
-import type { SliceFrameDescriptor } from '../types';
+import { type SliceFrameDescriptor, asImageAsset } from '../types';
 
-/** Per-domain panel frame sliced images. */
+/** Standard 128px border insets for 1024x1024 domain frames. */
+const DOMAIN_SLICE = { sliceMinX: 128, sliceMinY: 128, sliceMaxX: 896, sliceMaxY: 896 } as const;
+
+/** Per-domain panel frame and title bar sliced images. */
 export const SliceFrames = {
-  // Domain panel frames — populate after AI generation & upload:
-  // BloodPanelFrame: {
-  //   image: asImageAsset("rbxassetid://000000"),
-  //   sliceMinX: 64, sliceMinY: 64, sliceMaxX: 448, sliceMaxY: 448,
-  // },
-  // DecayPanelFrame: { ... },
-  // SpiritPanelFrame: { ... },
-  // RobotPanelFrame: { ... },
-  // FatelessPanelFrame: { ... },
+  // ── Blood Domain ───────────────────────────────────────────────────
+  // Local: "Slice Frame - Blood Panel.png" / "Slice Frame - Blood Title Bar.png"
+  // TODO: Replace placeholder IDs after Roblox upload
+  BloodPanelFrame: { image: asImageAsset('rbxassetid://0'), ...DOMAIN_SLICE },
+  BloodTitleBar: { image: asImageAsset('rbxassetid://0'), ...DOMAIN_SLICE },
+
+  // ── Decay Domain ───────────────────────────────────────────────────
+  // Local: "Slice Frame - Decay Panel.png" / "Slice Frame - Decay Title Bar.png"
+  DecayPanelFrame: { image: asImageAsset('rbxassetid://0'), ...DOMAIN_SLICE },
+  DecayTitleBar: { image: asImageAsset('rbxassetid://0'), ...DOMAIN_SLICE },
+
+  // ── Spirit Domain ──────────────────────────────────────────────────
+  // Local: "Slice Frame - Spirit Panel.png" / "Slice Frame - Spirit Title Bar.png"
+  SpiritPanelFrame: { image: asImageAsset('rbxassetid://0'), ...DOMAIN_SLICE },
+  SpiritTitleBar: { image: asImageAsset('rbxassetid://0'), ...DOMAIN_SLICE },
+
+  // ── Robot Domain ───────────────────────────────────────────────────
+  // Local: "Slice Frame - Robot Panel.png" / "Slice Frame - Robot Title Bar.png"
+  RobotPanelFrame: { image: asImageAsset('rbxassetid://120438321019486'), ...DOMAIN_SLICE },
+  RobotTitleBar: { image: asImageAsset('rbxassetid://81675775872733'), ...DOMAIN_SLICE },
+
+  // ── Fateless Domain ────────────────────────────────────────────────
+  // Local: "Slice Frame - Fateless Panel.png" / "Slice Frame - Fateless Title Bar.png"
+  FatelessPanelFrame: { image: asImageAsset('rbxassetid://0'), ...DOMAIN_SLICE },
+  FatelessTitleBar: { image: asImageAsset('rbxassetid://0'), ...DOMAIN_SLICE },
 } as const satisfies Record<string, SliceFrameDescriptor>;

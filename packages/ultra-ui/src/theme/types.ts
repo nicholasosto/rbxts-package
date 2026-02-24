@@ -44,6 +44,19 @@ export interface PanelTheme {
   cornerRadius: UDim;
   /** Overlay dim transparency for modals (0 = fully opaque). */
   overlayTransparency: number;
+
+  // ── Optional 9-slice image theming ──
+
+  /** Optional 9-slice background image (overrides backgroundColor when set). */
+  backgroundImage?: string;
+  /** Slice center rect for the background image. */
+  backgroundSliceCenter?: Rect;
+  /** Optional tint color applied to the background image. */
+  backgroundImageColor?: Color3;
+  /** Optional 9-slice title bar image (overrides titleBarColor when set). */
+  titleBarImage?: string;
+  /** Slice center rect for the title bar image. */
+  titleBarSliceCenter?: Rect;
 }
 
 /** Inventory / item slot theme values. */

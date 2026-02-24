@@ -11,6 +11,7 @@
 
 import React from '@rbxts/react';
 import { UserInputService } from '@rbxts/services';
+import { NineSlice } from '../primitives';
 import { useTheme } from '../theme';
 
 export interface PanelProps {
@@ -104,29 +105,61 @@ export function Panel(props: PanelProps): React.Element | undefined {
 
   if (!isOpen) return undefined;
 
+  const hasBackgroundImage =
+    theme.panel.backgroundImage !== undefined && theme.panel.backgroundSliceCenter !== undefined;
+  const hasTitleBarImage =
+    theme.panel.titleBarImage !== undefined && theme.panel.titleBarSliceCenter !== undefined;
+
   return (
     <frame
       key="Panel"
       AnchorPoint={anchorPoint}
       Position={currentPosition}
       Size={size}
-      BackgroundColor3={theme.panel.backgroundColor}
-      BackgroundTransparency={theme.panel.backgroundTransparency}
+      BackgroundColor3={hasBackgroundImage ? undefined : theme.panel.backgroundColor}
+      BackgroundTransparency={hasBackgroundImage ? 1 : theme.panel.backgroundTransparency}
       BorderSizePixel={0}
       ZIndex={baseZIndex}
     >
-      <uicorner CornerRadius={theme.panel.cornerRadius} />
-      <uistroke Color={theme.panel.borderColor} Thickness={theme.panel.borderThickness} />
+      {/* 9-slice background (when theme provides image) */}
+      {hasBackgroundImage && (
+        <NineSlice
+          image={theme.panel.backgroundImage!}
+          sliceCenter={theme.panel.backgroundSliceCenter!}
+          size={UDim2.fromScale(1, 1)}
+          imageColor={theme.panel.backgroundImageColor}
+          imageTransparency={theme.panel.backgroundTransparency}
+          zIndex={baseZIndex}
+        />
+      )}
+
+      {/* Fallback: code-based corner + stroke (only when no image) */}
+      {!hasBackgroundImage && (
+        <>
+          <uicorner CornerRadius={theme.panel.cornerRadius} />
+          <uistroke Color={theme.panel.borderColor} Thickness={theme.panel.borderThickness} />
+        </>
+      )}
 
       {/* Title bar */}
       <frame
         key="TitleBar"
         Size={new UDim2(1, 0, 0, 36)}
-        BackgroundColor3={theme.panel.titleBarColor}
+        BackgroundColor3={hasTitleBarImage ? undefined : theme.panel.titleBarColor}
+        BackgroundTransparency={hasTitleBarImage ? 1 : 0}
         BorderSizePixel={0}
         ZIndex={baseZIndex + 1}
       >
-        <uicorner CornerRadius={theme.panel.cornerRadius} />
+        {hasTitleBarImage ? (
+          <NineSlice
+            image={theme.panel.titleBarImage!}
+            sliceCenter={theme.panel.titleBarSliceCenter!}
+            size={UDim2.fromScale(1, 1)}
+            zIndex={baseZIndex + 1}
+          />
+        ) : (
+          <uicorner CornerRadius={theme.panel.cornerRadius} />
+        )}
 
         {isDraggable && (
           <frame

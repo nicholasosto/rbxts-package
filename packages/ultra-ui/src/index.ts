@@ -7,7 +7,17 @@
  */
 
 // ── Theme ──────────────────────────────────────────────────────────────────
-export { DARK_THEME, LIGHT_THEME, ThemeProvider, useTheme } from './theme';
+export {
+  BLOOD_THEME,
+  DARK_THEME,
+  DECAY_THEME,
+  FATELESS_THEME,
+  LIGHT_THEME,
+  ROBOT_THEME,
+  SPIRIT_THEME,
+  ThemeProvider,
+  useTheme,
+} from './theme';
 
 export type {
   ActionBarTheme,
@@ -20,9 +30,27 @@ export type {
   UltraTheme,
 } from './theme';
 
+// ── Shared Types ───────────────────────────────────────────────────────────
+export type { SpriteSheetDescriptor } from './types';
+
 // ── Primitives ─────────────────────────────────────────────────────────────
-export { Icon, NineSlice, ProgressFill } from './primitives';
-export type { IconProps, NineSliceProps, ProgressFillProps } from './primitives';
+export {
+  AnimatedBorder,
+  Icon,
+  NineSlice,
+  ProgressFill,
+  SpriteSheet,
+  useSpriteAnimation,
+} from './primitives';
+export type {
+  AnimatedBorderProps,
+  IconProps,
+  NineSliceProps,
+  ProgressFillProps,
+  SpriteAnimationOptions,
+  SpriteAnimationResult,
+  SpriteSheetProps,
+} from './primitives';
 
 // ── Bars (resource / level) ────────────────────────────────────────────────
 export * from './bars';

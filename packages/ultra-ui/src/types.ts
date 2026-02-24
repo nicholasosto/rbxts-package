@@ -121,3 +121,25 @@ export interface TopCenterBarProps extends ResourceBarProps {
   /** Optional subtitle (e.g. "World Boss", "Dungeon Guardian"). */
   subtitle?: string;
 }
+
+// ── Sprite Sheet ───────────────────────────────────────────────────────────
+
+/**
+ * Describes a sprite sheet image for flipbook-style animations.
+ * Mirrors the `SpriteSheetDescriptor` from @nicholasosto/assets
+ * but defined locally to avoid build-order coupling.
+ */
+export interface SpriteSheetDescriptor {
+  /** The uploaded image asset URI (rbxassetid://...). */
+  image: string;
+  /** Total image dimensions in pixels. */
+  imageSize: Vector2;
+  /** Size of a single frame in pixels. */
+  frameSize: Vector2;
+  /** Number of rows in the grid. */
+  rows: number;
+  /** Number of columns in the grid. */
+  columns: number;
+  /** Total number of frames (may be less than rows * columns). */
+  frameCount: number;
+}

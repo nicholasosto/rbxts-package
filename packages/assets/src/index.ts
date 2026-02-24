@@ -16,6 +16,7 @@ export {
   asImageAsset,
   asMeshAsset,
 } from './types';
+export type { SliceFrameDescriptor, SpriteSheetDescriptor } from './types';
 
 // Catalogs
 export { ACCESSORY_CATALOG } from './accessories';

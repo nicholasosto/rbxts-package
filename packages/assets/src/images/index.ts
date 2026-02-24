@@ -13,7 +13,9 @@ import { MenuPanelIcons } from './menu-panel-icons';
 import { PanelBackgrounds } from './panel-backgrounds';
 import { RarityFrames } from './rarity-frames';
 import { Screens } from './screens';
+import { SliceFrames } from './slice-frames';
 import { SoulGemIcons } from './soul-gem-icons';
+import { SpriteSheets } from './sprite-sheets';
 import { StatusIcons } from './status-icons';
 import { Textures } from './textures';
 import { UiControls } from './ui-controls';
@@ -44,6 +46,8 @@ export const IMAGE_CATALOG = {
   EquipmentIcons,
   SoulGemIcons,
   CharacterCardImages,
+  SliceFrames,
+  SpriteSheets,
 } as const;
 
 export type ImageCatalogKey = {

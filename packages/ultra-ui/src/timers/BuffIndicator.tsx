@@ -1,9 +1,12 @@
 /**
  * BuffIndicator — A single buff/debuff icon with remaining-time overlay.
+ * Optionally renders a looping sprite sheet animation behind the icon.
  */
 
 import React from '@rbxts/react';
+import { useSpriteAnimation } from '../primitives/useSpriteAnimation';
 import { useTheme } from '../theme';
+import type { SpriteSheetDescriptor } from '../types';
 import type { BuffData } from './types';
 
 export interface BuffIndicatorProps {
@@ -11,15 +14,35 @@ export interface BuffIndicatorProps {
   buff: BuffData;
   /** Icon size. Default: 36. */
   iconSize?: number;
+  /** Optional looping sprite animation rendered behind the icon. */
+  animSheet?: SpriteSheetDescriptor;
+  /** Frames per second for the sprite animation. Default: 8. */
+  animFps?: number;
 }
 
 export function BuffIndicator(props: BuffIndicatorProps): React.Element {
-  const { buff, iconSize = 36 } = props;
+  const { buff, iconSize = 36, animSheet, animFps = 8 } = props;
   const theme = useTheme();
 
   const pct =
     buff.totalSeconds > 0 ? math.clamp(buff.remainingSeconds / buff.totalSeconds, 0, 1) : 0;
   const borderColor = buff.isDebuff === true ? Color3.fromRGB(220, 50, 50) : theme.timer.fillColor;
+
+  // Sprite animation (only ticks when sheet is provided and buff is active).
+  const hasAnim = animSheet !== undefined && pct > 0;
+  const anim = useSpriteAnimation({
+    descriptor: animSheet ?? {
+      image: '' as never,
+      imageSize: Vector2.zero,
+      frameSize: Vector2.zero,
+      rows: 1,
+      columns: 1,
+      frameCount: 1,
+    },
+    fps: animFps,
+    playing: hasAnim,
+    looping: true,
+  });
 
   return (
     <frame
@@ -31,6 +54,23 @@ export function BuffIndicator(props: BuffIndicatorProps): React.Element {
     >
       <uicorner CornerRadius={new UDim(0, 4)} />
       <uistroke Color={borderColor} Thickness={2} />
+
+      {/* Animated background (sprite sheet loop) */}
+      {hasAnim && animSheet !== undefined && (
+        <imagelabel
+          key="AnimBg"
+          Size={UDim2.fromScale(1, 1)}
+          Image={animSheet.image}
+          ImageRectOffset={anim.rectOffset}
+          ImageRectSize={anim.rectSize}
+          ImageTransparency={0.3}
+          BackgroundTransparency={1}
+          ScaleType={Enum.ScaleType.Stretch}
+          ZIndex={0}
+        >
+          <uicorner CornerRadius={new UDim(0, 4)} />
+        </imagelabel>
+      )}
 
       {/* Icon */}
       <imagelabel

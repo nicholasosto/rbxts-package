@@ -26,7 +26,7 @@ function getUploadedSliceFrames(): SliceEntry[] {
 
   for (const [key, descriptor] of pairs(catalog)) {
     // Skip placeholders that haven't been uploaded yet
-    if (descriptor.image === 'rbxassetid://0') continue;
+    if ((descriptor.image as unknown as string) === 'rbxassetid://0') continue;
     entries.push({
       label: key as string,
       image: descriptor.image as unknown as string,

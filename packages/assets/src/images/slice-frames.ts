@@ -25,6 +25,17 @@ import { type SliceFrameDescriptor, asImageAsset } from '../types';
 /** Standard 128px border insets for 1024x1024 domain frames. */
 const DOMAIN_SLICE = { sliceMinX: 128, sliceMinY: 128, sliceMaxX: 896, sliceMaxY: 896 } as const;
 
+/** Wider 256px border insets — use when AI art bleeds past the 128px zone. */
+const WIDE_SLICE = { sliceMinX: 256, sliceMinY: 256, sliceMaxX: 768, sliceMaxY: 768 } as const;
+
+/** Rectangular 1536x1024 title bar slice — wider L/R for corner gears, thinner T/B for horizontal borders. */
+const TITLE_BAR_SLICE = {
+  sliceMinX: 384,
+  sliceMinY: 192,
+  sliceMaxX: 1152,
+  sliceMaxY: 832,
+} as const;
+
 /** Per-domain panel frame and title bar sliced images. */
 export const SliceFrames = {
   // ── Blood Domain ───────────────────────────────────────────────────
@@ -45,8 +56,8 @@ export const SliceFrames = {
 
   // ── Robot Domain ───────────────────────────────────────────────────
   // Local: "Slice Frame - Robot Panel.png" / "Slice Frame - Robot Title Bar.png"
-  RobotPanelFrame: { image: asImageAsset('rbxassetid://120438321019486'), ...DOMAIN_SLICE },
-  RobotTitleBar: { image: asImageAsset('rbxassetid://81675775872733'), ...DOMAIN_SLICE },
+  RobotPanelFrame: { image: asImageAsset('rbxassetid://120438321019486'), ...WIDE_SLICE },
+  RobotTitleBar: { image: asImageAsset('rbxassetid://112104325497751'), ...TITLE_BAR_SLICE },
 
   // ── Fateless Domain ────────────────────────────────────────────────
   // Local: "Slice Frame - Fateless Panel.png" / "Slice Frame - Fateless Title Bar.png"

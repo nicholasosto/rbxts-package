@@ -18,12 +18,29 @@ Every entity has a YAML + Markdown pair:
 All at `game-docs/.schemas/`:
 
 - `_common.schema.json` — shared `$defs`: `AttributeBlock`, `EntityRef`, `AssetRef`, `DomainId`, `RarityTier`, `ScalingEntry`, `TagList`
+- `cosmology.schema.json` — cosmic constructs (exoverse, universe, planes, cosmic laws)
+- `epoch.schema.json` — reincarnation cycles / named ages
+- `timeline-event.schema.json` — individual historical events
+- `timeline.schema.json` — master chronological ordering
+- `domain.schema.json` — the five domain territories
 - `monster.schema.json` — bestiary entries
 - `ability.schema.json` — combat abilities
-- `faction.schema.json` — factions
+- `faction.schema.json` — factions (includes `motto`, `leader`, `allies`, `enemies`, `ranks`)
 - `class.schema.json` — player classes
 - `item.schema.json` — items/equipment
-- `domain.schema.json` — world domains
+
+## World-Building Hierarchy
+
+```
+Exoverse → Universe → Planes → Epochs → Timeline Events → Domains → Entities
+```
+
+| Layer     | Schema                       | Directory               | Content                                                      |
+| --------- | ---------------------------- | ----------------------- | ------------------------------------------------------------ |
+| Cosmology | `cosmology.schema.json`      | `world-lore/cosmology/` | Exoverse, universe, void/creation planes, reality balance    |
+| Epochs    | `epoch.schema.json`          | `world-lore/epochs/`    | First Reincarnation (destroyed), Epoch of Eternity (current) |
+| Timeline  | `timeline-event.schema.json` | `world-lore/timeline/`  | Events + master `timeline.yaml` ordering                     |
+| Domains   | `domain.schema.json`         | `world-lore/domains/`   | Blood, Decay, Spirit, Robot, Fateless                        |
 
 ## The Six Base Attributes
 

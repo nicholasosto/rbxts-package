@@ -1,10 +1,19 @@
 {
   "name": "@nicholasosto/timer",
   "version": "0.1.0",
-  "private": true,
   "description": "Full-featured Flamework-native timer system for Roblox-TS with display, effects, lifecycle hooks, and chainable API",
+  "license": "MIT",
   "main": "out/init.lua",
   "types": "out/index.d.ts",
+  "files": [
+    "out",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nicholasosto/rbxts-package",
+    "directory": "packages/timer"
+  },
   "scripts": {
     "build": "rbxtsc",
     "watch": "rbxtsc -w",

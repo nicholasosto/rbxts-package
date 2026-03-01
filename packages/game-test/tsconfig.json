@@ -11,7 +11,12 @@
     "noLib": true,
     "strict": true,
     "target": "ESNext",
-    "typeRoots": ["node_modules/@rbxts", "node_modules/@flamework", "node_modules/@nicholasosto"],
+    "typeRoots": [
+      "node_modules/@rbxts",
+      "node_modules/@flamework",
+      "node_modules/@nicholasosto",
+      "node_modules/@trembus"
+    ],
     "preserveSymlinks": true,
     "rootDir": "src",
     "outDir": "out",
@@ -34,7 +39,8 @@
       "@nicholasosto/name-generator": ["./node_modules/@nicholasosto/name-generator/out"],
       "@nicholasosto/npc": ["./node_modules/@nicholasosto/npc/out"],
       "@nicholasosto/ultra-ui": ["./node_modules/@nicholasosto/ultra-ui/out"],
-      "@nicholasosto/timer": ["./node_modules/@nicholasosto/timer/out"]
+      "@nicholasosto/timer": ["./node_modules/@nicholasosto/timer/out"],
+      "@trembus/timer": ["./node_modules/@trembus/timer/out"]
     }
   },
   "include": ["src/**/*"]

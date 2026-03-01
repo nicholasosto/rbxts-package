@@ -1,18 +1,18 @@
 import { Controller, type OnStart } from '@flamework/core';
 import { UserInputService } from '@rbxts/services';
 import {
-  type TimerController,
   TimerAnchor,
   TimerEffect,
   TimerFormat,
-  type Timer,
   TimerHooks,
-} from '@nicholasosto/timer';
+  type Timer,
+  type TimerController,
+} from '@trembus/timer';
 
 /**
  * TimerTestController
  *
- * Interactive test harness for the @nicholasosto/timer package.
+ * Interactive test harness for the @trembus/timer package.
  * Press keys to exercise different timer features:
  *
  *   T — 30s round timer (TopCenter, ColorShift + Pulse + Shake)

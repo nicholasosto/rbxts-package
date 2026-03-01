@@ -102,16 +102,19 @@
                 "$path": "node_modules/@nicholasosto/ultra-ui/out"
               }
             },
-            "timer": {
-              "$className": "Folder",
-              "out": {
-                "$path": "node_modules/@nicholasosto/timer/out"
-              }
-            },
             "npc": {
               "$className": "Folder",
               "out": {
                 "$path": "node_modules/@nicholasosto/npc/out"
+              }
+            }
+          },
+          "@trembus": {
+            "$className": "Folder",
+            "timer": {
+              "$className": "Folder",
+              "out": {
+                "$path": "node_modules/@trembus/timer/out"
               }
             }
           },

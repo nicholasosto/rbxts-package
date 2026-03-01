@@ -132,15 +132,15 @@ importers:
       '@nicholasosto/npc':
         specifier: workspace:*
         version: link:../npc
-      '@nicholasosto/timer':
-        specifier: workspace:*
-        version: link:../timer
       '@nicholasosto/ultra-ui':
         specifier: workspace:*
         version: link:../ultra-ui
       '@rbxts/profile-store':
         specifier: ^1.0.3
         version: 1.0.3
+      '@trembus/timer':
+        specifier: ^0.1.0
+        version: link:../timer
     devDependencies:
       '@flamework/components':
         specifier: ^1.3.2

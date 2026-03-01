@@ -16,7 +16,7 @@
     "@nicholasosto/name-generator": "workspace:*",
     "@nicholasosto/npc": "workspace:*",
     "@nicholasosto/ultra-ui": "workspace:*",
-    "@nicholasosto/timer": "workspace:*",
+    "@trembus/timer": "^0.1.0",
     "@rbxts/profile-store": "^1.0.3"
   },
   "devDependencies": {

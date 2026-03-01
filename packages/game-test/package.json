@@ -16,8 +16,9 @@
     "@nicholasosto/name-generator": "workspace:*",
     "@nicholasosto/npc": "workspace:*",
     "@nicholasosto/ultra-ui": "workspace:*",
-    "@trembus/timer": "^0.1.0",
-    "@rbxts/profile-store": "^1.0.3"
+    "@rbxts/profile-store": "^1.0.3",
+    "@trembus/rbxts-input-bus": "workspace:^",
+    "@trembus/timer": "^0.1.0"
   },
   "devDependencies": {
     "@flamework/components": "^1.3.2",

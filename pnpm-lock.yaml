@@ -138,6 +138,9 @@ importers:
       '@rbxts/profile-store':
         specifier: ^1.0.3
         version: 1.0.3
+      '@trembus/rbxts-input-bus':
+        specifier: workspace:^
+        version: link:../rbxts-input-bus
       '@trembus/timer':
         specifier: ^0.1.0
         version: link:../timer

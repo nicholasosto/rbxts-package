@@ -1,4 +1,4 @@
-# @nosto/rbxts-input-bus
+# @trembus/rbxts-input-bus
 
 Multi-device input bus for [roblox-ts](https://roblox-ts.com) games. Maps keyboard, gamepad, and touch inputs to logical actions through a priority-based context system.
 
@@ -14,7 +14,7 @@ Multi-device input bus for [roblox-ts](https://roblox-ts.com) games. Maps keyboa
 ## Install
 
 ```bash
-npm install @nosto/rbxts-input-bus
+npm install @trembus/rbxts-input-bus
 ```
 
 ## Quick Start
@@ -24,7 +24,7 @@ npm install @nosto/rbxts-input-bus
 **Without Flamework:**
 
 ```typescript
-import { InputController, GameplayContext, MenuContext } from '@nosto/rbxts-input-bus';
+import { InputController, GameplayContext, MenuContext } from '@trembus/rbxts-input-bus';
 
 const controller = new InputController();
 controller.initialize([GameplayContext, MenuContext]);
@@ -34,13 +34,13 @@ controller.initialize([GameplayContext, MenuContext]);
 
 ```typescript
 // Just import it — Flamework auto-instantiates @Controller classes.
-import { FlameworkInputController } from '@nosto/rbxts-input-bus';
+import { FlameworkInputController } from '@trembus/rbxts-input-bus';
 ```
 
 ### 2. Subscribe to actions
 
 ```typescript
-import { inputBus, Actions, ActionPhase } from '@nosto/rbxts-input-bus';
+import { inputBus, Actions, ActionPhase } from '@trembus/rbxts-input-bus';
 
 inputBus.onAction((payload) => {
   if (payload.action === Actions.Jump && payload.phase === ActionPhase.Started) {
@@ -66,7 +66,7 @@ controller.disableContext('Menu');
 Actions are logical names like `"Jump"`, `"Attack"`, or `"Ability1"`. The `Actions` constant provides autocomplete:
 
 ```typescript
-import { Actions } from '@nosto/rbxts-input-bus';
+import { Actions } from '@trembus/rbxts-input-bus';
 
 Actions.Jump; // "Jump"
 Actions.Ability3; // "Ability3"
@@ -183,7 +183,7 @@ class MyInputController extends InputController {
 ### Singleton
 
 ```typescript
-import { inputBus } from '@nosto/rbxts-input-bus';
+import { inputBus } from '@trembus/rbxts-input-bus';
 ```
 
 A default `InputBus` instance shared across the project. Use `new InputBus()` if you need isolated instances.

@@ -1,5 +1,5 @@
 /**
- * @nosto/rbxts-input-bus — InputController (Framework-Agnostic)
+ * @trembus/rbxts-input-bus — InputController (Framework-Agnostic)
  *
  * Manages multi-device input handling with context-based action
  * mapping. Maps physical inputs (keyboard, gamepad, touch) to
@@ -14,7 +14,13 @@
 
 import { UserInputService } from '@rbxts/services';
 import { inputBus } from '../core/bus';
-import { type ActionEventPayload, ActionPhase, type Binding, type InputAction, type InputContext } from '../core/types';
+import {
+  type ActionEventPayload,
+  ActionPhase,
+  type Binding,
+  type InputAction,
+  type InputContext,
+} from '../core/types';
 
 /** The three device families supported. */
 export type InputDevice = 'KBM' | 'Gamepad' | 'Touch';

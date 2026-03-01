@@ -1,5 +1,5 @@
 /**
- * @nosto/rbxts-input-bus — Gameplay Input Context
+ * @trembus/rbxts-input-bus — Gameplay Input Context
  *
  * Default input context for RPG-style gameplay. Includes bindings
  * for movement, combat, abilities (5 slots), UI toggles, and debug

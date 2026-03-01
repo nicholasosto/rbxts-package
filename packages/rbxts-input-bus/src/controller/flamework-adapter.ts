@@ -1,5 +1,5 @@
 /**
- * @nosto/rbxts-input-bus — Flamework Adapter
+ * @trembus/rbxts-input-bus — Flamework Adapter
  *
  * Thin wrapper that makes InputController work as a Flamework
  * @Controller with OnStart lifecycle. Registers the default
@@ -12,7 +12,7 @@
  * // auto-instantiate this controller and call onStart().
  * // Then subscribe to the bus in your other controllers:
  *
- * import { inputBus, Actions, ActionPhase } from "@nosto/rbxts-input-bus";
+ * import { inputBus, Actions, ActionPhase } from "@trembus/rbxts-input-bus";
  *
  * inputBus.onAction((payload) => {
  *     if (payload.action === Actions.Jump && payload.phase === ActionPhase.Started) {

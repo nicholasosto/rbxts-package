@@ -1,5 +1,5 @@
 /**
- * @nosto/rbxts-input-bus — Menu Input Context
+ * @trembus/rbxts-input-bus — Menu Input Context
  *
  * Input context for menu / UI navigation. At priority 100 it
  * overrides the Gameplay context (50) when enabled, so WASD

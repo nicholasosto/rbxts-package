@@ -1,5 +1,5 @@
 /**
- * @nosto/rbxts-input-bus — Input Event Bus
+ * @trembus/rbxts-input-bus — Input Event Bus
  *
  * Central pub/sub channel for input actions. Producers (the
  * InputController) call emit(); consumers (gameplay controllers)

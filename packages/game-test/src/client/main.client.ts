@@ -7,6 +7,7 @@ import { Names } from '@nicholasosto/name-generator';
  */
 Flamework.addPaths('out/client');
 Flamework.addPaths('out/shared');
+Flamework.addPaths('node_modules/@trembus/timer/out');
 Flamework.ignite();
 
 print(`Generated name: ${Names.GenerateName({ type: 'FULL_MONIKER' })}`);

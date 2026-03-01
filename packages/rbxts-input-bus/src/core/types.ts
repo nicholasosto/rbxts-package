@@ -1,5 +1,5 @@
 /**
- * @nosto/rbxts-input-bus — Core Type Definitions
+ * @trembus/rbxts-input-bus — Core Type Definitions
  *
  * Defines the vocabulary for a multi-device input system:
  * logical actions, phases, device-specific bindings, and contexts.

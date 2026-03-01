@@ -1,0 +1,51 @@
+{
+  "name": "@nosto/rbxts-input-bus",
+  "version": "1.0.0",
+  "description": "Multi-device input bus for roblox-ts with context switching (KBM, Gamepad, Touch)",
+  "main": "out/init.lua",
+  "types": "out/index.d.ts",
+  "files": [
+    "out",
+    "!**/**.tsbuildinfo"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "rbxtsc",
+    "watch": "rbxtsc -w",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "roblox",
+    "typescript",
+    "input",
+    "rbxts",
+    "keyboard",
+    "gamepad",
+    "touch",
+    "event-bus",
+    "input-system"
+  ],
+  "author": "trembus",
+  "license": "MIT",
+  "dependencies": {
+    "@rbxts/signal": "^1.1.1"
+  },
+  "peerDependencies": {
+    "@flamework/core": "^1.3.2"
+  },
+  "peerDependenciesMeta": {
+    "@flamework/core": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@rbxts/compiler-types": "3.0.0-types.0",
+    "@rbxts/types": "^1.0.879",
+    "@flamework/core": "^1.3.2",
+    "rbxts-transformer-flamework": "^1.3.2",
+    "roblox-ts": "^3.0.0",
+    "typescript": "^5.5.3"
+  }
+}

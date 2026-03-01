@@ -1,6 +1,6 @@
 {
   "name": "rbxts-package",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "description": "NX monorepo for roblox-ts game package development",
   "packageManager": "pnpm@10.15.0",
@@ -67,5 +67,8 @@
     "@rbxts/react-roblox": "^17.3.7-ts.1",
     "@rbxts/services": "^1.6.0",
     "@rbxts/signal": "^1.1.1"
+  },
+  "volta": {
+    "node": "22.22.0"
   }
 }

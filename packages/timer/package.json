@@ -1,6 +1,6 @@
 {
   "name": "@trembus/timer",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Full-featured Flamework-native timer system for Roblox-TS with display, effects, lifecycle hooks, and chainable API",
   "license": "MIT",
   "main": "out/init.lua",
